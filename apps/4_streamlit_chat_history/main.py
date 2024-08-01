@@ -1,10 +1,44 @@
 from os import getenv
+from pprint import pprint
+from uuid import uuid4
 
 import streamlit as st
+from azure.cosmos import ContainerProxy, CosmosClient, PartitionKey
 from dotenv import load_dotenv
 from openai import AzureOpenAI
+from streamlit.runtime.scriptrunner import get_script_run_ctx
 
 load_dotenv()
+
+
+def get_container_client() -> ContainerProxy:
+    client = CosmosClient.from_connection_string(getenv("AZURE_COSMOS_DB_CONNECTION_STRING"))
+    database = client.create_database_if_not_exists(id=getenv("AZURE_COSMOS_DB_DATABASE_NAME"))
+    return database.create_container_if_not_exists(
+        id=getenv("AZURE_COSMOS_DB_CONTAINER_NAME"),
+        partition_key=PartitionKey(
+            path="/id",
+            kind="Hash",
+        ),
+    )
+
+
+def get_session_id():
+    return get_script_run_ctx().session_id
+
+
+def store_chat_history(container: ContainerProxy):
+    response = container.create_item(
+        body={
+            "id": uuid4().hex,
+            "session_id": get_session_id(),
+            "messages": st.session_state.messages,
+        }
+    )
+    pprint(response)
+
+
+container = get_container_client()
 
 with st.sidebar:
     azure_openai_endpoint = st.text_input(
@@ -36,6 +70,7 @@ with st.sidebar:
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/4_streamlit_chat_history/main.py)"
 
 st.title("Streamlit Chat")
+st.write(f"Session ID: {get_session_id()}")
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
@@ -84,4 +119,5 @@ if prompt := st.chat_input():
             "content": msg,
         }
     )
+    store_chat_history(container)
     st.chat_message("assistant").write(msg)
