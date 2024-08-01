@@ -37,5 +37,5 @@ jobs:
             GIT_REVISION=${{ github.sha }}
             GIT_TAG=${{steps.set_version.outputs.no-dash}}
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/template-python:${{steps.set_version.outputs.no-dash}}
-            ${{ secrets.DOCKERHUB_USERNAME }}/template-python:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/workshop-azure-openai:${{steps.set_version.outputs.no-dash}}
+            ${{ secrets.DOCKERHUB_USERNAME }}/workshop-azure-openai:latest

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "template-python"
+name = "workshop-azure-openai"
 version = "0.1.0"
 description = "A GitHub template repository for a Python"
 authors = ["ks6088ts <ks6088ts@gmail.com>"]

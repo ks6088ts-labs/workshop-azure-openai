@@ -43,7 +43,7 @@ What kind of change does this Pull Request introduce?
 
 ```
 git clone git@github.com:ks6088ts-labs/workshop-azure-openai.git
-cd template-python
+cd workshop-azure-openai
 ```
 
 - Test the code

@@ -49,7 +49,7 @@ ci-test: install-deps-dev format-check lint test ## run CI tests
 # Docker
 # ---
 DOCKER_REPO_NAME ?= ks6088ts
-DOCKER_IMAGE_NAME ?= template-python
+DOCKER_IMAGE_NAME ?= workshop-azure-openai
 DOCKER_COMMAND ?= python main.py
 
 # Tools
