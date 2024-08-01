@@ -1,0 +1,28 @@
+name: docker
+
+on:
+  push:
+    branches:
+      - "main"
+      - "feature/**"
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  docker:
+    runs-on: "ubuntu-latest"
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # to retrieve git tags
+      # How to set system path variable in github action workflow: https://stackoverflow.com/a/68214331
+      - name: Add to PATH
+        shell: bash
+        run: |
+          echo "/home/runner/bin" >> $GITHUB_PATH
+      - name: Run CI tests for Docker
+        shell: bash
+        run: |
+          make ci-test-docker TOOLS_DIR="/home/runner/bin"

@@ -1,0 +1,25 @@
+{
+    "name": "Python 3.10",
+    "image": "mcr.microsoft.com/devcontainers/python:3.10-bookworm",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.testing.pytestEnabled": true,
+                "python.testing.unittestEnabled": false,
+                "files.exclude": {
+                    ".coverage": true,
+                    ".pytest_cache": true,
+                    "__pycache__": true
+                }
+            },
+            "extensions": [
+                "ms-python.python",
+                "charliermarsh.ruff",
+                "ms-python.black-formatter"
+            ]
+        }
+    },
+    "postCreateCommand": "pipx install poetry && make install-deps-dev",
+    "remoteUser": "vscode"
+}

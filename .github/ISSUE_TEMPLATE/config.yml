@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Support Request
+    url: https://github.com/ks6088ts/template-python/issues
+    about: Create an issue for support request or question relating to this repository

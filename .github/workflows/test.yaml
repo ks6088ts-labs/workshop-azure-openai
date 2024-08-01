@@ -1,0 +1,35 @@
+name: test
+
+on:
+  push:
+    branches:
+      - "main"
+      - "feature/**"
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        platform:
+          - "ubuntu-latest"
+        python-version:
+          - "3.10"
+    runs-on: ${{ matrix.platform }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Poetry
+        shell: bash
+        run: pipx install poetry
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "poetry"
+      - name: Run CI tests
+        shell: bash
+        run: |
+          make ci-test
