@@ -51,3 +51,11 @@ To publish the docker image to Docker Hub, you need to set the following secrets
 gh secret set DOCKERHUB_USERNAME --body $DOCKERHUB_USERNAME
 gh secret set DOCKERHUB_TOKEN --body $DOCKERHUB_TOKEN
 ```
+
+## Deployment
+
+### App Service
+
+- [Streamlit を Azure App Service で動かす！](https://qiita.com/takashiuesaka/items/491b21e9afb34bbb6e6d)
+- [WARNING: Could not find virtual environment directory /home/site/wwwroot/antenv](https://stackoverflow.com/a/61720957)
+- [How to deploy a streamlit application on Azure App Service (WebApp)](https://learn.microsoft.com/en-us/answers/questions/1470782/how-to-deploy-a-streamlit-application-on-azure-app)
