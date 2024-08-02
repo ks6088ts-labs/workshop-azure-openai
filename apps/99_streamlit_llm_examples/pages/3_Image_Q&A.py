@@ -1,3 +1,4 @@
+import base64
 from os import getenv
 
 import streamlit as st
@@ -32,51 +33,66 @@ with st.sidebar:
     )
     "[Go to Azure Portal to get an Azure OpenAI API key](https://portal.azure.com/)"
     "[Go to Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
-    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/2_streamlit_chat/main.py)"
+    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_llm_examples/pages/1_File_Q&A.py)"
 
-st.title("Streamlit Chat")
+st.title("Image Q&A")
 
 if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
     st.warning("サイドバーに Azure OpenAI の設定を入力してください")
     st.stop()
 
-if "messages" not in st.session_state:
-    st.session_state["messages"] = [
-        {
-            "role": "assistant",
-            "content": "こんにちは、何かお手伝いできますか？",
-        }
-    ]
+st.info("ファイルをアップロードして質問をすると、AI が回答します")
 
-# 既存のメッセージを表示
-for msg in st.session_state.messages:
-    st.chat_message(msg["role"]).write(msg["content"])
+uploaded_file = st.file_uploader(
+    "Upload an article",
+    type=(
+        "jpg",
+        "jpeg",
+        "png",
+        "gif",
+        "bmp",
+        "tiff",
+    ),
+)
+question = st.text_input(
+    "アップロードしたファイルについて質問してください",
+    placeholder="画像の内容について説明してください",
+    disabled=not uploaded_file,
+)
 
-# ユーザーからの入力を受け付ける
-if prompt := st.chat_input():
+if uploaded_file and question:
+    encoded_image = base64.b64encode(uploaded_file.read()).decode()
+
     client = AzureOpenAI(
         api_key=azure_openai_api_key,
         api_version=azure_openai_api_version,
         azure_endpoint=azure_openai_endpoint,
     )
 
-    st.session_state.messages.append(
-        {
-            "role": "user",
-            "content": prompt,
-        }
-    )
-    st.chat_message("user").write(prompt)
+    print(question)
     with st.spinner("考え中..."):
         response = client.chat.completions.create(
             model=azure_openai_gpt_model,
-            messages=st.session_state.messages,
+            messages=[
+                {
+                    "role": "system",
+                    "content": "あなたはアップロードされた画像についての質問に日本語で回答する AI です",
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "image_url",
+                            "image_url": {"url": f"data:image/jpeg;base64,{encoded_image}"},
+                        },
+                        {
+                            "type": "text",
+                            "content": question,
+                        },
+                    ],
+                },
+            ],
         )
     msg = response.choices[0].message.content
-    st.session_state.messages.append(
-        {
-            "role": "assistant",
-            "content": msg,
-        }
-    )
+    st.write("### 回答")
     st.chat_message("assistant").write(msg)

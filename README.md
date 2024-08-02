@@ -4,13 +4,15 @@
 
 # workshop-azure-openai
 
-This is a template repository for Python
+This repository is for a workshop using Azure OpenAI Service.
 
 ## Prerequisites
 
 - [Python 3.10+](https://www.python.org/downloads/)
 - [Poetry](https://python-poetry.org/docs/#installation)
 - [GNU Make](https://www.gnu.org/software/make/)
+- [Azure OpenAI Service](https://azure.microsoft.com/ja-jp/products/ai-services/openai-service)
+- [Azure Cosmos DB](https://azure.microsoft.com/ja-jp/products/cosmos-db/)
 
 ## Development instructions
 
@@ -54,14 +56,33 @@ gh secret set DOCKERHUB_TOKEN --body $DOCKERHUB_TOKEN
 
 ## Deployment
 
+### From Docker Hub
+
+You can run the docker image from Docker Hub.
+
+```shell
+# Run 2_streamlit_chat
+docker run -p 8501:8501 ks6088ts/workshop-azure-openai:latest \
+    python -m streamlit run apps/2_streamlit_chat/main.py
+
+# Run 99_streamlit_llm_examples
+docker run -p 8501:8501 ks6088ts/workshop-azure-openai:latest \
+    python -m streamlit run apps/99_streamlit_llm_examples/main.py
+```
+
 ### App Service
 
-以下の 2 点の設定を行うことで、Streamlit アプリケーションを Azure App Service にデプロイすることができる。
+For deploying the Streamlit application to Azure App Service, you need to set the following two configurations.
 
-1. Settings > Configuration > Startup Command に streamlit 用のコマンド `python -m streamlit run apps/4_streamlit_chat_history/main.py --server.port 8000 --server.address 0.0.0.0` をセット (※ 実行スクリプトは適宜変更すること。App Service はデフォルトで 8000 ポートを listen しているため、`--server.port 8000` が必要。)
-1. `SCM_DO_BUILD_DURING_DEPLOYMENT` を `true` に設定する
+1. Go to `Settings > Configuration > Startup Command` and set startup command as `python -m streamlit run apps/4_streamlit_chat_history/main.py --server.port 8000 --server.address 0.0.0.0`
+1. Set `SCM_DO_BUILD_DURING_DEPLOYMENT` to `true`
 
-#### 参考資料
+Notes:
+
+- Update the startup command as needed. App Service listens on port 8000 by default, so `--server.port 8000` is required.
+- The default port of App Service is 8000, so `--server.port 8000` is required.
+
+#### References
 
 - [Streamlit を Azure App Service で動かす！](https://qiita.com/takashiuesaka/items/491b21e9afb34bbb6e6d)
 - [WARNING: Could not find virtual environment directory /home/site/wwwroot/antenv](https://stackoverflow.com/a/61720957)
