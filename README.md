@@ -56,6 +56,13 @@ gh secret set DOCKERHUB_TOKEN --body $DOCKERHUB_TOKEN
 
 ### App Service
 
+以下の 2 点の設定を行うことで、Streamlit アプリケーションを Azure App Service にデプロイすることができる。
+
+1. Settings > Configuration > Startup Command に streamlit 用のコマンド `python -m streamlit run apps/4_streamlit_chat_history/main.py --server.port 8000 --server.address 0.0.0.0` をセット (※ 実行スクリプトは適宜変更すること。App Service はデフォルトで 8000 ポートを listen しているため、`--server.port 8000` が必要。)
+1. `SCM_DO_BUILD_DURING_DEPLOYMENT` を `true` に設定する
+
+#### 参考資料
+
 - [Streamlit を Azure App Service で動かす！](https://qiita.com/takashiuesaka/items/491b21e9afb34bbb6e6d)
 - [WARNING: Could not find virtual environment directory /home/site/wwwroot/antenv](https://stackoverflow.com/a/61720957)
 - [How to deploy a streamlit application on Azure App Service (WebApp)](https://learn.microsoft.com/en-us/answers/questions/1470782/how-to-deploy-a-streamlit-application-on-azure-app)
