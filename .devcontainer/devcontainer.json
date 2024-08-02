@@ -15,11 +15,15 @@
             },
             "extensions": [
                 "ms-python.python",
+                "ms-python.vscode-pylance",
                 "charliermarsh.ruff",
                 "ms-python.black-formatter"
             ]
         }
     },
+    "forwardPorts": [
+        8501
+    ],
     "postCreateCommand": "pipx install poetry && make install-deps-dev",
     "remoteUser": "vscode"
 }
