@@ -69,6 +69,10 @@ with st.sidebar:
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/4_streamlit_chat_history/main.py)"
 
 st.title("Streamlit Chat")
+if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
+    st.warning("サイドバーに Azure OpenAI の設定を入力してください")
+    st.stop()
+
 st.write(f"Session ID: {get_session_id()}")
 
 if "messages" not in st.session_state:
@@ -85,15 +89,6 @@ for msg in st.session_state.messages:
 
 # ユーザーからの入力を受け付ける
 if prompt := st.chat_input():
-    if (
-        not azure_openai_api_key
-        or not azure_openai_endpoint
-        or not azure_openai_api_version
-        or not azure_openai_gpt_model
-    ):
-        st.info("サイドバーに Azure OpenAI の設定を入力してください")
-        st.stop()
-
     client = AzureOpenAI(
         api_key=azure_openai_api_key,
         api_version=azure_openai_api_version,
@@ -107,10 +102,11 @@ if prompt := st.chat_input():
         }
     )
     st.chat_message("user").write(prompt)
-    response = client.chat.completions.create(
-        model=azure_openai_gpt_model,
-        messages=st.session_state.messages,
-    )
+    with st.spinner("考え中..."):
+        response = client.chat.completions.create(
+            model=azure_openai_gpt_model,
+            messages=st.session_state.messages,
+        )
     msg = response.choices[0].message.content
     st.session_state.messages.append(
         {

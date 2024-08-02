@@ -35,6 +35,11 @@ with st.sidebar:
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_llm_examples/pages/1_File_Q&A.py)"
 
 st.title("File Q&A")
+
+if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
+    st.warning("サイドバーに Azure OpenAI の設定を入力してください")
+    st.stop()
+
 st.info("ファイルをアップロードして質問をすると、AI が回答します")
 
 uploaded_file = st.file_uploader("Upload an article", type=("txt", "md"))
@@ -45,15 +50,6 @@ question = st.text_input(
 )
 
 if uploaded_file and question:
-    if (
-        not azure_openai_api_key
-        or not azure_openai_endpoint
-        or not azure_openai_api_version
-        or not azure_openai_gpt_model
-    ):
-        st.info("サイドバーに Azure OpenAI の設定を入力してください")
-        st.stop()
-
     article = uploaded_file.read().decode()
 
     client = AzureOpenAI(
@@ -67,19 +63,20 @@ if uploaded_file and question:
 
     # st.chat_message("user").write(prompt)
     print(prompt)
-    response = client.chat.completions.create(
-        model=azure_openai_gpt_model,
-        messages=[
-            {
-                "role": "assistant",
-                "content": "あなたはアップロードされたファイルについての質問に回答する AI です",
-            },
-            {
-                "role": "user",
-                "content": prompt,
-            },
-        ],
-    )
+    with st.spinner("考え中..."):
+        response = client.chat.completions.create(
+            model=azure_openai_gpt_model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": "あなたはアップロードされたファイルについての質問に回答する AI です",
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+        )
     msg = response.choices[0].message.content
     st.write("### 回答")
     st.chat_message("assistant").write(msg)
