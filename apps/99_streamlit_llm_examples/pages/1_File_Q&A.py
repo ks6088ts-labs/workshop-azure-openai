@@ -32,7 +32,7 @@ with st.sidebar:
     )
     "[Go to Azure Portal to get an Azure OpenAI API key](https://portal.azure.com/)"
     "[Go to Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
-    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/4_streamlit_chat_history/main.py)"
+    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_llm_examples/pages/1_File_Q&A.py)"
 
 st.title("File Q&A")
 st.info("ファイルをアップロードして質問をすると、AI が回答します")
