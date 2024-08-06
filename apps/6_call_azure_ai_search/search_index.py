@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     # search for documents
     results = vector_store.hybrid_search(
-        query="吾輩は猫である。名前はまだない",
+        query="すきやねん上鳥羽",
         k=5,
     )
     pprint(results)
