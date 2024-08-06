@@ -70,7 +70,7 @@ with st.sidebar:
     )
     "[Go to Azure Portal to get an Azure OpenAI API key](https://portal.azure.com/)"
     "[Go to Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
-    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/4_streamlit_chat_history/main.py)"
+    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/7_streamlit_chat_history_rag/main.py)"
 
 if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
     st.warning("サイドバーに Azure OpenAI の設定を入力してください")
@@ -89,7 +89,7 @@ def init_page():
 def init_messages():
     clear_button = st.sidebar.button("Clear Conversation", key="clear")
     if clear_button or "messages" not in st.session_state:
-        welcome_message = "ベアーモバイル カスタマーサポートへようこそ。ご質問をどうぞ🐻"
+        welcome_message = "上鳥羽製作所の社内チャットサービスへようこそ。ご質問をどうぞ"
         st.session_state.messages = [{"role": "assistant", "content": welcome_message}]
         st.session_state["memory"] = ConversationBufferWindowMemory(
             return_messages=True, memory_key="chat_history", k=10
@@ -132,7 +132,7 @@ def main():
     for msg in st.session_state["memory"].chat_memory.messages:
         st.chat_message(msg.type).write(msg.content)
 
-    if prompt := st.chat_input(placeholder="法人で契約することはできるの？"):
+    if prompt := st.chat_input(placeholder="質問を入力してください"):
         st.chat_message("user").write(prompt)
 
         with st.chat_message("assistant"):

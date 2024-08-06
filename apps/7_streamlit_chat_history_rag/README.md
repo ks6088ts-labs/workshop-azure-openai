@@ -39,4 +39,4 @@ streamlit run ./apps/7_streamlit_chat_history_rag/main.py
 
 http://localhost:8501 にアクセスすると、以下のような画面が表示されます。
 
-![Streamlit Chat](../../docs/images/7_streamlit_chat_history_rag.png)
+![Streamlit Chat](../../docs/images/7_streamlit_query_chat_history_rag.png)
