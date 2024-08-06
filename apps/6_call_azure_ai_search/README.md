@@ -38,4 +38,3 @@ python apps/6_call_azure_ai_search/search_index.py
 ## 参考資料
 
 - [How to recursively split text by characters](https://python.langchain.com/v0.2/docs/how_to/recursive_text_splitter/)
-- [青空文庫 > 吾輩は猫である](https://www.aozora.gr.jp/cards/000148/files/789_14547.html)
