@@ -6,16 +6,16 @@ from azure.cosmos import CosmosClient, PartitionKey
 from dotenv import load_dotenv
 
 if __name__ == "__main__":
-    # .env ファイルをパースして環境変数にセット
+    # Parse .env file and get environment variables
     load_dotenv()
 
-    # コマンドライン引数から item_id を取得
+    # Get item_id from command line arguments
     if len(sys.argv) < 2:
         print("Usage: python main.py <item_id>")
         sys.exit(1)
     item_id = sys.argv[1]
 
-    # Azure Cosmos DB に接続
+    # Connect to Azure Cosmos DB
     try:
         client = CosmosClient.from_connection_string(getenv("AZURE_COSMOS_DB_CONNECTION_STRING"))
         database = client.create_database_if_not_exists(id=getenv("AZURE_COSMOS_DB_DATABASE_NAME"))
@@ -31,13 +31,13 @@ if __name__ == "__main__":
         print(f"Failed to connect to Azure Cosmos DB: {e}")
         sys.exit(1)
 
-    # Item を操作
+    # Create and read an item
     try:
         response = container.create_item(
             body={
                 "id": item_id,
                 "role": "assistant",
-                "content": "こんにちは、何かお手伝いできますか？",
+                "content": "Hello, world!",
             }
         )
         print("Created item:")

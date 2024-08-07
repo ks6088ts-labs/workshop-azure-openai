@@ -1,24 +1,30 @@
 from os import getenv
 from pprint import pprint
 
-from datasets import load_texts
 from dotenv import load_dotenv
 from langchain_community.vectorstores.azuresearch import AzureSearch
 from langchain_openai import AzureOpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
+
+def load_texts() -> list:
+    # for simplicity, hardcoding the path to the text file
+    with open("./apps/6_call_azure_ai_search/data/contoso_rules.txt") as f:
+        return f.readlines()
+
+
 if __name__ == "__main__":
     """
-    テキストを Azure OpenAI Service で埋め込み化し、Azure AI Search にインデックス化します。
+    This script demonstrates how to:
+        - Embed text with Azure OpenAI Service
+        - Index text with Azure AI Search
     """
     load_dotenv()
 
-    # ドキュメントを取得
-    texts = load_texts(
-        file_path="./apps/6_call_azure_ai_search/data/test.txt",
-    )
+    # Get documents
+    texts = load_texts()
 
-    # テキストを分割
+    # Split text into chunks
     # https://python.langchain.com/v0.2/docs/how_to/recursive_text_splitter/
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=400,
@@ -39,7 +45,7 @@ if __name__ == "__main__":
         model=getenv("AZURE_OPENAI_EMBEDDING_MODEL"),
     )
 
-    # Azure AI Search でのインデックス化
+    # Index documents
     # https://python.langchain.com/v0.2/docs/integrations/vectorstores/azuresearch/
     # create index
     search = AzureSearch(

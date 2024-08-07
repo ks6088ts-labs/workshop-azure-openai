@@ -34,19 +34,17 @@ with st.sidebar:
         key="AZURE_OPENAI_GPT_MODEL",
         type="default",
     )
-    "[Go to Azure Portal to get an Azure OpenAI API key](https://portal.azure.com/)"
-    "[Go to Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
-    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_llm_examples/pages/5_Explain_data.py)"
-    "[Streamlit > st.plotly_chart](https://docs.streamlit.io/develop/api-reference/charts/st.plotly_chart)"
-    "[Plotly > Time Series and Date Axes in Python](https://plotly.com/python/time-series/)"
+    "[Azure Portal](https://portal.azure.com/)"
+    "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
+    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/5_Explain_data.py)"
 
 st.title("Explain data")
 
 if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
-    st.warning("サイドバーに Azure OpenAI の設定を入力してください")
+    st.warning("Please fill in the required fields at the sidebar.")
     st.stop()
 
-st.info("データを説明するサンプルです")
+st.info("This is a sample to explain data.")
 
 
 def get_dataset() -> DataFrame:
@@ -61,7 +59,7 @@ def get_figure(df: DataFrame) -> Figure:
         hover_data={
             "date": "|%B %d, %Y",
         },
-        title="2018 年の株価を基準とした株価の変化",
+        title="Changes in stock prices based on 2018 stock prices",
     )
     fig.update_xaxes(
         dtick="M1",
@@ -86,7 +84,7 @@ def explain_data(input: str) -> str:
         messages=[
             {
                 "role": "system",
-                "content": f"""あなたはプロのデータ分析者です。与えられたデータについて説明します。
+                "content": f"""You are a professional data analyst. Explain the given data.
                 ---
                 {input}
                 ---""",
@@ -106,12 +104,12 @@ st.plotly_chart(
     use_container_width=True,
 )
 
-explain_button = st.button("説明")
+explain_button = st.button("Explain data")
 
 if explain_button:
-    with st.spinner("数値解析中..."):
+    with st.spinner("Numerical data analysis..."):
         analyze_result = analyze_data(df)
-    with st.spinner("LLM による解析中..."):
+    with st.spinner("Thinking..."):
         explain_result = explain_data(input=analyze_result)
     # st.write(analyze_result)
     st.write(explain_result)

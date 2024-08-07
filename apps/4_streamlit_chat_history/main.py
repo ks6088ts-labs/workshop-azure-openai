@@ -38,6 +38,7 @@ def store_chat_history(container: ContainerProxy):
     pprint(response)
 
 
+# To reuse the session for Cosmos DB, just define the container globally
 container = get_container_client()
 
 with st.sidebar:
@@ -64,13 +65,13 @@ with st.sidebar:
         key="AZURE_OPENAI_GPT_MODEL",
         type="default",
     )
-    "[Go to Azure Portal to get an Azure OpenAI API key](https://portal.azure.com/)"
-    "[Go to Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
+    "[Azure Portal](https://portal.azure.com/)"
+    "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/4_streamlit_chat_history/main.py)"
 
-st.title("Streamlit Chat")
+st.title("4_streamlit_chat_history")
 if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
-    st.warning("サイドバーに Azure OpenAI の設定を入力してください")
+    st.warning("Please fill in the required fields at the sidebar.")
     st.stop()
 
 st.write(f"Session ID: {get_session_id()}")
@@ -79,15 +80,15 @@ if "messages" not in st.session_state:
     st.session_state["messages"] = [
         {
             "role": "assistant",
-            "content": "こんにちは、何かお手伝いできますか？",
+            "content": "Hello! I'm a helpful assistant.",
         }
     ]
 
-# 既存のメッセージを表示
+# Show chat messages
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
-# ユーザーからの入力を受け付ける
+# Receive user input
 if prompt := st.chat_input():
     client = AzureOpenAI(
         api_key=azure_openai_api_key,
@@ -102,7 +103,7 @@ if prompt := st.chat_input():
         }
     )
     st.chat_message("user").write(prompt)
-    with st.spinner("考え中..."):
+    with st.spinner("Thinking..."):
         response = client.chat.completions.create(
             model=azure_openai_gpt_model,
             messages=st.session_state.messages,
@@ -114,5 +115,6 @@ if prompt := st.chat_input():
             "content": msg,
         }
     )
+    # !! Here's the only difference from apps/2_streamlit_chat/main.py
     store_chat_history(container)
     st.chat_message("assistant").write(msg)

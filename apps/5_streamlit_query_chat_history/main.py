@@ -24,15 +24,15 @@ def get_container_client() -> ContainerProxy:
 container = get_container_client()
 
 with st.sidebar:
-    "[Go to Azure Portal to get an Azure OpenAI API key](https://portal.azure.com/)"
-    "[Go to Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
+    "[Azure Portal](https://portal.azure.com/)"
+    "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/4_streamlit_chat_history/main.py)"
 
-st.title("Query chat history")
+st.title("5_streamlit_query_chat_history")
 
 today = datetime.datetime.now().date()
 result = st.slider(
-    "期間を指定してください。",
+    "Select a range.",
     value=(today - datetime.timedelta(days=30), today + datetime.timedelta(days=1)),
     format="YYYY-MM-DD (ddd)",
 )
@@ -42,7 +42,7 @@ def convert_to_epoch(d: datetime.date) -> int:
     return int(time.mktime(time.strptime(d.isoformat(), "%Y-%m-%d")))
 
 
-run = st.button("チャット履歴を取得する")
+run = st.button("Retrieve chat history")
 if run:
     query = "SELECT * FROM c WHERE c._ts < @end_date AND c._ts > @start_date"
     parameters = [
@@ -56,7 +56,7 @@ if run:
         },
     ]
 
-    with st.spinner("チャット履歴を取得中です。しばらくお待ちください。"):
+    with st.spinner("Retrieving chat history. Please wait."):
         items = container.query_items(
             query=query,
             parameters=parameters,

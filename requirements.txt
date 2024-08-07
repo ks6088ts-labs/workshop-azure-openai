@@ -1,4 +1,4 @@
-openai==1.37.1
+openai==1.39.0
 python-dotenv==1.0.1
 streamlit==1.37.0
 azure-cosmos==4.7.0

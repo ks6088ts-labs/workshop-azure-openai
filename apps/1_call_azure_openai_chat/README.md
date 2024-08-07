@@ -1,48 +1,46 @@
-# Azure OpenAI Service を Python から呼び出す
+# Call Azure OpenAI Service API from Python
 
-Azure OpenAI Service を Python から呼び出す方法を説明します。
+This article explains how to call Azure OpenAI Service API from Python.
 
-## 前提条件
+## Prerequisites
 
-- Python 3.11+ がインストールされていること
-- Azure OpenAI Service が利用できること
-- Azure OpenAI Service の API キーが取得できていること
+- Python 3.10 or later
+- Azure OpenAI Service
 
-## 手順
+## Usage
 
-1. Azure OpenAI Service の API キーを取得する
-1. [.env.template](../../.env.template) をコピーして `.env` ファイルを作成する
-1. `.env` ファイルに API キーを設定する
-1. [main.py](./main.py) を実行する
+1. Get Azure OpenAI Service API key
+1. Copy [.env.template](../../.env.template) to `.env` in the same directory
+1. Set credentials in `.env`
+1. Run [main.py](./main.py)
 
 ```shell
-# 仮想環境を作成してライブラリをインストールする
-python -m venv .venv
+# Create a virtual environment
+$ python -m venv .venv
 
-# 仮想環境を有効化する
-source .venv/bin/activate
+# Activate the virtual environment
+$ source .venv/bin/activate
 
-# ライブラリをインストールする
-pip install -r requirements.txt
+# Install dependencies
+$ pip install -r requirements.txt
 
-# スクリプトを実行する
-python apps/1_call_azure_openai/main.py
+# Run the script
+$ python apps/1_call_azure_openai/main.py
 ```
 
-### 実行例
+### Example
 
 ```shell
-❯ python apps/1_call_azure_openai_chat/main.py
-こんにちは！どうされましたか？何かお手伝いできることがあれば教えてください。
+$ python apps/1_call_azure_openai_chat/main.py
 {
-  "id": "chatcmpl-9rHSFKIBtJDOlDheesev79CO7RNMz",
+  "id": "chatcmpl-9tVzJwEczzb40cXT1gHZkk7ThX5Lm",
   "choices": [
     {
       "finish_reason": "stop",
       "index": 0,
       "logprobs": null,
       "message": {
-        "content": "こんにちは！どうされましたか？何かお手伝いできることがあれば教えてください。",
+        "content": "Hello! How can I assist you today?",
         "role": "assistant",
         "function_call": null,
         "tool_calls": null
@@ -51,6 +49,14 @@ python apps/1_call_azure_openai/main.py
         "hate": {
           "filtered": false,
           "severity": "safe"
+        },
+        "protected_material_code": {
+          "filtered": false,
+          "detected": false
+        },
+        "protected_material_text": {
+          "filtered": false,
+          "detected": false
         },
         "self_harm": {
           "filtered": false,
@@ -67,15 +73,15 @@ python apps/1_call_azure_openai/main.py
       }
     }
   ],
-  "created": 1722485507,
+  "created": 1723018029,
   "model": "gpt-4o-2024-05-13",
   "object": "chat.completion",
   "service_tier": null,
   "system_fingerprint": "fp_abc28019ad",
   "usage": {
-    "completion_tokens": 23,
+    "completion_tokens": 9,
     "prompt_tokens": 18,
-    "total_tokens": 41
+    "total_tokens": 27
   },
   "prompt_filter_results": [
     {
@@ -107,6 +113,6 @@ python apps/1_call_azure_openai/main.py
 }
 ```
 
-## 参考資料
+## References
 
-- [クイックスタート: Azure OpenAI Service で GPT-35-Turbo と GPT-4 を使い始める](https://learn.microsoft.com/ja-jp/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Cpython-new&pivots=programming-language-python)
+- [Quickstart: Get started using GPT-35-Turbo and GPT-4 with Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Cpython-new&pivots=programming-language-python)

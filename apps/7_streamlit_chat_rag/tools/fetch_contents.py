@@ -1,5 +1,3 @@
-# GitHub: https://github.com/naotaka1128/llm_app_codes/chapter_010/tools/fetch_qa_content.py
-
 from os import getenv
 
 from dotenv import load_dotenv
@@ -9,6 +7,7 @@ from langchain_core.tools import tool
 from langchain_openai import AzureOpenAIEmbeddings
 
 load_dotenv()
+
 embeddings = AzureOpenAIEmbeddings(
     api_key=getenv("AZURE_OPENAI_API_KEY"),
     api_version=getenv("AZURE_OPENAI_API_VERSION"),
@@ -28,7 +27,7 @@ vector_store = AzureSearch(
 
 
 class QueryInput(BaseModel):
-    """型を指定するためのクラス"""
+    """This is a schema for the input arguments of the tool."""
 
     query: str = Field()
     k: int = Field(default=5)
@@ -37,14 +36,14 @@ class QueryInput(BaseModel):
 @tool(args_schema=QueryInput)
 def fetch_contents(query, k=5):
     """
-    事前に登録されたドキュメントの中から、ユーザーの質問に関連するコンテンツを取得します。
-    "上鳥羽製作所"に関する社内規則など具体的な知識を得るのに役立ちます。
+    This tool fetches content from pre-registered documents that are related to the user's question.
+    It helps to obtain specific knowledge such as internal rules related to "Contoso Corporation".
 
-    このツールは `content`（コンテンツ）を返します。
-    - 'content'は、質問に関連したテキストを提供します。
+    This tool returns 'content'.
+    - 'content' provides text related to the question.
 
-    空のリストが返された場合、関連するコンテンツが見つからなかったことを意味します。
-    その場合、ユーザーに質問内容を明確にしてもらうのが良いでしょう。
+    When an empty list is returned, it means that no related content was found.
+    In that case, it is a good idea to ask the user to clarify the question.
 
     Returns
     -------
@@ -56,4 +55,9 @@ def fetch_contents(query, k=5):
         query=query,
         k=k,
     )
-    return [{"content": doc.page_content} for doc in docs]
+    return [
+        {
+            "content": doc.page_content,
+        }
+        for doc in docs
+    ]

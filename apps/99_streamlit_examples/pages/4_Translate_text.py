@@ -30,24 +30,24 @@ with st.sidebar:
         key="AZURE_OPENAI_GPT_MODEL",
         type="default",
     )
-    "[Go to Azure Portal to get an Azure OpenAI API key](https://portal.azure.com/)"
-    "[Go to Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
-    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_llm_examples/pages/4_Translate_text.py)"
+    "[Azure Portal](https://portal.azure.com/)"
+    "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
+    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/4_Translate_text.py)"
 
 st.title("Translate text")
 
 if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
-    st.warning("サイドバーに Azure OpenAI の設定を入力してください")
+    st.warning("Please fill in the required fields at the sidebar.")
     st.stop()
 
-st.info("翻訳アプリ")
+st.info("This is a sample to translate text.")
 
 supported_languages = [
-    "英語",
-    "日本語",
-    "丁寧な日本語",
-    "関西弁",
-    "青森弁",
+    "English",
+    "Japanese",
+    "Polite Japanese",
+    "Kansai dialect (Japanese)",
+    "Aomori dialect (Japanese)",
 ]
 
 
@@ -76,49 +76,39 @@ def translate(target: str, input: str) -> str:
 
 
 # ---
-# 2カラムレイアウト
+# 2 column layout
 
-# 1行目
+# 1st row
 row1_left, row1_right = st.columns(2)
 with row1_left:
     target = st.selectbox(
-        "ターゲット言語",
+        "Translate to",
         supported_languages,
         key="target",
         index=0,
     )
 
 with row1_right:
-    translate_button = st.button("翻訳")
+    translate_button = st.button("Translate")
 
-# 2行目
+# 2nd row
 row2_left, row2_right = st.columns(2)
 
-default_input = """むかし、むかし、ある所におじいさんとおばあさんが住んでいました。
-おじいさんは山へしば刈りに、おばあさんは川へ洗濯に行きました。
-おばあさんが川で洗濯をしていると大きな桃が流れてきました。
-「なんと大きな桃じゃろう！家に持って帰ろう。」
-とおばあさんは背中に担いで家に帰り、その桃を切ろうとすると、なんと桃から大きな赤ん坊が出てきたのです。
-「おっとたまげた。」
-二人は驚いたけれども、とても喜び、
-「何という名前にしましょうか。」
-「桃から生まれたから、桃太郎というのはどうだろう。」
-「それがいい。」
-桃太郎はあっと言う間に大きくなり、立派な優しい男の子になりました。
+default_input = """Hello, how are you?
 """
 
 with row2_left:
     input = st.text_area(
-        "入力テキスト",
+        "Input",
         height=400,
-        placeholder="翻訳したい文章を入力してください",
+        placeholder="Please enter the text to translate.",
         key="input",
         value=default_input,
     )
 
 with row2_right:
     if input != "" and translate_button:
-        with st.spinner("翻訳中..."):
+        with st.spinner("Translating..."):
             output = translate(
                 target=target,
                 input=input,
