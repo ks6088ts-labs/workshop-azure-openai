@@ -30,22 +30,22 @@ with st.sidebar:
         key="AZURE_OPENAI_GPT_MODEL",
         type="default",
     )
-    "[Go to Azure Portal to get an Azure OpenAI API key](https://portal.azure.com/)"
-    "[Go to Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
-    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_llm_examples/pages/1_File_Q&A.py)"
+    "[Azure Portal](https://portal.azure.com/)"
+    "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
+    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/1_File_Q&A.py)"
 
 st.title("File Q&A")
 
 if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
-    st.warning("サイドバーに Azure OpenAI の設定を入力してください")
+    st.warning("Please fill in the required fields at the sidebar.")
     st.stop()
 
-st.info("ファイルをアップロードして質問をすると、AI が回答します")
+st.info("Upload a file and ask a question. AI will answer the question.")
 
 uploaded_file = st.file_uploader("Upload an article", type=("txt", "md"))
 question = st.text_input(
-    "アップロードしたファイルについて質問してください",
-    placeholder="簡潔な要約を作成してください",
+    "Ask a question about the uploaded file",
+    placeholder="Please describe the content of the image",
     disabled=not uploaded_file,
 )
 
@@ -58,18 +58,18 @@ if uploaded_file and question:
         azure_endpoint=azure_openai_endpoint,
     )
 
-    prompt = f"""参考資料:\n\n<article>
-    {article}\n\n</article>\n\n質問: {question}"""
+    prompt = f"""Reference:\n\n<article>
+    {article}\n\n</article>\n\nQuestion: {question}"""
 
     # st.chat_message("user").write(prompt)
     print(prompt)
-    with st.spinner("考え中..."):
+    with st.spinner("Thinking..."):
         response = client.chat.completions.create(
             model=azure_openai_gpt_model,
             messages=[
                 {
                     "role": "system",
-                    "content": "あなたはアップロードされたファイルについての質問に回答する AI です",
+                    "content": "You are a professional data analyst. Explain the given data.",
                 },
                 {
                     "role": "user",
@@ -78,5 +78,5 @@ if uploaded_file and question:
             ],
         )
     msg = response.choices[0].message.content
-    st.write("### 回答")
+    st.write("### Answer:")
     st.chat_message("assistant").write(msg)

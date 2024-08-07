@@ -1,5 +1,4 @@
 from os import getenv
-from pprint import pprint
 
 from dotenv import load_dotenv
 from langchain_community.vectorstores.azuresearch import AzureSearch
@@ -7,7 +6,7 @@ from langchain_openai import AzureOpenAIEmbeddings
 
 if __name__ == "__main__":
     """
-    Azure AI Search で検索を行う
+    Search for documents in Azure AI Search
     """
     load_dotenv()
 
@@ -30,7 +29,8 @@ if __name__ == "__main__":
 
     # search for documents
     results = vector_store.hybrid_search(
-        query="すきやねん上鳥羽",
-        k=5,
+        query="meetings",
+        k=3,
     )
-    pprint(results)
+    for result in results:
+        print(result.page_content)

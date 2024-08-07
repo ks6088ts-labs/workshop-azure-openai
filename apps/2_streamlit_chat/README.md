@@ -1,45 +1,47 @@
-# Streamlit でチャットアプリを作成する
+# Create an Azure OpenAI Chat app using Streamlit
 
-Streamlit を使って、Azure OpenAI Service を利用したチャットアプリを作成します。
+This app demonstrates how to create a chat application using Azure OpenAI Service and Streamlit.
 
-## 前提条件
+## Prerequisites
 
-- Python 3.11+ がインストールされていること
-- Azure OpenAI Service が利用できること
-- Azure OpenAI Service の API キーが取得できていること
+- Python 3.10 or later
+- Azure OpenAI Service
 
-## 手順
+## Usage
 
-1. Azure OpenAI Service の API キーを取得する
-1. [.env.template](../../.env.template) をコピーして `.env` ファイルを作成する
-1. `.env` ファイルに API キーを設定する
-1. [main.py](./main.py) を実行する
+1. Get Azure OpenAI Service API key
+1. Copy [.env.template](../../.env.template) to `.env` in the same directory
+1. Set credentials in `.env`
+1. Run [main.py](./main.py)
 
 ```shell
-# 仮想環境を作成してライブラリをインストールする
-python -m venv .venv
+# Create a virtual environment
+$ python -m venv .venv
 
-# 仮想環境を有効化する
-source .venv/bin/activate
+# Activate the virtual environment
+$ source .venv/bin/activate
 
-# ライブラリをインストールする
-pip install -r requirements.txt
+# Install dependencies
+$ pip install -r requirements.txt
 
-# スクリプトを実行する
-streamlit run ./apps/2_streamlit_chat/main.py
+# Run the script
+$ python -m streamlit run apps/2_streamlit_chat/main.py
 ```
 
-### 実行例
+### Example
 
-http://localhost:8501 にアクセスすると、以下のような画面が表示されます。
+When you access `http://localhost:8501`, you will see the following screen.
 
-![Streamlit Chat](../../docs/images/2_streamlit_chat.png)
+![Streamlit Chat](../../docs/images/2_streamlit_chat.initial_page.png)
 
-## 補足
+To start a conversation, fill in the required fields in the sidebar and you will see the following screen.
 
-本アプリでは、チャットのやり取りを保持するために、`st.session_state.messages` にメッセージを保持しています。
-これはアプリケーションのプロセス側で、セッションごとにメッセージを保持するための仕組みです。セッションが終了するとメッセージは消えます。
+![Streamlit Chat](../../docs/images/2_streamlit_chat.chat_page.png)
 
-## 参考資料
+## Note
+
+This app uses `st.session_state.messages` to store messages for chat. This is a mechanism to store messages per session on the process side of the application. Messages will disappear when the session ends.
+
+## References
 
 - [Your LLM code playground](https://streamlit.io/generative-ai)

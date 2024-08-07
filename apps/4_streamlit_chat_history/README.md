@@ -1,109 +1,109 @@
-# Streamlit のチャットアプリに履歴機能を追加する
+# Add feature to store chat history using Azure Cosmos DB
 
-Cosmos DB を利用して、チャットの履歴を保存する機能を追加します。
+This app demonstrates how to add a feature to save chat history using Azure Cosmos DB to an Azure OpenAI Chat app using Streamlit implemented in [2_streamlit_chat](../2_streamlit_chat/).
 
-## 前提条件
+## Prerequisites
 
-- Python 3.11+ がインストールされていること
-- Azure OpenAI Service が利用できること
-- Azure OpenAI Service の API キーが取得できていること
-- Azure Cosmos DB のアカウントが作成されていること
-- Azure Cosmos DB の接続文字列が取得できていること
+- Python 3.10 or later
+- Azure OpenAI Service
+- Azure Cosmos DB
 
-## 手順
+## Usage
 
-1. Azure OpenAI Service の API キーを取得する
-1. Azure Cosmos DB の接続文字列を取得する
-1. [.env.template](../../.env.template) をコピーして `.env` ファイルを作成する
-1. `.env` ファイルに API キーを設定する
-1. [main.py](./main.py) を実行する
+1. Get Azure OpenAI Service API key
+1. Get the connection string for Azure Cosmos DB
+1. Copy [.env.template](../../.env.template) to `.env` in the same directory
+1. Set credentials in `.env`
+1. Run [main.py](./main.py)
 
 ```shell
-# 仮想環境を作成してライブラリをインストールする
-python -m venv .venv
+# Create a virtual environment
+$ python -m venv .venv
 
-# 仮想環境を有効化する
-source .venv/bin/activate
+# Activate the virtual environment
+$ source .venv/bin/activate
 
-# ライブラリをインストールする
-pip install -r requirements.txt
+# Install dependencies
+$ pip install -r requirements.txt
 
-# スクリプトを実行する
-streamlit run ./apps/4_streamlit_chat_history/main.py
+# Run the script
+$ python -m streamlit run apps/4_streamlit_chat_history/main.py
 ```
 
-### 実行例
+### Example
 
-http://localhost:8501 にアクセスすると、以下のような画面が表示されます。
+Access `http://localhost:8501` and set the required fields in the sidebar to start a conversation.
 
-![Streamlit Chat](../../docs/images/4_streamlit_chat_history.png)
+When you send a message, the chat history will be saved in Azure Cosmos DB.
 
-会話履歴は、Cosmos DB の Data Explorer から確認できます。
+![Chat page](../../docs/images/4_streamlit_chat_history.chat_page.png)
 
-![Cosmos DB Data Explorer](../../docs/images/4_streamlit_chat_history_data_explorer.png)
+Conversation history can be viewed from the Cosmos DB Data Explorer as shown below.
 
-以下のようにチャットの履歴が保存されています。
+![Cosmos DB Data Explorer](../../docs/images/4_streamlit_chat_history.data_explorer.png)
 
-**会話 1 ターン目**
+The chat history is saved as shown below.
+
+**Conversation #1**
 
 ```json
 {
-  "id": "45ce53f941f446dfa859d81dce9c285c",
-  "session_id": "f327ff27-d79e-44d5-8909-b058091f079c",
+  "id": "1616ec81774f4a81b75038edfe493df3",
+  "session_id": "2b083432-39b5-49d6-a14a-8ea341bbb0e0",
   "messages": [
     {
       "role": "assistant",
-      "content": "こんにちは、何かお手伝いできますか？"
+      "content": "Hello! I'm a helpful assistant."
     },
     {
       "role": "user",
-      "content": "こんにちは。私の名前はマイクロ花子です。"
+      "content": "Hello how are you ?"
     },
     {
       "role": "assistant",
-      "content": "こんにちは、マイクロ花子さん！お会いできて嬉しいです。今日はどんなことについてお話ししましょうか？"
+      "content": "Hello! I'm just a program, so I don't have feelings, but I'm here and ready to help you with whatever you need. How can I assist you today?"
     }
   ],
-  "_rid": "nNUPAMIaqAQBAAAAAAAAAA==",
-  "_self": "dbs/nNUPAA==/colls/nNUPAMIaqAQ=/docs/nNUPAMIaqAQBAAAAAAAAAA==/",
-  "_etag": "\"1c003a38-0000-2300-0000-66ab36150000\"",
+  "_rid": "Ny9FAOMmTIMLAAAAAAAAAA==",
+  "_self": "dbs/Ny9FAA==/colls/Ny9FAOMmTIM=/docs/Ny9FAOMmTIMLAAAAAAAAAA==/",
+  "_etag": "\"8100214b-0000-2300-0000-66b331fe0000\"",
   "_attachments": "attachments/",
-  "_ts": 1722496533
+  "_ts": 1723019774
 }
 ```
 
-**会話 2 ターン目**
+**Conversation #2**
 
 ```json
 {
-  "id": "c01db30dbf1d4db9b082f2cce806f29c",
-  "session_id": "f327ff27-d79e-44d5-8909-b058091f079c",
+  "id": "417ff09c764a45099a2b08618225cf57",
+  "session_id": "2b083432-39b5-49d6-a14a-8ea341bbb0e0",
   "messages": [
     {
       "role": "assistant",
-      "content": "こんにちは、何かお手伝いできますか？"
+      "content": "Hello! I'm a helpful assistant."
     },
     {
       "role": "user",
-      "content": "こんにちは。私の名前はマイクロ花子です。"
+      "content": "Hello how are you ?"
     },
     {
       "role": "assistant",
-      "content": "こんにちは、マイクロ花子さん！お会いできて嬉しいです。今日はどんなことについてお話ししましょうか？"
+      "content": "Hello! I'm just a program, so I don't have feelings, but I'm here and ready to help you with whatever you need. How can I assist you today?"
     },
     {
       "role": "user",
-      "content": "自分の名前を忘れました。私は誰ですか？"
+      "content": "describe what Microsoft is"
     },
     {
       "role": "assistant",
-      "content": "あなたはマイクロ花子さんです！名前を忘れることは時々ありますが、安心してください。あなたはあなた自身で、ここでお話しするためにいます。他に何かお手伝いできることがあれば教えてください！"
+      "content": "Microsoft Corporation is an American multinational technology company that develops, manufactures, licenses, supports, and sells a wide range of software, services, devices, and solutions. It was founded by Bill Gates and Paul Allen on April 4, 1975. Here are some key aspects of Microsoft:\n\n### Key Products and Services:\n\n1. **Windows Operating System**:\n   - Microsoft Windows is one of the most widely used operating systems for personal computers and servers. Various versions include Windows 10, Windows 11, and earlier versions such as Windows XP and Windows 7.\n\n2. **Microsoft Office Suite**:\n   - Office is a suite of productivity applications that includes Word (word processing), Excel (spreadsheets), PowerPoint (presentations), Outlook (email and calendar), and more. Office is available both as a one-time purchase and as a subscription service known as Microsoft 365.\n\n3. **Azure**:\n   - Microsoft Azure is a cloud computing platform and service used for building, testing, deploying, and managing applications and services through Microsoft-managed data centers.\n\n4. **Surface Devices**:\n   - Microsoft Surface is a series of touchscreen personal computers and interactive whiteboards, which include tablets, laptops, and desktop PCs.\n\n5. **Xbox**:\n   - Xbox is a gaming console brand created and owned by Microsoft. It includes consoles like the Xbox One, Xbox Series X, and Xbox Series S.\n\n6. **LinkedIn**:\n   - A professional networking platform that Microsoft acquired in 2016.\n\n7. **GitHub**:\n   - A web-based platform for version control and collaboration, primarily for software development. Microsoft acquired GitHub in 2018.\n\n8. **Teams**:\n   - Microsoft Teams is a collaboration platform that combines workplace chat, meetings, notes, and attachments. It integrates with Microsoft Office 365.\n\n### Corporate Information:\n- **Headquarters**: Redmond, Washington, USA\n- **CEO**: As of the last update, Satya Nadella (took over the role in 2014)\n\n### Innovations and Contributions:\n- **Artificial Intelligence (AI)** and **Machine Learning (ML)** solutions.\n- **Quantum Computing** research and development.\n- Investments in educational tools and initiatives.\n- Various contributions to open source software.\n\nOverall, Microsoft is a key player in the tech industry, contributing significantly to various technological advancements and offering a wide array of products and services that impact both consumers and businesses around the world."
     }
   ],
-  "_rid": "nNUPAMIaqAQCAAAAAAAAAA==",
-  "_self": "dbs/nNUPAA==/colls/nNUPAMIaqAQ=/docs/nNUPAMIaqAQCAAAAAAAAAA==/",
-  "_etag": "\"1c003b38-0000-2300-0000-66ab362c0000\"",
+  "_rid": "Ny9FAOMmTIMMAAAAAAAAAA==",
+  "_self": "dbs/Ny9FAA==/colls/Ny9FAOMmTIM=/docs/Ny9FAOMmTIMMAAAAAAAAAA==/",
+  "_etag": "\"81004656-0000-2300-0000-66b332a40000\"",
   "_attachments": "attachments/",
-  "_ts": 1722496556
+  "_ts": 1723019940
 }
 ```
