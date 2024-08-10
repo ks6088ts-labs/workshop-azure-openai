@@ -1,16 +1,14 @@
 name: ghcr
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        type: string
-        required: true
-        description: version (e.g. 1.2.3)
+  push:
+    tags:
+      - "v*"
 env:
   IMAGE_NAME: workshop-azure-openai
 jobs:
-  publish:
+  ghcr:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       packages: write
       contents: read
@@ -21,12 +19,25 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: docker/metadata-action@v5
+      - name: Set Versions
+        uses: actions/github-script@v7
+        id: set_version
+        with:
+          script: |
+            const tag = context.ref.substring(10)
+            const no_v = tag.replace('v', '')
+            const dash_index = no_v.lastIndexOf('-')
+            const no_dash = (dash_index > -1) ?  no_v.substring(0, dash_index) : no_v
+            core.setOutput('tag', tag)
+            core.setOutput('no-v', no_v)
+            core.setOutput('no-dash', no_dash)
+      - name: Set meta data tag = ${{steps.set_version.outputs.no-dash}}
+        uses: docker/metadata-action@v5
         id: meta
         with:
           images: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=semver,pattern={{version}},value=v${{ inputs.version }}
+            type=semver,pattern={{version}},value=v${{steps.set_version.outputs.no-dash}}
             type=raw,value=latest
       - uses: docker/build-push-action@v5
         with:
