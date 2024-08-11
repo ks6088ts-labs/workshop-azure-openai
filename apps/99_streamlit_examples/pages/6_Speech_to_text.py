@@ -33,7 +33,7 @@ with st.sidebar:
     )
     "[Azure Portal](https://portal.azure.com/)"
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
-    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/2_Speech_to_text.py)"
+    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/6_Speech_to_text.py)"
 
 st.title("Speech to text")
 

@@ -37,13 +37,13 @@ Access to http://localhost:8501 and select the sample you want to run from the s
 
 ![File Q&A](../../docs/images/99_streamlit_examples.fileqa.png)
 
-#### 2. Speech to Text
-
-![Speech to Text](../../docs/images/99_streamlit_examples.stt.png)
-
-#### 3. Image Q&A
+#### 2. Image Q&A
 
 ![Image Q&A](../../docs/images/99_streamlit_examples.imageqa.png)
+
+#### 3. Camera Q&A
+
+![Camera Q&A](../../docs/images/99_streamlit_examples.cameraqa.png)
 
 #### 4. Translate text
 
@@ -52,6 +52,10 @@ Access to http://localhost:8501 and select the sample you want to run from the s
 #### 5. Explain data
 
 ![Explain data](../../docs/images/99_streamlit_examples.explaindata.png)
+
+#### 6. Speech to Text
+
+![Speech to Text](../../docs/images/99_streamlit_examples.stt.png)
 
 ## References
 
