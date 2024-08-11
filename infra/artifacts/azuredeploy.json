@@ -1,0 +1,915 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.29.47.4906",
+      "templateHash": "9244475966134419434"
+    }
+  },
+  "parameters": {
+    "prefix": {
+      "type": "string",
+      "defaultValue": "[substring(uniqueString(resourceGroup().id, parameters('location')), 0, 4)]",
+      "minLength": 4,
+      "maxLength": 10,
+      "metadata": {
+        "description": "Specifies the name prefix for all the Azure resources."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Specifies the location for all the Azure resources."
+      }
+    },
+    "logAnalyticsName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Specifies the name of the Azure Log Analytics resource."
+      }
+    },
+    "logAnalyticsSku": {
+      "type": "string",
+      "defaultValue": "PerNode",
+      "allowedValues": [
+        "Free",
+        "Standalone",
+        "PerNode",
+        "PerGB2018"
+      ],
+      "metadata": {
+        "description": "Specifies the service tier of the workspace: Free, Standalone, PerNode, Per-GB."
+      }
+    },
+    "logAnalyticsRetentionInDays": {
+      "type": "int",
+      "defaultValue": 60,
+      "metadata": {
+        "description": "Specifies the workspace data retention in days. -1 means Unlimited retention for the Unlimited Sku. 730 days is the maximum allowed for all other Skus."
+      }
+    },
+    "aiServicesName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Specifies the name of the Azure AI Services resource."
+      }
+    },
+    "aiServicesSku": {
+      "type": "object",
+      "defaultValue": {
+        "name": "S0"
+      },
+      "metadata": {
+        "description": "Specifies the resource model definition representing SKU."
+      }
+    },
+    "aiServicesIdentity": {
+      "type": "object",
+      "defaultValue": {
+        "type": "SystemAssigned"
+      },
+      "metadata": {
+        "description": "Specifies the identity of the Azure AI Services resource."
+      }
+    },
+    "aiServicesCustomSubDomainName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Specifies an optional subdomain name used for token-based authentication."
+      }
+    },
+    "aiServicesDisableLocalAuth": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Specifies whether disable the local authentication via API key."
+      }
+    },
+    "aiServicesPublicNetworkAccess": {
+      "type": "string",
+      "defaultValue": "Enabled",
+      "allowedValues": [
+        "Enabled",
+        "Disabled"
+      ],
+      "metadata": {
+        "description": "Specifies whether or not public endpoint access is allowed for this account.."
+      }
+    },
+    "openAiDeployments": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Specifies the OpenAI deployments to create."
+      }
+    },
+    "tags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Specifies the resource tags for all the resoources."
+      }
+    },
+    "userObjectId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Specifies the object id of a Microsoft Entra ID user. In general, this the object id of the system administrator who deploys the Azure resources."
+      }
+    },
+    "aiSearchName": {
+      "type": "string",
+      "defaultValue": "[format('{0}aisearch', parameters('prefix'))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure AI Search resource."
+      }
+    },
+    "cosmosDbName": {
+      "type": "string",
+      "defaultValue": "[format('{0}cosmosdb', parameters('prefix'))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Cosmos DB resource."
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "workspace",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "name": "[if(empty(parameters('logAnalyticsName')), createObject('value', toLower(format('{0}-log-analytics', parameters('prefix')))), createObject('value', parameters('logAnalyticsName')))]",
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          },
+          "sku": {
+            "value": "[parameters('logAnalyticsSku')]"
+          },
+          "retentionInDays": {
+            "value": "[parameters('logAnalyticsRetentionInDays')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.29.47.4906",
+              "templateHash": "5884786019063959613"
+            }
+          },
+          "parameters": {
+            "name": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the Log Analytics workspace."
+              }
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Specifies the location."
+              }
+            },
+            "sku": {
+              "type": "string",
+              "defaultValue": "PerNode",
+              "allowedValues": [
+                "Free",
+                "Standalone",
+                "PerNode",
+                "PerGB2018"
+              ],
+              "metadata": {
+                "description": "Specifies the service tier of the workspace: Free, Standalone, PerNode, Per-GB."
+              }
+            },
+            "retentionInDays": {
+              "type": "int",
+              "defaultValue": 60,
+              "metadata": {
+                "description": "Specifies the workspace data retention in days. -1 means Unlimited retention for the Unlimited Sku. 730 days is the maximum allowed for all other Skus."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "metadata": {
+                "description": "Specifies the resource tags."
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.OperationalInsights/workspaces",
+              "apiVersion": "2023-09-01",
+              "name": "[parameters('name')]",
+              "tags": "[parameters('tags')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "sku": {
+                  "name": "[parameters('sku')]"
+                },
+                "retentionInDays": "[parameters('retentionInDays')]"
+              }
+            }
+          ],
+          "outputs": {
+            "id": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('name'))]"
+            },
+            "name": {
+              "type": "string",
+              "value": "[parameters('name')]"
+            },
+            "customerId": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.OperationalInsights/workspaces', parameters('name')), '2023-09-01').customerId]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "aiServices",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "name": "[if(empty(parameters('aiServicesName')), createObject('value', toLower(format('{0}-ai-services', parameters('prefix')))), createObject('value', parameters('aiServicesName')))]",
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          },
+          "sku": {
+            "value": "[parameters('aiServicesSku')]"
+          },
+          "identity": {
+            "value": "[parameters('aiServicesIdentity')]"
+          },
+          "customSubDomainName": "[if(empty(parameters('aiServicesCustomSubDomainName')), createObject('value', toLower(format('{0}-ai-services', parameters('prefix')))), createObject('value', parameters('aiServicesCustomSubDomainName')))]",
+          "disableLocalAuth": {
+            "value": "[parameters('aiServicesDisableLocalAuth')]"
+          },
+          "publicNetworkAccess": {
+            "value": "[parameters('aiServicesPublicNetworkAccess')]"
+          },
+          "deployments": {
+            "value": "[parameters('openAiDeployments')]"
+          },
+          "workspaceId": {
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'workspace'), '2022-09-01').outputs.id.value]"
+          },
+          "userObjectId": {
+            "value": "[parameters('userObjectId')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.29.47.4906",
+              "templateHash": "408471496462884287"
+            }
+          },
+          "parameters": {
+            "name": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the Azure AI Services account."
+              }
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Specifies the location."
+              }
+            },
+            "sku": {
+              "type": "object",
+              "defaultValue": {
+                "name": "S0"
+              },
+              "metadata": {
+                "description": "Specifies the resource model definition representing SKU."
+              }
+            },
+            "identity": {
+              "type": "object",
+              "defaultValue": {
+                "type": "SystemAssigned"
+              },
+              "metadata": {
+                "description": "Specifies the identity of the aiServices resource."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "metadata": {
+                "description": "Specifies the resource tags."
+              }
+            },
+            "customSubDomainName": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Specifies an optional subdomain name used for token-based authentication."
+              }
+            },
+            "disableLocalAuth": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Specifies whether disable the local authentication via API key."
+              }
+            },
+            "publicNetworkAccess": {
+              "type": "string",
+              "defaultValue": "Enabled",
+              "allowedValues": [
+                "Enabled",
+                "Disabled"
+              ],
+              "metadata": {
+                "description": "Specifies whether or not public endpoint access is allowed for this account.."
+              }
+            },
+            "deployments": {
+              "type": "array",
+              "defaultValue": [],
+              "metadata": {
+                "description": "Specifies the OpenAI deployments to create."
+              }
+            },
+            "workspaceId": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the workspace id of the Log Analytics used to monitor the Application Gateway."
+              }
+            },
+            "userObjectId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Specifies the object id of a Miccrosoft Entra ID user. In general, this the object id of the system administrator who deploys the Azure resources."
+              }
+            }
+          },
+          "variables": {
+            "copy": [
+              {
+                "name": "aiServicesLogs",
+                "count": "[length(variables('aiServicesLogCategories'))]",
+                "input": {
+                  "category": "[variables('aiServicesLogCategories')[copyIndex('aiServicesLogs')]]",
+                  "enabled": true
+                }
+              },
+              {
+                "name": "aiServicesMetrics",
+                "count": "[length(variables('aiServicesMetricCategories'))]",
+                "input": {
+                  "category": "[variables('aiServicesMetricCategories')[copyIndex('aiServicesMetrics')]]",
+                  "enabled": true
+                }
+              }
+            ],
+            "diagnosticSettingsName": "diagnosticSettings",
+            "aiServicesLogCategories": [
+              "Audit",
+              "RequestResponse",
+              "Trace"
+            ],
+            "aiServicesMetricCategories": [
+              "AllMetrics"
+            ]
+          },
+          "resources": [
+            {
+              "type": "Microsoft.CognitiveServices/accounts",
+              "apiVersion": "2024-04-01-preview",
+              "name": "[parameters('name')]",
+              "location": "[parameters('location')]",
+              "sku": "[parameters('sku')]",
+              "kind": "AIServices",
+              "identity": "[parameters('identity')]",
+              "tags": "[parameters('tags')]",
+              "properties": {
+                "customSubDomainName": "[parameters('customSubDomainName')]",
+                "disableLocalAuth": "[parameters('disableLocalAuth')]",
+                "publicNetworkAccess": "[parameters('publicNetworkAccess')]"
+              }
+            },
+            {
+              "copy": {
+                "name": "model",
+                "count": "[length(parameters('deployments'))]",
+                "mode": "serial",
+                "batchSize": 1
+              },
+              "type": "Microsoft.CognitiveServices/accounts/deployments",
+              "apiVersion": "2024-04-01-preview",
+              "name": "[format('{0}/{1}', parameters('name'), parameters('deployments')[copyIndex()].model.name)]",
+              "sku": {
+                "capacity": "[coalesce(parameters('deployments')[copyIndex()].sku.capacity, 100)]",
+                "name": "[if(empty(parameters('deployments')[copyIndex()].sku.name), 'Standard', parameters('deployments')[copyIndex()].sku.name)]"
+              },
+              "properties": {
+                "model": {
+                  "format": "OpenAI",
+                  "name": "[parameters('deployments')[copyIndex()].model.name]",
+                  "version": "[parameters('deployments')[copyIndex()].model.version]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('name'))]"
+              ]
+            },
+            {
+              "condition": "[not(empty(parameters('userObjectId')))]",
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[format('Microsoft.CognitiveServices/accounts/{0}', parameters('name'))]",
+              "name": "[guid(resourceId('Microsoft.CognitiveServices/accounts', parameters('name')), subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '25fbc0a9-bd7c-42a3-aa1a-3b75d497ee68'), parameters('userObjectId'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '25fbc0a9-bd7c-42a3-aa1a-3b75d497ee68')]",
+                "principalType": "User",
+                "principalId": "[parameters('userObjectId')]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('name'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[format('Microsoft.CognitiveServices/accounts/{0}', parameters('name'))]",
+              "name": "[guid(resourceId('Microsoft.CognitiveServices/accounts', parameters('name')), subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a97b65f3-24c7-4388-baec-2e87135dc908'), parameters('userObjectId'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a97b65f3-24c7-4388-baec-2e87135dc908')]",
+                "principalType": "ServicePrincipal",
+                "principalId": "[reference(resourceId('Microsoft.CognitiveServices/accounts', parameters('name')), '2024-04-01-preview', 'full').identity.principalId]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('name'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Insights/diagnosticSettings",
+              "apiVersion": "2021-05-01-preview",
+              "scope": "[format('Microsoft.CognitiveServices/accounts/{0}', parameters('name'))]",
+              "name": "[variables('diagnosticSettingsName')]",
+              "properties": {
+                "workspaceId": "[parameters('workspaceId')]",
+                "logs": "[variables('aiServicesLogs')]",
+                "metrics": "[variables('aiServicesMetrics')]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('name'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "id": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.CognitiveServices/accounts', parameters('name'))]"
+            },
+            "name": {
+              "type": "string",
+              "value": "[parameters('name')]"
+            },
+            "endpoint": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', parameters('name')), '2024-04-01-preview').endpoint]"
+            },
+            "openAiEndpoint": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', parameters('name')), '2024-04-01-preview').endpoints['OpenAI Language Model Instance API']]"
+            },
+            "principalId": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', parameters('name')), '2024-04-01-preview', 'full').identity.principalId]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Resources/deployments', 'workspace')]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "aiSearch",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "name": {
+            "value": "[parameters('aiSearchName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.29.47.4906",
+              "templateHash": "7750052267626722262"
+            }
+          },
+          "parameters": {
+            "name": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the virtual machine."
+              }
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Specifies the location."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Specifies the resource tags."
+              }
+            },
+            "sku": {
+              "type": "string",
+              "defaultValue": "basic",
+              "allowedValues": [
+                "basic",
+                "free",
+                "standard",
+                "standard2",
+                "standard3",
+                "storage_optimized_l1",
+                "storage_optimized_l2"
+              ],
+              "metadata": {
+                "description": "SKU for the cognitive search service"
+              }
+            },
+            "authOptions": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Authentication options for how the data plane API of a search service authenticates requests."
+              }
+            },
+            "publicNetworkAccess": {
+              "type": "string",
+              "defaultValue": "enabled",
+              "allowedValues": [
+                "enabled",
+                "disabled"
+              ]
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Search/searchServices",
+              "apiVersion": "2024-06-01-preview",
+              "name": "[parameters('name')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "authOptions": "[parameters('authOptions')]",
+                "disableLocalAuth": false,
+                "encryptionWithCmk": {
+                  "enforcement": "Unspecified"
+                },
+                "hostingMode": "default",
+                "networkRuleSet": {
+                  "ipRules": []
+                },
+                "partitionCount": 1,
+                "publicNetworkAccess": "[parameters('publicNetworkAccess')]",
+                "replicaCount": 1
+              },
+              "sku": {
+                "name": "[parameters('sku')]"
+              }
+            }
+          ],
+          "outputs": {
+            "id": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.Search/searchServices', parameters('name'))]"
+            },
+            "name": {
+              "type": "string",
+              "value": "[parameters('name')]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "cosmosDb",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "name": {
+            "value": "[parameters('cosmosDbName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          },
+          "primaryRegion": {
+            "value": "[parameters('location')]"
+          },
+          "secondaryRegion": {
+            "value": "japanwest"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.29.47.4906",
+              "templateHash": "8653954838570010114"
+            }
+          },
+          "parameters": {
+            "name": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the Azure Cosmos DB resource"
+              }
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Specifies the primary location of Azure resources."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Specifies the resource tags."
+              }
+            },
+            "accountName": {
+              "type": "string",
+              "defaultValue": "[toLower(format('{0}account', parameters('name')))]",
+              "metadata": {
+                "description": "Specifies the name of the Azure Cosmos DB account name, max length 44 characters, lowercase."
+              }
+            },
+            "databaseName": {
+              "type": "string",
+              "defaultValue": "[toLower(format('{0}database', parameters('name')))]",
+              "metadata": {
+                "description": "Specifies the name of the Azure Cosmos DB database name, lowercase."
+              }
+            },
+            "containerName": {
+              "type": "string",
+              "defaultValue": "[toLower(format('{0}container', parameters('name')))]",
+              "metadata": {
+                "description": "Specifies the name of the Azure Cosmos DB container name, lowercase."
+              }
+            },
+            "primaryRegion": {
+              "type": "string",
+              "metadata": {
+                "description": "The primary region for the Cosmos DB account."
+              }
+            },
+            "secondaryRegion": {
+              "type": "string",
+              "metadata": {
+                "description": "The secondary region for the Cosmos DB account."
+              }
+            },
+            "defaultConsistencyLevel": {
+              "type": "string",
+              "defaultValue": "Session",
+              "allowedValues": [
+                "Eventual",
+                "ConsistentPrefix",
+                "Session",
+                "BoundedStaleness",
+                "Strong"
+              ],
+              "metadata": {
+                "description": "The default consistency level of the Cosmos DB account."
+              }
+            },
+            "maxStalenessPrefix": {
+              "type": "int",
+              "defaultValue": 100000,
+              "minValue": 10,
+              "maxValue": 2147483647,
+              "metadata": {
+                "description": "Max stale requests. Required for BoundedStaleness. Valid ranges, Single Region: 10 to 2147483647. Multi Region: 100000 to 2147483647."
+              }
+            },
+            "maxIntervalInSeconds": {
+              "type": "int",
+              "defaultValue": 300,
+              "minValue": 5,
+              "maxValue": 86400,
+              "metadata": {
+                "description": "Max lag time (minutes). Required for BoundedStaleness. Valid ranges, Single Region: 5 to 84600. Multi Region: 300 to 86400."
+              }
+            },
+            "systemManagedFailover": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable system managed failover for regions"
+              }
+            }
+          },
+          "variables": {
+            "consistencyPolicy": {
+              "Eventual": {
+                "defaultConsistencyLevel": "Eventual"
+              },
+              "ConsistentPrefix": {
+                "defaultConsistencyLevel": "ConsistentPrefix"
+              },
+              "Session": {
+                "defaultConsistencyLevel": "Session"
+              },
+              "BoundedStaleness": {
+                "defaultConsistencyLevel": "BoundedStaleness",
+                "maxStalenessPrefix": "[parameters('maxStalenessPrefix')]",
+                "maxIntervalInSeconds": "[parameters('maxIntervalInSeconds')]"
+              },
+              "Strong": {
+                "defaultConsistencyLevel": "Strong"
+              }
+            },
+            "locations": [
+              {
+                "locationName": "[parameters('primaryRegion')]",
+                "failoverPriority": 0,
+                "isZoneRedundant": false
+              },
+              {
+                "locationName": "[parameters('secondaryRegion')]",
+                "failoverPriority": 1,
+                "isZoneRedundant": false
+              }
+            ]
+          },
+          "resources": [
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts",
+              "apiVersion": "2024-05-15",
+              "name": "[parameters('accountName')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "kind": "GlobalDocumentDB",
+              "properties": {
+                "consistencyPolicy": "[variables('consistencyPolicy')[parameters('defaultConsistencyLevel')]]",
+                "locations": "[variables('locations')]",
+                "databaseAccountOfferType": "Standard",
+                "enableAutomaticFailover": "[parameters('systemManagedFailover')]",
+                "capabilities": [
+                  {
+                    "name": "EnableNoSQLVectorSearch"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases",
+              "apiVersion": "2024-05-15",
+              "name": "[format('{0}/{1}', parameters('accountName'), parameters('databaseName'))]",
+              "properties": {
+                "resource": {
+                  "id": "[parameters('databaseName')]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('accountName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+              "apiVersion": "2024-05-15",
+              "name": "[format('{0}/{1}/{2}', parameters('accountName'), parameters('databaseName'), parameters('containerName'))]",
+              "properties": {
+                "resource": {
+                  "id": "[parameters('containerName')]",
+                  "partitionKey": {
+                    "paths": [
+                      "/partitionKey"
+                    ],
+                    "kind": "Hash"
+                  }
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('accountName'), parameters('databaseName'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "accountId": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('accountName'))]"
+            },
+            "accountName": {
+              "type": "string",
+              "value": "[parameters('accountName')]"
+            },
+            "accountEndpoint": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('accountName')), '2024-05-15').documentEndpoint]"
+            },
+            "databaseId": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('accountName'), parameters('databaseName'))]"
+            },
+            "databaseName": {
+              "type": "string",
+              "value": "[parameters('databaseName')]"
+            },
+            "containerId": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers', parameters('accountName'), parameters('databaseName'), parameters('containerName'))]"
+            },
+            "containerName": {
+              "type": "string",
+              "value": "[parameters('containerName')]"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "deploymentInfo": {
+      "type": "object",
+      "value": {
+        "subscriptionId": "[subscription().subscriptionId]",
+        "resourceGroupName": "[resourceGroup().name]",
+        "location": "[parameters('location')]",
+        "aiServicesName": "[reference(resourceId('Microsoft.Resources/deployments', 'aiServices'), '2022-09-01').outputs.name.value]",
+        "aiServicesEndpoint": "[reference(resourceId('Microsoft.Resources/deployments', 'aiServices'), '2022-09-01').outputs.endpoint.value]",
+        "aiSearchName": "[reference(resourceId('Microsoft.Resources/deployments', 'aiSearch'), '2022-09-01').outputs.name.value]",
+        "cosmosDbAccountName": "[reference(resourceId('Microsoft.Resources/deployments', 'cosmosDb'), '2022-09-01').outputs.accountName.value]",
+        "cosmosDbAccountEndpoint": "[reference(resourceId('Microsoft.Resources/deployments', 'cosmosDb'), '2022-09-01').outputs.accountEndpoint.value]"
+      }
+    }
+  }
+}

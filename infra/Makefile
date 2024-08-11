@@ -51,7 +51,7 @@ build: ## build a bicep file
 	@mkdir -p $(OUT_DIR)
 	@az bicep build \
 		--file $(BICEP_MAIN) \
-		--outfile $(OUT_DIR)/$(GIT_REVISION).json
+		--outfile $(OUT_DIR)/azuredeploy.json
 
 .PHONY: test
 test: deployment-what-if ## test codes
