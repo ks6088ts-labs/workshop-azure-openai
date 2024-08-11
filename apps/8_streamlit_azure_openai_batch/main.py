@@ -17,8 +17,6 @@ with st.sidebar:
     )
     azure_openai_api_key = st.text_input(
         label="AZURE_OPENAI_API_KEY",
-        # DEBUG
-        value=getenv("AZURE_OPENAI_API_KEY"),
         key="AZURE_OPENAI_API_KEY",
         type="password",
     )
