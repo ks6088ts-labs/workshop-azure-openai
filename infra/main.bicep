@@ -48,6 +48,9 @@ param aiServicesDisableLocalAuth bool = false
 ])
 param aiServicesPublicNetworkAccess string = 'Enabled'
 
+@description('Specifies the location for the Azure AI Services resource.')
+param aiServicesLocation string = 'eastus'
+
 @description('Specifies the OpenAI deployments to create.')
 param openAiDeployments array = []
 
@@ -81,7 +84,7 @@ module aiServices 'modules/aiServices.bicep' = {
   params: {
     // properties
     name: empty(aiServicesName) ? toLower('${prefix}-ai-services') : aiServicesName
-    location: location
+    location: aiServicesLocation
     tags: tags
     sku: aiServicesSku
     identity: aiServicesIdentity
