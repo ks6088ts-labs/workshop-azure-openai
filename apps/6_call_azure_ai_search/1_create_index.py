@@ -9,7 +9,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 def load_texts() -> list:
     # for simplicity, hardcoding the path to the text file
-    with open("./apps/6_call_azure_ai_search/data/contoso_rules.txt") as f:
+    with open("./datasets/contoso_rules.csv") as f:
         return f.readlines()
 
 
