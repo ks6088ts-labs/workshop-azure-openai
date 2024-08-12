@@ -1,4 +1,4 @@
-FROM python:3.11.8-slim-bookworm as requirements-stage
+FROM python:3.11.8-slim-bookworm AS requirements-stage
 
 WORKDIR /tmp
 
@@ -21,4 +21,4 @@ COPY . .
 # Install dependencies
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
-CMD ["python", "main.py"]
+CMD ["python", "-m", "streamlit", "run", "apps/99_streamlit_examples/main.py"]
