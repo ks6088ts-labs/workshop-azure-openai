@@ -48,7 +48,20 @@ content = st.text_area(
 )
 st.write(f"You wrote {len(content)} characters.")
 
-if st.button("Convert"):
+voice_option = st.selectbox(
+    "Select voice",
+    (
+        "alloy",
+        "echo",
+        "fable",
+        "onyx",
+        "nova",
+        "shimmer",
+    ),
+)
+
+convert_button = st.button("Convert")
+if convert_button and content and voice_option:
     client = AzureOpenAI(
         api_key=azure_openai_api_key,
         api_version=azure_openai_api_version,
@@ -59,7 +72,7 @@ if st.button("Convert"):
     with st.spinner("Converting..."):
         response = client.audio.speech.create(
             input=content,
-            voice=getenv("AZURE_OPENAI_TTS_VOICE"),
+            voice=voice_option,
             model=azure_openai_tts_model,
             response_format="mp3",
         )
