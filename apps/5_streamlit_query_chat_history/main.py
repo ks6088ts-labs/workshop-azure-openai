@@ -21,8 +21,6 @@ def get_container_client() -> ContainerProxy:
     )
 
 
-container = get_container_client()
-
 with st.sidebar:
     "[Azure Portal](https://portal.azure.com/)"
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
@@ -57,7 +55,7 @@ if run:
     ]
 
     with st.spinner("Retrieving chat history. Please wait."):
-        items = container.query_items(
+        items = get_container_client().query_items(
             query=query,
             parameters=parameters,
             enable_cross_partition_query=True,

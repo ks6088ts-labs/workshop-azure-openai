@@ -36,12 +36,6 @@ with st.sidebar:
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/8_streamlit_azure_openai_batch/main.py)"
 
-client = AzureOpenAI(
-    api_key=azure_openai_api_key,
-    api_version=azure_openai_api_version,
-    azure_endpoint=azure_openai_endpoint,
-)
-
 st.title("8_streamlit_azure_openai_batch")
 
 if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
@@ -53,6 +47,11 @@ if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api
 # ---------------
 st.header("Upload batch file")
 st.info("Upload a file in JSON lines format (.jsonl)")
+client = AzureOpenAI(
+    api_key=azure_openai_api_key,
+    api_version=azure_openai_api_version,
+    azure_endpoint=azure_openai_endpoint,
+)
 uploaded_file = st.file_uploader("Upload an input file in JSON lines format", type=("jsonl"))
 if uploaded_file:
     bytes_data = uploaded_file.read()
