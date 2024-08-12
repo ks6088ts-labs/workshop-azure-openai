@@ -33,7 +33,7 @@ with st.sidebar:
     )
     "[Azure Portal](https://portal.azure.com/)"
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
-    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/7_Create_image.py)"
+    "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/8_Create_image.py)"
 
 st.title("Create image")
 
