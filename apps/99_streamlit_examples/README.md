@@ -57,6 +57,10 @@ Access to http://localhost:8501 and select the sample you want to run from the s
 
 ![Speech to Text](../../docs/images/99_streamlit_examples.stt.png)
 
+#### 7. Create image
+
+![Create image](../../docs/images/99_streamlit_examples.createimage.png)
+
 ## References
 
 - [🎈 Streamlit + LLM Examples App](https://github.com/streamlit/llm-examples)
