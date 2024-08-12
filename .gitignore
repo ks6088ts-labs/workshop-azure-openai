@@ -162,3 +162,4 @@ cython_debug/
 # Project
 *.env
 generated/
+*.mp3

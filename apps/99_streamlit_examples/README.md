@@ -57,11 +57,15 @@ Access to http://localhost:8501 and select the sample you want to run from the s
 
 ![Speech to Text](../../docs/images/99_streamlit_examples.stt.png)
 
-#### 7. Create image
+#### 7. Text to Speech
+
+![Text to Speech](../../docs/images/99_streamlit_examples.tts.png)
+
+#### 8. Create image
 
 ![Create image](../../docs/images/99_streamlit_examples.createimage.png)
 
-#### 8. Visualize location
+#### 9. Visualize location
 
 ![Visualize location](../../docs/images/99_streamlit_examples.map.png)
 
