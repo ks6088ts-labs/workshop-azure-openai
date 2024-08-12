@@ -38,9 +38,6 @@ def store_chat_history(container: ContainerProxy):
     pprint(response)
 
 
-# To reuse the session for Cosmos DB, just define the container globally
-container = get_container_client()
-
 with st.sidebar:
     azure_openai_endpoint = st.text_input(
         label="AZURE_OPENAI_ENDPOINT",
@@ -116,5 +113,7 @@ if prompt := st.chat_input():
         }
     )
     # !! Here's the only difference from apps/2_streamlit_chat/main.py
-    store_chat_history(container)
+    store_chat_history(
+        container=get_container_client(),
+    )
     st.chat_message("assistant").write(msg)
