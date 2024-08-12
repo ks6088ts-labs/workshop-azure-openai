@@ -9,6 +9,15 @@ def test_smoke():
         # "apps/7_streamlit_chat_rag/main.py",
         "apps/8_streamlit_azure_openai_batch/main.py",
         "apps/99_streamlit_examples/main.py",
+        "apps/99_streamlit_examples/pages/1_File_Q&A.py",
+        "apps/99_streamlit_examples/pages/2_Image_Q&A.py",
+        "apps/99_streamlit_examples/pages/3_Camera_Q&A.py",
+        "apps/99_streamlit_examples/pages/4_Translate_text.py",
+        "apps/99_streamlit_examples/pages/5_Explain_data.py",
+        "apps/99_streamlit_examples/pages/6_Speech_to_text.py",
+        "apps/99_streamlit_examples/pages/7_Text_to_speech.py",
+        "apps/99_streamlit_examples/pages/8_Create_image.py",
+        "apps/99_streamlit_examples/pages/9_Visualize_location.py",
     ]
     for path in paths:
         at = AppTest(
