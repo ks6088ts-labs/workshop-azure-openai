@@ -57,9 +57,13 @@ with st.sidebar:
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/7_streamlit_chat_rag/main.py)"
 
-if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
+
+def is_configured():
+    return azure_openai_api_key and azure_openai_endpoint and azure_openai_api_version and azure_openai_gpt_model
+
+
+if not is_configured():
     st.warning("Please fill in the required fields at the sidebar.")
-    st.stop()
 
 
 def get_session_id():
@@ -121,7 +125,7 @@ def main():
     for msg in st.session_state["memory"].chat_memory.messages:
         st.chat_message(msg.type).write(msg.content)
 
-    if prompt := st.chat_input(placeholder="Type your message here..."):
+    if prompt := st.chat_input(placeholder="Type your message here...", disabled=not is_configured()):
         st.chat_message("user").write(prompt)
 
         with st.chat_message("assistant"):

@@ -36,34 +36,44 @@ with st.sidebar:
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/8_streamlit_azure_openai_batch/main.py)"
 
+
+def is_configured():
+    return azure_openai_api_key and azure_openai_endpoint and azure_openai_api_version and azure_openai_gpt_model
+
+
+def get_client():
+    return AzureOpenAI(
+        api_key=azure_openai_api_key,
+        api_version=azure_openai_api_version,
+        azure_endpoint=azure_openai_endpoint,
+    )
+
+
 st.title("8_streamlit_azure_openai_batch")
 
-if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
+if not is_configured():
     st.warning("Please fill in the required fields at the sidebar.")
-    st.stop()
 
 # ---------------
 # Upload batch file
 # ---------------
 st.header("Upload batch file")
 st.info("Upload a file in JSON lines format (.jsonl)")
-client = AzureOpenAI(
-    api_key=azure_openai_api_key,
-    api_version=azure_openai_api_version,
-    azure_endpoint=azure_openai_endpoint,
-)
 uploaded_file = st.file_uploader("Upload an input file in JSON lines format", type=("jsonl"))
 if uploaded_file:
     bytes_data = uploaded_file.read()
     st.write(bytes_data.decode().split("\n"))
-    submit_button = st.button("Submit", key="submit")
-    if submit_button:
+    if st.button(
+        "Submit",
+        key="submit",
+        disabled=not is_configured(),
+    ):
         temp_file_path = "tmp.jsonl"
         with open(temp_file_path, "wb") as f:
             f.write(bytes_data)
         with st.spinner("Uploading..."):
             try:
-                response = client.files.create(
+                response = get_client().files.create(
                     # FIXME: hardcoded for now, use uploaded_file
                     file=open(temp_file_path, "rb"),
                     purpose="batch",
@@ -83,11 +93,14 @@ track_file_id = st.text_input(
     key="track_file_id",
     help="Enter the file ID to track the file upload status",
 )
-track_button = st.button("Track")
-if track_file_id != "" and track_button:
+if st.button(
+    "Track",
+    key="track",
+    disabled=not track_file_id or not is_configured(),
+):
     with st.spinner("Tracking..."):
         try:
-            response = client.files.retrieve(track_file_id)
+            response = get_client().files.retrieve(track_file_id)
             st.write(response.model_dump())
             st.write(f"status: {response.status}")
         except Exception as e:
@@ -104,11 +117,14 @@ batch_file_id = st.text_input(
     key="batch_file_id",
     help="Enter the file ID to track the file upload status",
 )
-batch_button = st.button("Create batch job")
-if batch_file_id != "" and batch_button:
+if st.button(
+    "Create batch job",
+    key="create",
+    disabled=not batch_file_id or not is_configured(),
+):
     with st.spinner("Creating..."):
         try:
-            response = client.batches.create(
+            response = get_client().batches.create(
                 input_file_id=batch_file_id,
                 endpoint="/chat/completions",
                 completion_window="24h",
@@ -128,11 +144,14 @@ track_batch_job_id = st.text_input(
     key="track_batch_job_id",
     help="Enter the batch job ID to track the job progress",
 )
-track_batch_job_button = st.button("Track batch job")
-if track_batch_job_id != "" and track_batch_job_button:
+if st.button(
+    "Track batch job",
+    key="track_batch_job",
+    disabled=not track_batch_job_id or not is_configured(),
+):
     with st.spinner("Tracking..."):
         try:
-            response = client.batches.retrieve(track_batch_job_id)
+            response = get_client().batches.retrieve(track_batch_job_id)
             st.write(response.model_dump())
             st.write(f"status: {response.status}")
             st.write(f"output_file_id: {response.output_file_id}")
@@ -150,11 +169,14 @@ output_file_id = st.text_input(
     key="retrieve_batch_job_id",
     help="Enter the batch job ID to retrieve the output file",
 )
-retrieve_batch_job_button = st.button("Retrieve batch job output file")
-if output_file_id != "" and retrieve_batch_job_button:
+if st.button(
+    "Retrieve batch job output file",
+    key="retrieve_batch_job",
+    disabled=not output_file_id or not is_configured(),
+):
     with st.spinner("Retrieving..."):
         try:
-            file_response = client.files.content(output_file_id)
+            file_response = get_client().files.content(output_file_id)
             raw_responses = file_response.text.strip().split("\n")
 
             for raw_response in raw_responses:

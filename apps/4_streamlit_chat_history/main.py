@@ -66,10 +66,15 @@ with st.sidebar:
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/4_streamlit_chat_history/main.py)"
 
+
+def is_configured():
+    return azure_openai_api_key and azure_openai_endpoint and azure_openai_api_version and azure_openai_gpt_model
+
+
 st.title("4_streamlit_chat_history")
-if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
+
+if not is_configured():
     st.warning("Please fill in the required fields at the sidebar.")
-    st.stop()
 
 st.write(f"Session ID: {get_session_id()}")
 
@@ -86,7 +91,7 @@ for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
 # Receive user input
-if prompt := st.chat_input():
+if prompt := st.chat_input(disabled=not is_configured()):
     client = AzureOpenAI(
         api_key=azure_openai_api_key,
         api_version=azure_openai_api_version,

@@ -35,16 +35,15 @@ with st.sidebar:
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/8_Create_image.py)"
 
+
+def is_configured():
+    return azure_openai_api_key and azure_openai_endpoint and azure_openai_api_version and azure_openai_dalle_model
+
+
 st.title("Create image")
 
-if (
-    not azure_openai_api_key
-    or not azure_openai_endpoint
-    or not azure_openai_api_version
-    or not azure_openai_dalle_model
-):
+if not is_configured():
     st.warning("Please fill in the required fields at the sidebar.")
-    st.stop()
 
 st.info("Create an image from a text description.")
 
@@ -53,7 +52,7 @@ description = st.text_input(
     placeholder="Please describe the content of the image",
 )
 
-if description:
+if st.button("Create image", disabled=not description or not is_configured()):
     client = AzureOpenAI(
         api_key=azure_openai_api_key,
         api_version=azure_openai_api_version,

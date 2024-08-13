@@ -34,11 +34,15 @@ with st.sidebar:
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/1_File_Q&A.py)"
 
+
+def is_configured():
+    return azure_openai_api_key and azure_openai_endpoint and azure_openai_api_version and azure_openai_gpt_model
+
+
 st.title("File Q&A")
 
-if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
+if not is_configured():
     st.warning("Please fill in the required fields at the sidebar.")
-    st.stop()
 
 st.info("Upload a file and ask a question. AI will answer the question.")
 
@@ -49,7 +53,7 @@ question = st.text_input(
     disabled=not uploaded_file,
 )
 
-if uploaded_file and question:
+if uploaded_file and question and is_configured():
     article = uploaded_file.read().decode()
 
     client = AzureOpenAI(

@@ -34,11 +34,15 @@ with st.sidebar:
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/7_Text_to_speech.py)"
 
+
+def is_configured():
+    return azure_openai_api_key and azure_openai_endpoint and azure_openai_api_version and azure_openai_tts_model
+
+
 st.title("Text to speech")
 
-if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_tts_model:
+if not is_configured():
     st.warning("Please fill in the required fields at the sidebar.")
-    st.stop()
 
 st.info("This is a sample to convert text to speech.")
 
@@ -60,8 +64,7 @@ voice_option = st.selectbox(
     ),
 )
 
-convert_button = st.button("Convert")
-if convert_button and content and voice_option:
+if st.button("Convert", disabled=not content or not is_configured()):
     client = AzureOpenAI(
         api_key=azure_openai_api_key,
         api_version=azure_openai_api_version,

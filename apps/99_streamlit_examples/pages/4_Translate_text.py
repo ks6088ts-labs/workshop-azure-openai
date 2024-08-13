@@ -34,11 +34,15 @@ with st.sidebar:
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/4_Translate_text.py)"
 
+
+def is_configured():
+    return azure_openai_api_key and azure_openai_endpoint and azure_openai_api_version and azure_openai_gpt_model
+
+
 st.title("Translate text")
 
-if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_gpt_model:
+if not is_configured():
     st.warning("Please fill in the required fields at the sidebar.")
-    st.stop()
 
 st.info("This is a sample to translate text.")
 
@@ -89,7 +93,7 @@ with row1_left:
     )
 
 with row1_right:
-    translate_button = st.button("Translate")
+    translate_button = st.button("Translate", disabled=not is_configured())
 
 # 2nd row
 row2_left, row2_right = st.columns(2)

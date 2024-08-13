@@ -35,11 +35,15 @@ with st.sidebar:
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/99_streamlit_examples/pages/6_Speech_to_text.py)"
 
+
+def is_configured():
+    return azure_openai_api_key and azure_openai_endpoint and azure_openai_api_version and azure_openai_stt_model
+
+
 st.title("Speech to text")
 
-if not azure_openai_api_key or not azure_openai_endpoint or not azure_openai_api_version or not azure_openai_stt_model:
+if not is_configured():
     st.warning("Please fill in the required fields at the sidebar.")
-    st.stop()
 
 st.info("This is a sample to convert speech to text.")
 
@@ -64,17 +68,17 @@ if uploaded_file:
         azure_endpoint=azure_openai_endpoint,
     )
 
-    if st.button("Convert"):
-        with st.spinner("Converting..."):
-            response = client.audio.transcriptions.create(
-                model=azure_openai_stt_model,
-                file=uploaded_file,
-                response_format="text",
-            )
-        st.write(response)
-        transcript_encoded = base64.b64encode(response.encode()).decode()
-        # Generate a link to download the result
-        st.markdown(
-            f'<a href="data:file/txt;base64,{transcript_encoded}" download="transcript.txt">Download Result</a>',
-            unsafe_allow_html=True,
+if st.button("Convert", disabled=not uploaded_file or not is_configured()):
+    with st.spinner("Converting..."):
+        response = client.audio.transcriptions.create(
+            model=azure_openai_stt_model,
+            file=uploaded_file,
+            response_format="text",
         )
+    st.write(response)
+    transcript_encoded = base64.b64encode(response.encode()).decode()
+    # Generate a link to download the result
+    st.markdown(
+        f'<a href="data:file/txt;base64,{transcript_encoded}" download="transcript.txt">Download Result</a>',
+        unsafe_allow_html=True,
+    )
