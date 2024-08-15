@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.29.47.4906",
-      "templateHash": "9244475966134419434"
+      "templateHash": "2885509356264964242"
     }
   },
   "parameters": {
@@ -100,6 +100,13 @@
       ],
       "metadata": {
         "description": "Specifies whether or not public endpoint access is allowed for this account.."
+      }
+    },
+    "aiServicesLocation": {
+      "type": "string",
+      "defaultValue": "eastus",
+      "metadata": {
+        "description": "Specifies the location for the Azure AI Services resource."
       }
     },
     "openAiDeployments": {
@@ -258,7 +265,7 @@
         "parameters": {
           "name": "[if(empty(parameters('aiServicesName')), createObject('value', toLower(format('{0}-ai-services', parameters('prefix')))), createObject('value', parameters('aiServicesName')))]",
           "location": {
-            "value": "[parameters('location')]"
+            "value": "[parameters('aiServicesLocation')]"
           },
           "tags": {
             "value": "[parameters('tags')]"
