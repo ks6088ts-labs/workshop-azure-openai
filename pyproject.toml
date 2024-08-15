@@ -20,6 +20,7 @@ langchain-openai = "^0.1.20"
 langchain-community = "^0.2.11"
 azure-search-documents = "^11.5.1"
 azure-identity = "^1.17.1"
+ultralytics = "^8.2.77"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.8.0"
