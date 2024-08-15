@@ -18,6 +18,8 @@ def test_smoke():
         "apps/99_streamlit_examples/pages/7_Text_to_speech.py",
         "apps/99_streamlit_examples/pages/8_Create_image.py",
         "apps/99_streamlit_examples/pages/9_Visualize_location.py",
+        "apps/99_streamlit_examples/pages/10_Object_detection.py",
+        "apps/99_streamlit_examples/pages/11_Pose_estimation.py",
     ]
     for path in paths:
         at = AppTest(
