@@ -163,3 +163,4 @@ cython_debug/
 *.env
 generated/
 *.mp3
+*.pt

@@ -69,6 +69,10 @@ Access to http://localhost:8501 and select the sample you want to run from the s
 
 ![Visualize location](../../docs/images/99_streamlit_examples.map.png)
 
+#### 10. Object detection
+
+![Object detection](../../docs/images/99_streamlit_examples.objectdetection.png)
+
 ## References
 
 - [🎈 Streamlit + LLM Examples App](https://github.com/streamlit/llm-examples)
