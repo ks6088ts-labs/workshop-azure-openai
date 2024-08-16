@@ -15,7 +15,7 @@ ARG GIT_TAG="x.x.x"
 
 WORKDIR /app
 
-COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
+COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.gen.txt
 COPY . .
 
 # Install packages: https://stackoverflow.com/a/68666500/4457856
@@ -25,6 +25,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.gen.txt
 
 CMD ["python", "-m", "streamlit", "run", "apps/99_streamlit_examples/main.py"]
