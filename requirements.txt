@@ -9,5 +9,9 @@ langchain-openai==0.1.20
 langchain-community==0.2.11
 azure-search-documents==11.5.1
 azure-identity==1.17.1
-ultralytics==8.2.77
-mediapipe==0.10.14
+
+# To run 99_streamlit_examples/pages/10_Object_Detection.py
+# ultralytics==8.2.77
+
+# To run 99_streamlit_examples/pages/11_Pose_Estimation.py
+# mediapipe==0.10.14

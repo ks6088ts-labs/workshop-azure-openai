@@ -18,6 +18,10 @@ WORKDIR /app
 COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
 COPY . .
 
+# Install packages: https://stackoverflow.com/a/68666500/4457856
+RUN apt-get update \
+    && apt-get install -y ffmpeg libsm6 libxext6
+
 # Install dependencies
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
