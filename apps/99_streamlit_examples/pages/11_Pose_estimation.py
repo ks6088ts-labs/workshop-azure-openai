@@ -28,23 +28,36 @@ with st.sidebar:
         index=1,
         key="model_complexity",
     )
+    data_source = st.selectbox(
+        label="Select a data source",
+        options=[
+            "file",
+            "camera",
+        ],
+        key="data_source",
+        index=0,
+    )
 
 
 st.title("Pose estimation")
 
-st.info("Upload an image and AI will estimate the pose.")
+if data_source == "camera":
+    st.info("AI will detect objects in the camera image.")
+    uploaded_file = st.camera_input("Take a picture")
+if data_source == "file":
+    st.info("Upload an image and AI will estimate the pose.")
+    uploaded_file = st.file_uploader(
+        "Upload an image",
+        type=(
+            "jpg",
+            "jpeg",
+            "png",
+            "gif",
+            "bmp",
+            "tiff",
+        ),
+    )
 
-uploaded_file = st.file_uploader(
-    "Upload an image",
-    type=(
-        "jpg",
-        "jpeg",
-        "png",
-        "gif",
-        "bmp",
-        "tiff",
-    ),
-)
 if uploaded_file is not None:
     button = st.button("Estimate pose")
 

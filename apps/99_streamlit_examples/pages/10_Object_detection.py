@@ -18,23 +18,35 @@ with st.sidebar:
         key="model_name",
         index=0,
     )
+    data_source = st.selectbox(
+        label="Select a data source",
+        options=[
+            "file",
+            "camera",
+        ],
+        key="data_source",
+        index=0,
+    )
 
 
 st.title("Object detection")
 
-st.info("Upload an image and AI will detect objects in the image.")
-
-uploaded_file = st.file_uploader(
-    "Upload an image",
-    type=(
-        "jpg",
-        "jpeg",
-        "png",
-        "gif",
-        "bmp",
-        "tiff",
-    ),
-)
+if data_source == "camera":
+    st.info("AI will detect objects in the camera image.")
+    uploaded_file = st.camera_input("Take a picture")
+if data_source == "file":
+    st.info("Upload an image and AI will detect objects in the image.")
+    uploaded_file = st.file_uploader(
+        "Upload an image",
+        type=(
+            "jpg",
+            "jpeg",
+            "png",
+            "gif",
+            "bmp",
+            "tiff",
+        ),
+    )
 if uploaded_file is not None:
     button = st.button("Detect objects")
 
