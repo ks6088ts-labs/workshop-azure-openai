@@ -19,6 +19,7 @@ To run all the projects in this repository, you need the followings.
 - [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/ai-services/openai-service)
 - [Azure Cosmos DB](https://azure.microsoft.com/en-us/products/cosmos-db/)
 - [Azure AI Search](https://azure.microsoft.com/en-us/products/ai-services/ai-search)
+- [Azure AI Document Intelligence](https://azure.microsoft.com/en-us/products/ai-services/ai-document-intelligence)
 
 Here are the preferred tools for development.
 
@@ -27,17 +28,18 @@ Here are the preferred tools for development.
 
 ## Projects
 
-| Project                                                                           | Description                                             | Image                                                                                    |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| [1_call_azure_openai_chat](./apps/1_call_azure_openai_chat/README.md)             | Call Azure OpenAI Service API from Python               | No Image                                                                                 |
-| [2_streamlit_chat](./apps/2_streamlit_chat/README.md)                             | Create an Azure OpenAI Chat app using Streamlit         | ![2_streamlit_chat](./docs/images/2_streamlit_chat.chat_page.png)                        |
-| [3_call_azure_cosmos_db](./apps/3_call_azure_cosmos_db/README.md)                 | Call Azure Cosmos DB from Python                        | No Image                                                                                 |
-| [4_streamlit_chat_history](./apps/4_streamlit_chat_history/README.md)             | Add feature to store chat history using Azure Cosmos DB | ![4_streamlit_chat_history](./docs/images/4_streamlit_chat_history.chat_page.png)        |
-| [5_streamlit_query_chat_history](./apps/5_streamlit_query_chat_history/README.md) | Search Chat History                                     | ![5_streamlit_query_chat_history](./docs/images/5_streamlit_query_chat_history.main.png) |
-| [6_call_azure_ai_search](./apps/6_call_azure_ai_search/README.md)                 | Call Azure AI Search from Python                        | No Image                                                                                 |
-| [7_streamlit_chat_rag](./apps/7_streamlit_chat_rag/README.md)                     | Add RAG feature to Streamlit chat app                   | ![7_streamlit_chat_rag](./docs/images/7_streamlit_chat_rag.main.png)                     |
-| [8_streamlit_azure_openai_batch](./apps/8_streamlit_azure_openai_batch/README.md) | Call Azure OpenAI Batch API with Streamlit              | ![8_streamlit_azure_openai_batch](./docs/images/8_streamlit_azure_openai_batch.main.png) |
-| [99_streamlit_examples](./apps/99_streamlit_examples/README.md)                   | Code samples for Streamlit                              | ![99_streamlit_examples](./docs/images/99_streamlit_examples.explaindata.png)            |
+| Project                                                                                             | Description                                             | Image                                                                                                      |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| [1_call_azure_openai_chat](./apps/1_call_azure_openai_chat/README.md)                               | Call Azure OpenAI Service API from Python               | No Image                                                                                                   |
+| [2_streamlit_chat](./apps/2_streamlit_chat/README.md)                                               | Create an Azure OpenAI Chat app using Streamlit         | ![2_streamlit_chat](./docs/images/2_streamlit_chat.chat_page.png)                                          |
+| [3_call_azure_cosmos_db](./apps/3_call_azure_cosmos_db/README.md)                                   | Call Azure Cosmos DB from Python                        | No Image                                                                                                   |
+| [4_streamlit_chat_history](./apps/4_streamlit_chat_history/README.md)                               | Add feature to store chat history using Azure Cosmos DB | ![4_streamlit_chat_history](./docs/images/4_streamlit_chat_history.chat_page.png)                          |
+| [5_streamlit_query_chat_history](./apps/5_streamlit_query_chat_history/README.md)                   | Search Chat History                                     | ![5_streamlit_query_chat_history](./docs/images/5_streamlit_query_chat_history.main.png)                   |
+| [6_call_azure_ai_search](./apps/6_call_azure_ai_search/README.md)                                   | Call Azure AI Search from Python                        | No Image                                                                                                   |
+| [7_streamlit_chat_rag](./apps/7_streamlit_chat_rag/README.md)                                       | Add RAG feature to Streamlit chat app                   | ![7_streamlit_chat_rag](./docs/images/7_streamlit_chat_rag.main.png)                                       |
+| [8_streamlit_azure_openai_batch](./apps/8_streamlit_azure_openai_batch/README.md)                   | Call Azure OpenAI Batch API with Streamlit              | ![8_streamlit_azure_openai_batch](./docs/images/8_streamlit_azure_openai_batch.main.png)                   |
+| [9_streamlit_azure_document_intelligence](./apps/9_streamlit_azure_document_intelligence/README.md) | Call Azure AI Document Intelligence API with Streamlit  | ![9_streamlit_azure_document_intelligence](./docs/images/9_streamlit_azure_document_intelligence.main.png) |
+| [99_streamlit_examples](./apps/99_streamlit_examples/README.md)                                     | Code samples for Streamlit                              | ![99_streamlit_examples](./docs/images/99_streamlit_examples.explaindata.png)                              |
 
 ## How to run
 
