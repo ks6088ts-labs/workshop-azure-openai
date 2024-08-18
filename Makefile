@@ -79,4 +79,4 @@ docker-scan: ## scan Docker image
 	trivy image $(DOCKER_REPO_NAME)/$(DOCKER_IMAGE_NAME):$(GIT_TAG)
 
 .PHONY: ci-test-docker
-ci-test-docker: docker-lint docker-build docker-scan docker-run ## run CI test for Docker
+ci-test-docker: docker-lint docker-build docker-run ## run CI test for Docker

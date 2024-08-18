@@ -22,6 +22,7 @@ azure-search-documents = "^11.5.1"
 azure-identity = "^1.17.1"
 ultralytics = "^8.2.77"
 mediapipe = "^0.10.14"
+azure-ai-documentintelligence = "^1.0.0b3"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.8.0"
