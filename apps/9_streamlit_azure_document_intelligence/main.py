@@ -28,6 +28,17 @@ with st.sidebar:
         key="AZURE_DOCUMENT_INTELLIGENCE_API_KEY",
         type="password",
     )
+    output_content_format = st.selectbox(
+        label="output_content_format",
+        key="output_content_format",
+        options=[
+            ContentFormat.MARKDOWN,
+            ContentFormat.TEXT,
+        ],
+        index=0,
+        format_func=lambda x: x.value,
+    )
+
     "[Azure Portal](https://portal.azure.com/)"
     "[Azure OpenAI Studio](https://oai.azure.com/resource/overview)"
     "[View the source code](https://github.com/ks6088ts-labs/workshop-azure-openai/blob/main/apps/9_streamlit_azure_document_intelligence/main.py)"
@@ -88,7 +99,7 @@ if st.button(
                 model_id="prebuilt-layout",
                 analyze_request=bytes_data,
                 content_type="application/octet-stream",
-                output_content_format=ContentFormat.TEXT,
+                output_content_format=output_content_format,
             )
             result: AnalyzeResult = poller.result()
             output_encoded = base64.b64encode(
@@ -100,7 +111,7 @@ if st.button(
             # Generate a link to download the result
             st.markdown(
                 f'<a href="data:file/txt;base64,{output_encoded}" \
-                    download="{uploaded_file.name}.json">Download Result</a>',
+                    download="{uploaded_file.name}.{output_content_format}.json">Download Result</a>',
                 unsafe_allow_html=True,
             )
             st.write(result.as_dict())
