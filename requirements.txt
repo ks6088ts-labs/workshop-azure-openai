@@ -15,3 +15,5 @@ azure-identity==1.17.1
 
 # To run 99_streamlit_examples/pages/11_Pose_Estimation.py
 # mediapipe==0.10.14
+
+azure-ai-documentintelligence==1.0.0b3
