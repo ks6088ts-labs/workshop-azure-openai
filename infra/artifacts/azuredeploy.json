@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.29.47.4906",
-      "templateHash": "2885509356264964242"
+      "templateHash": "3135606789741441731"
     }
   },
   "parameters": {
@@ -142,6 +142,20 @@
       "defaultValue": "[format('{0}cosmosdb', parameters('prefix'))]",
       "metadata": {
         "description": "Specifies the name of the Azure Cosmos DB resource."
+      }
+    },
+    "storageAccountName": {
+      "type": "string",
+      "defaultValue": "[format('{0}storageaccount', parameters('prefix'))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage Account resource."
+      }
+    },
+    "storageAccountContainerNames": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage Account containers."
       }
     }
   },
@@ -902,6 +916,125 @@
           }
         }
       }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "storageAccount",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "name": {
+            "value": "[parameters('storageAccountName')]"
+          },
+          "containerNames": {
+            "value": "[parameters('storageAccountContainerNames')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.29.47.4906",
+              "templateHash": "15880869177723600522"
+            }
+          },
+          "parameters": {
+            "name": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the storage account."
+              }
+            },
+            "containerNames": {
+              "type": "array",
+              "defaultValue": [],
+              "metadata": {
+                "description": "Specifies an array of containers to create."
+              }
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Specifies the location."
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Specifies the resource tags."
+              }
+            }
+          },
+          "resources": [
+            {
+              "copy": {
+                "name": "containers",
+                "count": "[length(parameters('containerNames'))]"
+              },
+              "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+              "apiVersion": "2023-05-01",
+              "name": "[format('{0}/{1}/{2}', parameters('name'), 'default', parameters('containerNames')[copyIndex()])]",
+              "properties": {
+                "publicAccess": "None",
+                "defaultEncryptionScope": "$account-encryption-key",
+                "denyEncryptionScopeOverride": false
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('name'), 'default')]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/blobServices",
+              "apiVersion": "2023-05-01",
+              "name": "[format('{0}/{1}', parameters('name'), 'default')]",
+              "properties": {
+                "deleteRetentionPolicy": {
+                  "enabled": false,
+                  "allowPermanentDelete": false
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('name'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts",
+              "apiVersion": "2023-05-01",
+              "name": "[parameters('name')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "sku": {
+                "name": "Standard_LRS"
+              },
+              "kind": "StorageV2"
+            }
+          ],
+          "outputs": {
+            "id": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.Storage/storageAccounts', parameters('name'))]"
+            },
+            "name": {
+              "type": "string",
+              "value": "[parameters('name')]"
+            }
+          }
+        }
+      }
     }
   ],
   "outputs": {
@@ -915,7 +1048,8 @@
         "aiServicesEndpoint": "[reference(resourceId('Microsoft.Resources/deployments', 'aiServices'), '2022-09-01').outputs.endpoint.value]",
         "aiSearchName": "[reference(resourceId('Microsoft.Resources/deployments', 'aiSearch'), '2022-09-01').outputs.name.value]",
         "cosmosDbAccountName": "[reference(resourceId('Microsoft.Resources/deployments', 'cosmosDb'), '2022-09-01').outputs.accountName.value]",
-        "cosmosDbAccountEndpoint": "[reference(resourceId('Microsoft.Resources/deployments', 'cosmosDb'), '2022-09-01').outputs.accountEndpoint.value]"
+        "cosmosDbAccountEndpoint": "[reference(resourceId('Microsoft.Resources/deployments', 'cosmosDb'), '2022-09-01').outputs.accountEndpoint.value]",
+        "storageAccountName": "[reference(resourceId('Microsoft.Resources/deployments', 'storageAccount'), '2022-09-01').outputs.name.value]"
       }
     }
   }

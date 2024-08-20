@@ -66,6 +66,12 @@ param aiSearchName string = '${prefix}aisearch'
 @description('Specifies the name of the Azure Cosmos DB resource.')
 param cosmosDbName string = '${prefix}cosmosdb'
 
+@description('Specifies the name of the Azure Storage Account resource.')
+param storageAccountName string = '${prefix}storageaccount'
+
+@description('Specifies the name of the Azure Storage Account containers.')
+param storageAccountContainerNames array = []
+
 // Resources
 module workspace 'modules/logAnalytics.bicep' = {
   name: 'workspace'
@@ -121,6 +127,16 @@ module cosmosDb './modules/cosmosDb.bicep' = {
   }
 }
 
+module storageAccount './modules/storageAccount.bicep' = {
+  name: 'storageAccount'
+  params: {
+    name: storageAccountName
+    containerNames: storageAccountContainerNames
+    location: location
+    tags: tags
+  }
+}
+
 output deploymentInfo object = {
   subscriptionId: subscription().subscriptionId
   resourceGroupName: resourceGroup().name
@@ -130,4 +146,5 @@ output deploymentInfo object = {
   aiSearchName: aiSearch.outputs.name
   cosmosDbAccountName: cosmosDb.outputs.accountName
   cosmosDbAccountEndpoint: cosmosDb.outputs.accountEndpoint
+  storageAccountName: storageAccount.outputs.name
 }
