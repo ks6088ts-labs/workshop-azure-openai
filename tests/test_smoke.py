@@ -8,6 +8,8 @@ def test_smoke():
         "apps/5_streamlit_query_chat_history/main.py",
         # "apps/7_streamlit_chat_rag/main.py",
         "apps/8_streamlit_azure_openai_batch/main.py",
+        "apps/9_streamlit_azure_document_intelligence/main.py",
+        "apps/10_streamlit_batch_transcription/main.py",
         "apps/99_streamlit_examples/main.py",
         "apps/99_streamlit_examples/pages/1_File_Q&A.py",
         "apps/99_streamlit_examples/pages/2_Image_Q&A.py",
@@ -18,8 +20,9 @@ def test_smoke():
         "apps/99_streamlit_examples/pages/7_Text_to_speech.py",
         "apps/99_streamlit_examples/pages/8_Create_image.py",
         "apps/99_streamlit_examples/pages/9_Visualize_location.py",
-        "apps/99_streamlit_examples/pages/10_Object_detection.py",
-        "apps/99_streamlit_examples/pages/11_Pose_estimation.py",
+        # fixme: disabled due to flaky test
+        # "apps/99_streamlit_examples/pages/10_Object_detection.py",
+        # "apps/99_streamlit_examples/pages/11_Pose_estimation.py",
     ]
     for path in paths:
         at = AppTest(

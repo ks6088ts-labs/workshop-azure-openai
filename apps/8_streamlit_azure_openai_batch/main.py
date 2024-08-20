@@ -115,7 +115,7 @@ st.info("Create a batch job using the file ID")
 batch_file_id = st.text_input(
     label="File ID",
     key="batch_file_id",
-    help="Enter the file ID to track the file upload status",
+    help="Enter the file ID to create a batch job",
 )
 if st.button(
     "Create batch job",
