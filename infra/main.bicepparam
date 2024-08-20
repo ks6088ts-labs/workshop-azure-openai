@@ -26,6 +26,11 @@ param openAiDeployments = [
     }
   }
 ]
+
+param storageAccountContainerNames = [
+  'audio'
+]
+
 param tags = {
   environment: 'development'
   iac: 'bicep'
