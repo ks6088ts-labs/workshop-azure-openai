@@ -77,6 +77,10 @@ Access to http://localhost:8501 and select the sample you want to run from the s
 
 ![Pose estimation](../../docs/images/99_streamlit_examples.poseestimation.png)
 
+#### 12. Video processing
+
+![Video processing](../../docs/images/99_streamlit_examples.videoprocessing.png)
+
 ## References
 
 - [🎈 Streamlit + LLM Examples App](https://github.com/streamlit/llm-examples)
