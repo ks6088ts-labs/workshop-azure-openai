@@ -23,6 +23,7 @@ def test_smoke():
         # fixme: disabled due to flaky test
         # "apps/99_streamlit_examples/pages/10_Object_detection.py",
         # "apps/99_streamlit_examples/pages/11_Pose_estimation.py",
+        "apps/99_streamlit_examples/pages/12_Video_processing.py",
     ]
     for path in paths:
         at = AppTest(
