@@ -169,10 +169,10 @@ with st.sidebar:
         processor_type = st.radio(
             label="processor type",
             options=[
+                ProcessorType.YOLOV8,
                 ProcessorType.BLUR,
                 ProcessorType.CANNY,
                 ProcessorType.INVERT,
-                ProcessorType.YOLOV8,
             ],
             index=0,
             format_func=lambda x: x.value,
