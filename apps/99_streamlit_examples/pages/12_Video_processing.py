@@ -16,6 +16,11 @@ class ProcessorType(Enum):
     YOLOV8 = "yolov8"
 
 
+class InputSource(Enum):
+    CAMERA = "camera"
+    FILE = "file"
+
+
 class Processor:
     def process(
         self,
@@ -79,10 +84,13 @@ class Yolov8Processor(Processor):
         self,
         model_name: str = "yolov8n.pt",
         confidence: float = 0.5,
+        # https://stackoverflow.com/a/77479465
+        classes: list[int] = None,
     ):
         # model_name: https://docs.ultralytics.com/models/yolov8/#supported-tasks-and-modes
         self.model = YOLO(model_name)
         self.confidence = confidence
+        self.classes = classes
 
     def process(
         self,
@@ -91,7 +99,7 @@ class Yolov8Processor(Processor):
         results = self.model(
             frame,
             conf=self.confidence,
-            classes=[0],
+            classes=self.classes,
         )
         output_img = results[0].plot(
             labels=True,
@@ -117,25 +125,58 @@ def get_processor(processor_type: ProcessorType) -> Processor:
 
 
 with st.sidebar:
-    # device: https://docs.opencv.org/4.10.0/d8/dfe/classcv_1_1VideoCapture.html#a5d5f5dacb77bbebdcbfb341e3d4355c1
-    device = st.text_input(
-        label="input your video/camera device",
-        value="0",
+    tab_input, tab_mode = st.tabs(
+        [
+            "input",
+            "mode",
+        ]
     )
-    if device.isnumeric():
-        # e.g. "0" -> 0
-        device = int(device)
-    processor_type = st.radio(
-        label="processor type",
-        options=[
-            ProcessorType.BLUR,
-            ProcessorType.CANNY,
-            ProcessorType.INVERT,
-            ProcessorType.YOLOV8,
-        ],
-        index=0,
-        format_func=lambda x: x.value,
-    )
+    with tab_input:
+        source = st.radio(
+            label="input source",
+            options=[
+                InputSource.FILE,
+                InputSource.CAMERA,
+            ],
+            index=0,
+            format_func=lambda x: x.value,
+        )
+        if source == InputSource.FILE:
+            file = st.file_uploader(
+                label="upload video file",
+                type=[
+                    "mp4",
+                    "mov",
+                    "avi",
+                ],
+            )
+            if file:
+                file_path = f"/tmp/{file.name}"
+                with open(file_path, "wb") as f:
+                    f.write(file.read())
+                device = file_path
+        if source == InputSource.CAMERA:
+            # device: https://docs.opencv.org/4.10.0/d8/dfe/classcv_1_1VideoCapture.html#a5d5f5dacb77bbebdcbfb341e3d4355c1
+            device = st.text_input(
+                label="input your video/camera device",
+                value="0",
+            )
+            if device.isnumeric():
+                # e.g. "0" -> 0
+                device = int(device)
+
+    with tab_mode:
+        processor_type = st.radio(
+            label="processor type",
+            options=[
+                ProcessorType.BLUR,
+                ProcessorType.CANNY,
+                ProcessorType.INVERT,
+                ProcessorType.YOLOV8,
+            ],
+            index=0,
+            format_func=lambda x: x.value,
+        )
 
 st.title("Video processing")
 
@@ -143,6 +184,7 @@ start_button = st.button("Start")
 stop = st.button("Stop")
 
 image_loc = st.empty()
+message_loc = st.empty()
 processor = get_processor(processor_type)
 
 if start_button:
@@ -152,7 +194,7 @@ if start_button:
         ret, frame = capture.read()
 
         if not ret:
-            st.error("Failed to capture image")
+            message_loc.error("Failed to read frame")
             continue
 
         processed_frame = processor.process(
