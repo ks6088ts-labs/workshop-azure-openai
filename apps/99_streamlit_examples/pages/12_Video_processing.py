@@ -89,12 +89,16 @@ class Yolov8Processor(Processor):
         confidence: float = 0.5,
         # https://stackoverflow.com/a/77479465
         classes: list[int] = None,
+        target: int = 0,  # 0: 'person'
     ):
         # model_name: https://docs.ultralytics.com/models/yolov8/#supported-tasks-and-modes
         self.model = YOLO(model_name)
+        # label names, 0: 'person', 1: 'bicycle', 2: 'car'
+        # print(self.model.names)
         self.confidence = confidence
         self.classes = classes
-        self.num_of_persons = 0
+        self.num = 0
+        self.target = target
 
     def process(
         self,
@@ -105,7 +109,7 @@ class Yolov8Processor(Processor):
             conf=self.confidence,
             classes=self.classes,
         )
-        self.num_of_persons = len([x for x in results[0].boxes.cls if x == 0])
+        self.num = len([x for x in results[0].boxes.cls if x == self.target])
         output_img = results[0].plot(
             labels=True,
             conf=True,
@@ -117,7 +121,7 @@ class Yolov8Processor(Processor):
 
     def get_states(self):
         return {
-            "num_of_persons": self.num_of_persons,
+            "num": self.num,
         }
 
 
@@ -194,10 +198,10 @@ st.text(f"source: {input_source_type.value}")
 st.text(f"processor: {processor_type.value}")
 
 start_button = st.button("Start")
-stop = st.button("Stop")
+stop_button = st.button("Stop")
 
 image_loc = st.empty()
-message_loc = st.empty()
+states_loc = st.empty()
 processor = get_processor(processor_type)
 
 if start_button:
@@ -215,14 +219,14 @@ if start_button:
         )
 
         states = processor.get_states()
-        message_loc.info(f"states: {states}")
+        states_loc.write(states)
 
         image_loc.image(
             image=processed_frame,
             use_column_width=True,
         )
 
-        if stop:
+        if stop_button:
             break
 
     capture.release()
