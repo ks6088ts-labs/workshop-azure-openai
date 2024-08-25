@@ -1,3 +1,4 @@
+import base64
 from enum import Enum
 
 import cv2
@@ -109,11 +110,17 @@ class Yolov8Processor(Processor):
             conf=self.confidence,
             classes=self.classes,
         )
+        previous_num = self.num
         self.num = len([x for x in results[0].boxes.cls if x == self.target])
         output_img = results[0].plot(
             labels=True,
             conf=True,
         )
+
+        # play alert sound if the number of target objects increases
+        if previous_num < self.num:
+            self._handle_event()
+
         return cv2.cvtColor(
             src=output_img,
             code=cv2.COLOR_BGR2RGB,
@@ -123,6 +130,27 @@ class Yolov8Processor(Processor):
         return {
             "num": self.num,
         }
+
+    def _handle_event(self):
+        st.toast("Alert", icon="❗")
+        try:
+            # https://discuss.streamlit.io/t/how-to-play-an-audio-file-automatically-generated-using-text-to-speech-in-streamlit/33201
+            # https://www.youtube.com/watch?v=U5Z76XLEwRM
+            with open("./datasets/alert.mp3", "rb") as f:
+                data = f.read()
+                b64 = base64.b64encode(data).decode()
+                md = f"""
+                    <audio controls autoplay="true">
+                    <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+                    </audio>
+                    """
+                st.markdown(
+                    md,
+                    unsafe_allow_html=True,
+                )
+        except Exception as _:
+            # st.toast("Failed to play alert sound", icon="❌")
+            pass
 
 
 def get_processor(processor_type: ProcessorType) -> Processor:
