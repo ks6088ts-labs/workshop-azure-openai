@@ -16,7 +16,7 @@ class ProcessorType(Enum):
     YOLOV8 = "yolov8"
 
 
-class InputSource(Enum):
+class InputSourceType(Enum):
     CAMERA = "camera"
     FILE = "file"
 
@@ -27,6 +27,9 @@ class Processor:
         frame: cv2.UMat,
     ) -> cv2.UMat:
         raise NotImplementedError
+
+    def get_states(self) -> dict:
+        return {}
 
 
 class BlurProcessor(Processor):
@@ -91,6 +94,7 @@ class Yolov8Processor(Processor):
         self.model = YOLO(model_name)
         self.confidence = confidence
         self.classes = classes
+        self.num_of_persons = 0
 
     def process(
         self,
@@ -101,6 +105,7 @@ class Yolov8Processor(Processor):
             conf=self.confidence,
             classes=self.classes,
         )
+        self.num_of_persons = len([x for x in results[0].boxes.cls if x == 0])
         output_img = results[0].plot(
             labels=True,
             conf=True,
@@ -109,6 +114,11 @@ class Yolov8Processor(Processor):
             src=output_img,
             code=cv2.COLOR_BGR2RGB,
         )
+
+    def get_states(self):
+        return {
+            "num_of_persons": self.num_of_persons,
+        }
 
 
 def get_processor(processor_type: ProcessorType) -> Processor:
@@ -127,21 +137,21 @@ def get_processor(processor_type: ProcessorType) -> Processor:
 with st.sidebar:
     tab_input, tab_mode = st.tabs(
         [
-            "input",
-            "mode",
+            "source",
+            "processor",
         ]
     )
     with tab_input:
-        source = st.radio(
+        input_source_type = st.radio(
             label="input source",
             options=[
-                InputSource.FILE,
-                InputSource.CAMERA,
+                InputSourceType.FILE,
+                InputSourceType.CAMERA,
             ],
             index=0,
             format_func=lambda x: x.value,
         )
-        if source == InputSource.FILE:
+        if input_source_type == InputSourceType.FILE:
             file = st.file_uploader(
                 label="upload video file",
                 type=[
@@ -155,7 +165,7 @@ with st.sidebar:
                 with open(file_path, "wb") as f:
                     f.write(file.read())
                 device = file_path
-        if source == InputSource.CAMERA:
+        if input_source_type == InputSourceType.CAMERA:
             # device: https://docs.opencv.org/4.10.0/d8/dfe/classcv_1_1VideoCapture.html#a5d5f5dacb77bbebdcbfb341e3d4355c1
             device = st.text_input(
                 label="input your video/camera device",
@@ -180,6 +190,9 @@ with st.sidebar:
 
 st.title("Video processing")
 
+st.text(f"source: {input_source_type.value}")
+st.text(f"processor: {processor_type.value}")
+
 start_button = st.button("Start")
 stop = st.button("Stop")
 
@@ -194,12 +207,15 @@ if start_button:
         ret, frame = capture.read()
 
         if not ret:
-            message_loc.error("Failed to read frame")
-            continue
+            st.toast("End of video", icon="❗")
+            break
 
         processed_frame = processor.process(
             frame=frame,
         )
+
+        states = processor.get_states()
+        message_loc.info(f"states: {states}")
 
         image_loc.image(
             image=processed_frame,
