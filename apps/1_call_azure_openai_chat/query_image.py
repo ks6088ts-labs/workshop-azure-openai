@@ -62,7 +62,7 @@ if __name__ == "__main__":
                     },
                     {
                         "type": "text",
-                        "content": args.prompt,
+                        "text": args.prompt,
                     },
                 ],
             },
