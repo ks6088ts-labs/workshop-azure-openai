@@ -91,7 +91,7 @@ if uploaded_file and question and is_configured():
                         },
                         {
                             "type": "text",
-                            "content": question,
+                            "text": question,
                         },
                     ],
                 },

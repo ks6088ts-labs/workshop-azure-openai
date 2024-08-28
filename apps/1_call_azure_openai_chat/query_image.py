@@ -1,5 +1,6 @@
 import argparse
 import base64
+import logging
 from os import getenv
 
 from dotenv import load_dotenv
@@ -15,10 +16,17 @@ def init_args() -> argparse.Namespace:
     parser.add_argument("-f", "--file")
     parser.add_argument("-s", "--system", default="You are a professional image analyst. Describe the image.")
     parser.add_argument("-p", "--prompt", default="Please describe the content of the image")
+    parser.add_argument("-v", "--verbose", action="store_true")
     return parser.parse_args()
 
 
 if __name__ == "__main__":
+    args = init_args()
+
+    # Set verbose mode
+    if args.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+
     # Parse .env file and set environment variables
     load_dotenv()
 
@@ -28,8 +36,6 @@ if __name__ == "__main__":
         api_version=getenv("AZURE_OPENAI_API_VERSION"),
         azure_endpoint=getenv("AZURE_OPENAI_ENDPOINT"),
     )
-
-    args = init_args()
 
     # Read image file and encode it to base64
     try:
@@ -56,7 +62,7 @@ if __name__ == "__main__":
                     },
                     {
                         "type": "text",
-                        "content": args.prompt,
+                        "text": args.prompt,
                     },
                 ],
             },

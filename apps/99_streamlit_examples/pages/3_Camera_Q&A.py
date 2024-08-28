@@ -81,7 +81,7 @@ if img_file_buffer and question and is_configured():
                         },
                         {
                             "type": "text",
-                            "content": question,
+                            "text": question,
                         },
                     ],
                 },
