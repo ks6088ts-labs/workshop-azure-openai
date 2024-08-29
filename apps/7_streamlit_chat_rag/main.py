@@ -81,7 +81,7 @@ def init_messages():
         st.session_state.messages = [
             {
                 "role": "assistant",
-                "content": "Welcome to the internal chat service of Contoso Corporation. Please ask your questions.",
+                "content": "Welcome to our chat service. How can I help you today?",
             }
         ]
         st.session_state["memory"] = ConversationBufferWindowMemory(
