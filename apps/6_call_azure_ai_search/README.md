@@ -73,13 +73,22 @@ Create an index in Azure AI Search and upload documents:
 > This script should be run only once to avoid creating duplicate indexes.
 
 ```shell
-$ python apps/6_call_azure_ai_search/1_create_index.py
+$ INDEX_NAME=yourindexname
+$ FILE=./datasets/yourfile.csv
+$ python apps/6_call_azure_ai_search/1_create_index.py \
+  --index-name $INDEX_NAME \
+  --file $FILE \
+  --verbose
 ```
 
 Search documents in Azure AI Search:
 
 ```shell
-$ python apps/6_call_azure_ai_search/2_search_index.py
+$ INDEX_NAME=yourindexname
+$ python apps/6_call_azure_ai_search/2_search_docs.py \
+  --index-name $INDEX_NAME \
+  --query "meeting" \
+  --verbose
 
 > All meetings must include a 5-minute meditation session.
 > All meetings must begin with a joke.

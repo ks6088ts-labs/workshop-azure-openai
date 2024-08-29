@@ -9,9 +9,8 @@ from openai import AzureOpenAI
 
 def init_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        prog="ProgramName",
-        description="What the program does",
-        epilog="Text at the bottom of help",
+        prog="query_image",
+        description="Query Azure OpenAI Chat with an image",
     )
     parser.add_argument("-f", "--file")
     parser.add_argument("-s", "--system", default="You are a professional image analyst. Describe the image.")
