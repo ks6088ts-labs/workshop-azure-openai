@@ -76,7 +76,7 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 
 # Run the script
-$ python apps/1_call_azure_openai/main.py
+$ python apps/1_call_azure_openai_chat/main.py
 ```
 
 ### Example
