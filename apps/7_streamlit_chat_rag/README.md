@@ -80,7 +80,7 @@ To change the behavior of the application, modify the `CUSTOM_SYSTEM_PROMPT` var
 Also designing prompts, so called "prompt engineering", is important to get the best results from the model. There are many resources available to help you design optimal prompts. Here are some recommendations:
 
 - [Prompt Engineering Guide](https://www.promptingguide.ai/)
-<!-- FIXME: Add prompt engineering sources, slides -->
+- [github.com/dahatake/ChatGPT-Prompt-Sample-Japanese/Workshop_English](https://github.com/dahatake/ChatGPT-Prompt-Sample-Japanese/tree/main/Workshop_English)
 
 ### Customize tools
 
