@@ -70,9 +70,22 @@ To see how the RAG feature works, watch the video below.
 
 [![Streamlit Chat App with RAG Feature](https://img.youtube.com/vi/ummiu-rzYvs/0.jpg)](https://youtu.be/ummiu-rzYvs)
 
-### How to customize
+## How to customize
 
-You can customize the chat app by modifying the following codes:
+### Customize your application purpose
 
-- [main.py](./main.py): `CUSTOM_SYSTEM_PROMPT` variable which defines the system prompt
-- [tools/fetch_contents.py](./tools/fetch_contents.py): `fetch_contents` function comments which is passed to the LLM model
+The application purpose is defined in a system prompt. By default, the application provides information about the fictional company Contoso Corporation.
+
+To change the behavior of the application, modify the `CUSTOM_SYSTEM_PROMPT` variable to fit your needs.
+Also designing prompts, so called "prompt engineering", is important to get the best results from the model. There are many resources available to help you design optimal prompts. Here are some recommendations:
+
+- [Prompt Engineering Guide](https://www.promptingguide.ai/)
+<!-- FIXME: Add prompt engineering sources, slides -->
+
+### Customize tools
+
+As explained in the previous chapter, you can use the function calling feature to connect the LLM model to external tools and systems.
+To customize the tools, you have only to modify followings.
+
+1. Implement your own tools just as [tools/fetch_contents.py](./tools/fetch_contents.py) does.
+1. Add your tool to the `tool` array in [create_agent()](./main.py) function.
