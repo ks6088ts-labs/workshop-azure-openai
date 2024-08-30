@@ -66,6 +66,65 @@ $ pf run create \
     --stream
 ```
 
+### playground
+
+```shell
+cd apps/11_promptflow
+
+# Initialize a new flow
+$ pf flow init \
+    --flow playground \
+    --type chat
+
+$ cd playground
+
+# Set parameters
+$ CONNECTION_NAME=open_ai_connection
+$ AZURE_OPENAI_KEY=<your_api_key>
+$ AZURE_OPENAI_ENDPOINT=<your_api_endpoint>
+
+# List connections
+$ pf connection list
+
+
+# Delete connection (if needed)
+$ pf connection delete \
+    --name $CONNECTION_NAME
+
+# Create connection
+$ pf connection create \
+    --file azure_openai.yaml \
+    --set api_key=$AZURE_OPENAI_KEY \
+    --set api_base=$AZURE_OPENAI_ENDPOINT \
+    --name $CONNECTION_NAME
+
+# Show connection
+$ pf connection show \
+    --name $CONNECTION_NAME
+
+# Interact with chat flow
+$ pf flow test \
+    --flow . \
+    --interactive
+
+# Test flow
+$ pf flow test \
+    --flow . \
+    --inputs question="What's the capital of France?"
+
+# Create run with multiple lines data
+$ RUN_NAME=playground-$(date +%s)
+$ pf run create \
+    --name $RUN_NAME \
+    --flow . \
+    --data ./data.jsonl \
+    --column-mapping question='${data.question}' \
+    --stream
+
+# Show run details
+$ pf run show-details --name $RUN_NAME
+```
+
 ## References
 
 - [Prompt flow > repos](https://github.com/microsoft/promptflow)
