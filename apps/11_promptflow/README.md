@@ -125,6 +125,33 @@ $ pf run create \
 $ pf run show-details --name $RUN_NAME
 ```
 
+### playground_evaluation
+
+```shell
+cd apps/11_promptflow
+
+# Initialize a new flow
+$ pf flow init \
+    --flow playground_evaluation \
+    --type evaluation
+
+$ cd playground_evaluation
+
+# Create run with multiple lines data
+$ RUN_NAME=playground_evaluation-$(date +%s)
+$ pf run create \
+    --name $RUN_NAME \
+    --flow . \
+    --data ./data.jsonl \
+    --column-mapping \
+        groundtruth='${data.groundtruth}' \
+        prediction='${data.prediction}' \
+    --stream
+
+# Show run details
+$ pf run show-details --name $RUN_NAME
+```
+
 ## References
 
 - [Prompt flow > repos](https://github.com/microsoft/promptflow)
