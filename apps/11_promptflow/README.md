@@ -66,17 +66,17 @@ $ pf run create \
     --stream
 ```
 
-### playground
+### playground_chat
 
 ```shell
 cd apps/11_promptflow
 
 # Initialize a new flow
 $ pf flow init \
-    --flow playground \
+    --flow playground_chat \
     --type chat
 
-$ cd playground
+$ cd playground_chat
 
 # Set parameters
 $ CONNECTION_NAME=open_ai_connection
@@ -113,7 +113,7 @@ $ pf flow test \
     --inputs question="What's the capital of France?"
 
 # Create run with multiple lines data
-$ RUN_NAME=playground-$(date +%s)
+$ RUN_NAME=playground_chat-$(date +%s)
 $ pf run create \
     --name $RUN_NAME \
     --flow . \
