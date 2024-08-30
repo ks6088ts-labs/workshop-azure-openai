@@ -1,0 +1,32 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  user_prompt:
+    type: string
+    default: Please extract texts from the image
+  system_prompt:
+    type: string
+    default: You are an excellent OCR tool
+  image:
+    type: image
+    default: ../../../datasets/contoso-receipt.png
+  model:
+    type: string
+    default: gpt-4o
+outputs:
+  output_prompt:
+    type: string
+    reference: ${image_qa.output}
+nodes:
+- name: image_qa
+  type: python
+  source:
+    type: code
+    path: hello.py
+  inputs:
+    connection: open_ai_connection
+    image: ${inputs.image}
+    system_prompt: ${inputs.system_prompt}
+    user_prompt: ${inputs.user_prompt}
+    model: ${inputs.model}

@@ -1,0 +1,37 @@
+{
+  "package": {},
+  "code": {
+    "hello.py": {
+      "type": "python",
+      "inputs": {
+        "connection": {
+          "type": [
+            "AzureOpenAIConnection"
+          ]
+        },
+        "image": {
+          "type": [
+            "image"
+          ]
+        },
+        "model": {
+          "type": [
+            "string"
+          ]
+        },
+        "system_prompt": {
+          "type": [
+            "string"
+          ]
+        },
+        "user_prompt": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "hello.py",
+      "function": "my_python_tool"
+    }
+  }
+}

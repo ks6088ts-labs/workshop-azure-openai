@@ -177,6 +177,32 @@ $ pf run create \
 $ pf run show-details --name $RUN_NAME
 ```
 
+### image_qa
+
+To run the image QA flow with GPT-4o, we customize an LLM tool.
+Following documents provide more details:
+
+- docs: [Customizing an LLM Tool](https://microsoft.github.io/promptflow/how-to-guides/develop-a-tool/customize_an_llm_tool.html)
+- example codes: [promptflow/examples/flows/chat/chat-with-image](https://github.com/microsoft/promptflow/tree/main/examples/flows/chat/chat-with-image)
+
+With the image QA flow sample, you can ask questions about an image and get answers from the model.
+
+```shell
+cd apps/11_promptflow/image_qa
+
+# Create run with multiple lines data
+$ RUN_NAME=image_qa-$(date +%s)
+$ pf run create \
+    --name $RUN_NAME \
+    --flow . \
+    --data ./data.jsonl \
+    --column-mapping image='${data.image}' \
+    --stream
+
+# Show run details
+$ pf run show-details --name $RUN_NAME
+```
+
 ## References
 
 - [Prompt flow > repos](https://github.com/microsoft/promptflow)
