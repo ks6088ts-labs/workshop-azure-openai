@@ -40,6 +40,7 @@ Here are the preferred tools for development.
 | [8_streamlit_azure_openai_batch](./apps/8_streamlit_azure_openai_batch/README.md)                   | Call Azure OpenAI Batch API with Streamlit              | ![8_streamlit_azure_openai_batch](./docs/images/8_streamlit_azure_openai_batch.main.png)                   |
 | [9_streamlit_azure_document_intelligence](./apps/9_streamlit_azure_document_intelligence/README.md) | Call Azure AI Document Intelligence API with Streamlit  | ![9_streamlit_azure_document_intelligence](./docs/images/9_streamlit_azure_document_intelligence.main.png) |
 | [10_streamlit_batch_transcription](./apps/10_streamlit_batch_transcription/README.md)               | Call Batch Transcription API with Streamlit             | ![10_streamlit_batch_transcription](./docs/images/10_streamlit_batch_transcription.main.png)               |
+| [11_promptflow](./apps/11_promptflow/README.md)                                                     | Get started with Prompt flow                            | No Image                                                                                                   |
 | [99_streamlit_examples](./apps/99_streamlit_examples/README.md)                                     | Code samples for Streamlit                              | ![99_streamlit_examples](./docs/images/99_streamlit_examples.explaindata.png)                              |
 
 ## How to run
