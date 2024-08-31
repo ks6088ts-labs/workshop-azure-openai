@@ -34,6 +34,7 @@ $ pip install -r requirements.txt
 ## Examples
 
 [Prompt flow > Quick start](https://microsoft.github.io/promptflow/how-to-guides/quick-start.html) provides a quick start guide to Prompt flow.
+Some of the examples are extracted from [github.com/microsoft/promptflow/examples](https://github.com/microsoft/promptflow/tree/main/examples) to guide you through the basic usage of Prompt flow.
 
 ### [chat_minimal](https://github.com/microsoft/promptflow/tree/main/examples/flex-flows/chat-minimal)
 
@@ -203,7 +204,7 @@ $ pf run create \
 $ pf run show-details --name $RUN_NAME
 ```
 
-### chat-math-variant
+### [chat-math-variant](https://github.com/microsoft/promptflow/tree/main/examples/flows/chat/chat-math-variant)
 
 Tuning prompts using `variants` is a powerful feature in Prompt flow. It allows you to test different prompts and see which one works best for your use case.
 
@@ -229,7 +230,19 @@ $ pf run create \
 $ pf run show-details --name $RUN_NAME
 ```
 
+### [eval-chat-math](https://github.com/microsoft/promptflow/tree/main/examples/flows/evaluation/eval-chat-math)
+
+This example shows how to evaluate the answer of math questions, which can compare the output results with the standard answers numerically.
+Details are available in the [eval-chat-math/README.md](./eval-chat-math/README.md).
+To understand how to operate the flow in VS Code, you can refer to the [Build your high quality LLM apps with Prompt flow](https://www.youtube.com/watch?v=gcIe6nk2gA4).
+This video shows how to evaluate the answer of math questions and guide you to tune the prompts using variants.
+
+<!-- TODO: rag, tracing, deployments -->
+
 ## References
 
-- [Prompt flow > repos](https://github.com/microsoft/promptflow)
-- [Prompt flow > documents](https://microsoft.github.io/promptflow/)
+- [Repository](https://github.com/microsoft/promptflow)
+  - [examples](https://github.com/microsoft/promptflow/tree/main/examples)
+- [Documents](https://microsoft.github.io/promptflow/)
+  - [How-to Guides](https://microsoft.github.io/promptflow/how-to-guides/index.html)
+  - [Tutorials](https://microsoft.github.io/promptflow/tutorials/index.html#)
