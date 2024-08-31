@@ -203,6 +203,32 @@ $ pf run create \
 $ pf run show-details --name $RUN_NAME
 ```
 
+### chat-math-variant
+
+Tuning prompts using `variants` is a powerful feature in Prompt flow. It allows you to test different prompts and see which one works best for your use case.
+
+Prompt flow repository provides an example of a chat flow with math variants at [examples/flows/chat/chat-math-variant](https://github.com/microsoft/promptflow/tree/main/examples/flows/chat/chat-math-variant).
+
+To understand how to use variants, you can refer to the [How-to Guides > Tune prompts using variants](https://microsoft.github.io/promptflow/how-to-guides/tune-prompts-with-variants.html) document.
+
+```shell
+cd apps/11_promptflow/chat-math-variant
+
+# Create run with multiple lines data with variant
+$ RUN_NAME=chat-math-variant-$(date +%s)
+$ VARIANT='${chat.variant_0}'
+$ pf run create \
+    --name $RUN_NAME \
+    --flow . \
+    --data ./data.jsonl \
+    --column-mapping question='${data.question}' \
+    --variant $VARIANT \
+    --stream
+
+# Show run details
+$ pf run show-details --name $RUN_NAME
+```
+
 ## References
 
 - [Prompt flow > repos](https://github.com/microsoft/promptflow)
