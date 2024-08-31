@@ -36,7 +36,41 @@ $ pip install -r requirements.txt
 [Prompt flow > Quick start](https://microsoft.github.io/promptflow/how-to-guides/quick-start.html) provides a quick start guide to Prompt flow.
 Some of the examples are extracted from [github.com/microsoft/promptflow/examples](https://github.com/microsoft/promptflow/tree/main/examples) to guide you through the basic usage of Prompt flow.
 
+**Set up connection**
+
+```shell
+$ cd apps/11_promptflow
+
+# List connections
+$ pf connection list
+
+# Set parameters
+$ AZURE_OPENAI_KEY=<your_api_key>
+$ AZURE_OPENAI_ENDPOINT=<your_api_endpoint>
+$ CONNECTION_NAME=open_ai_connection
+
+# Delete connection (if needed)
+$ pf connection delete \
+    --name $CONNECTION_NAME
+
+# Create connection
+$ pf connection create \
+    --file connection_azure_openai.yaml \
+    --set api_key=$AZURE_OPENAI_KEY \
+    --set api_base=$AZURE_OPENAI_ENDPOINT \
+    --name $CONNECTION_NAME
+
+# Show connection
+$ pf connection show \
+    --name $CONNECTION_NAME
+```
+
 ### [chat_minimal](https://github.com/microsoft/promptflow/tree/main/examples/flex-flows/chat-minimal)
+
+A chat flow defined using function with minimal code. It demonstrates the minimal code to have a chat flow.
+
+Tracing feature is available in Prompt flow, which allows you to trace the flow of the conversation. You can see its implementation in this example.
+Details are available in [Tracing](https://microsoft.github.io/promptflow/how-to-guides/tracing/index.html)
 
 **Run as normal Python script**
 
@@ -67,6 +101,8 @@ $ pf run create \
     --stream
 ```
 
+`--column-mapping` is used to map the data in the JSONL file to the flow. For more details, refer to [Use column mapping](https://microsoft.github.io/promptflow/how-to-guides/run-and-evaluate-a-flow/use-column-mapping.html).
+
 ### playground_chat
 
 ```shell
@@ -78,30 +114,6 @@ $ pf flow init \
     --type chat
 
 $ cd playground_chat
-
-# Set parameters
-$ CONNECTION_NAME=open_ai_connection
-$ AZURE_OPENAI_KEY=<your_api_key>
-$ AZURE_OPENAI_ENDPOINT=<your_api_endpoint>
-
-# List connections
-$ pf connection list
-
-
-# Delete connection (if needed)
-$ pf connection delete \
-    --name $CONNECTION_NAME
-
-# Create connection
-$ pf connection create \
-    --file azure_openai.yaml \
-    --set api_key=$AZURE_OPENAI_KEY \
-    --set api_base=$AZURE_OPENAI_ENDPOINT \
-    --name $CONNECTION_NAME
-
-# Show connection
-$ pf connection show \
-    --name $CONNECTION_NAME
 
 # Interact with chat flow
 $ pf flow test \
@@ -230,6 +242,8 @@ $ pf run create \
 $ pf run show-details --name $RUN_NAME
 ```
 
+[Tutorial: How prompt flow helps on quality improvement](https://github.com/microsoft/promptflow/blob/main/examples/tutorials/flow-fine-tuning-evaluation/promptflow-quality-improvement.md) provides a detailed guide on how to use Prompt flow to improve the quality of your LLM applications.
+
 ### [eval-chat-math](https://github.com/microsoft/promptflow/tree/main/examples/flows/evaluation/eval-chat-math)
 
 This example shows how to evaluate the answer of math questions, which can compare the output results with the standard answers numerically.
@@ -237,7 +251,29 @@ Details are available in the [eval-chat-math/README.md](./eval-chat-math/README.
 To understand how to operate the flow in VS Code, you can refer to the [Build your high quality LLM apps with Prompt flow](https://www.youtube.com/watch?v=gcIe6nk2gA4).
 This video shows how to evaluate the answer of math questions and guide you to tune the prompts using variants.
 
-<!-- TODO: rag, tracing, deployments -->
+### flex_flow_langchain
+
+To guide you through working with LangChain, we provide an example flex flow that
+
+```shell
+$ cd apps/11_promptflow/flex_flow_langchain
+$ pf flow test \
+    --flow main:LangChainRunner \
+    --inputs question="What's 2+2?" \
+    --init custom_connection=open_ai_connection
+
+$ RUN_NAME=flex_flow_langchain-$(date +%s)
+$ pf run create \
+    --name $RUN_NAME \
+    --flow . \
+    --data ./data.jsonl \
+    --column-mapping question='${data.question}' \
+    --stream
+
+$ pf run show-details --name $RUN_NAME
+```
+
+<!-- TODO: rag, deployments -->
 
 ## References
 
