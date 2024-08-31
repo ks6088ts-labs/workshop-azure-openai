@@ -13,4 +13,4 @@ repos:
     rev: 24.2.0
     hooks:
     -   id: black
-exclude: 'generated/.*|artifacts/.*|.jsonl|.csv'
+exclude: 'generated/.*|artifacts/.*|.jsonl|.csv|.json'
