@@ -27,6 +27,7 @@ azure-storage-blob = "^12.22.0"
 requests = "^2.32.3"
 opencv-python-headless = "^4.10.0.84"
 promptflow = "^1.15.0"
+promptflow-evals = "^0.3.2"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.8.0"

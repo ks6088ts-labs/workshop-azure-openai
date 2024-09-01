@@ -120,6 +120,20 @@ yarl = ">=1.0,<2.0"
 speedups = ["Brotli", "aiodns (>=3.2.0)", "brotlicffi"]
 
 [[package]]
+name = "aiohttp-retry"
+version = "2.8.3"
+description = "Simple retry client for aiohttp"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "aiohttp_retry-2.8.3-py3-none-any.whl", hash = "sha256:3aeeead8f6afe48272db93ced9440cf4eda8b6fd7ee2abb25357b7eb28525b45"},
+    {file = "aiohttp_retry-2.8.3.tar.gz", hash = "sha256:9a8e637e31682ad36e1ff9f8bcba912fcfc7d7041722bc901a4b948da4d71ea9"},
+]
+
+[package.dependencies]
+aiohttp = "*"
+
+[[package]]
 name = "aiosignal"
 version = "1.3.1"
 description = "aiosignal: a list of registered asynchronous callbacks"
@@ -1540,6 +1554,20 @@ files = [
 six = "*"
 
 [[package]]
+name = "isort"
+version = "5.13.2"
+description = "A Python utility / library to sort Python imports."
+optional = false
+python-versions = ">=3.8.0"
+files = [
+    {file = "isort-5.13.2-py3-none-any.whl", hash = "sha256:8ca5e72a8d85860d5a3fa69b8745237f2939afe12dbf656afbcb47fe72d947a6"},
+    {file = "isort-5.13.2.tar.gz", hash = "sha256:48fdfcb9face5d58a4f6dde2e72a1fb8dcaf8ab26f95ab49fab84c2ddefb0109"},
+]
+
+[package.extras]
+colors = ["colorama (>=0.4.6)"]
+
+[[package]]
 name = "itsdangerous"
 version = "2.2.0"
 description = "Safely pass data to untrusted environments and back."
@@ -1748,6 +1776,20 @@ files = [
 
 [package.dependencies]
 jsonpointer = ">=1.9"
+
+[[package]]
+name = "jsonpath-ng"
+version = "1.6.1"
+description = "A final implementation of JSONPath for Python that aims to be standard compliant, including arithmetic and binary comparison operators and providing clear AST for metaprogramming."
+optional = false
+python-versions = "*"
+files = [
+    {file = "jsonpath-ng-1.6.1.tar.gz", hash = "sha256:086c37ba4917304850bd837aeab806670224d3f038fe2833ff593a672ef0a5fa"},
+    {file = "jsonpath_ng-1.6.1-py3-none-any.whl", hash = "sha256:8f22cd8273d7772eea9aaa84d922e0841aa36fdb8a2c6b7f6c3791a16a9bc0be"},
+]
+
+[package.dependencies]
+ply = "*"
 
 [[package]]
 name = "jsonpointer"
@@ -3255,6 +3297,17 @@ dev = ["pre-commit", "tox"]
 testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
+name = "ply"
+version = "3.11"
+description = "Python Lex & Yacc"
+optional = false
+python-versions = "*"
+files = [
+    {file = "ply-3.11-py2.py3-none-any.whl", hash = "sha256:096f9b8350b65ebd2fd1346b12452efe5b9607f7482813ffca50c22722a807ce"},
+    {file = "ply-3.11.tar.gz", hash = "sha256:00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3"},
+]
+
+[[package]]
 name = "portalocker"
 version = "2.10.1"
 description = "Wraps the portalocker recipe for easy usage"
@@ -3374,6 +3427,32 @@ waitress = ">=2.1.2,<3.0.0"
 [package.extras]
 executable = ["bs4", "pyarrow (>=14.0.1,<15.0.0)", "pyinstaller (>=5.13.2)", "streamlit (>=1.26.0)", "streamlit-quill (<0.1.0)"]
 pyarrow = ["pyarrow (>=14.0.1,<15.0.0)"]
+
+[[package]]
+name = "promptflow-evals"
+version = "0.3.2"
+description = "Prompt flow evals"
+optional = false
+python-versions = "<4.0,>=3.8"
+files = [
+    {file = "promptflow_evals-0.3.2-py3-none-any.whl", hash = "sha256:4a07f85db9b3564b654e5c380360c699fbc470acd2e15046c1b2f78df1730cb6"},
+]
+
+[package.dependencies]
+aiohttp_retry = ">=2.8.3"
+azure-core = ">=1.30.2"
+azure-identity = ">=1.17.1"
+isort = ">=5.13.2,<6.0.0"
+jsonpath_ng = ">=1.5.0"
+numpy = ">=1.22"
+promptflow-core = ">=1.14.0,<2.0.0"
+promptflow-devkit = ">=1.14.0,<2.0.0"
+pyjwt = ">=2.8.0"
+urllib3 = ">1.26.17"
+websocket-client = ">=1.2.0"
+
+[package.extras]
+azure = ["promptflow-azure (>=1.14.0,<2.0.0)"]
 
 [[package]]
 name = "promptflow-tracing"
@@ -5045,6 +5124,22 @@ files = [
 watchmedo = ["PyYAML (>=3.10)"]
 
 [[package]]
+name = "websocket-client"
+version = "1.8.0"
+description = "WebSocket client for Python with low level API options"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "websocket_client-1.8.0-py3-none-any.whl", hash = "sha256:17b44cc997f5c498e809b22cdf2d9c7a9e71c02c8cc2b6c56e7c2d1239bfa526"},
+    {file = "websocket_client-1.8.0.tar.gz", hash = "sha256:3239df9f44da632f96012472805d40a23281a991027ce11d2f45a6f24ac4c3da"},
+]
+
+[package.extras]
+docs = ["Sphinx (>=6.0)", "myst-parser (>=2.0.0)", "sphinx-rtd-theme (>=1.1.0)"]
+optional = ["python-socks", "wsaccel"]
+test = ["websockets"]
+
+[[package]]
 name = "werkzeug"
 version = "3.0.4"
 description = "The comprehensive WSGI web application library."
@@ -5265,4 +5360,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "dfb3022b3b0c10d975b964eed5083f9471673f10a7255fc4a5d1cd17265ea8ab"
+content-hash = "7845e52dadd7997beb2f689111d540313becacfb7c1a392575493de26f08efb2"
