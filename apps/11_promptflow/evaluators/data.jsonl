@@ -1,0 +1,2 @@
+{"answer": "Paris is the capital of France.", "context": "France is in Europe", "ground_truth": "Paris has been the capital of France since the 10th century and is known for its cultural and historical landmarks.", "question": "What is the capital of France?"}
+{"answer": "I'm sorry, I don't know that. Would you like me to look it up for you?", "context": "Fixing car isn't supported.", "ground_truth": "We don't support car fixing service. I'm sorry, I don't know that. Would you like me to look it up for you?", "question": "Where can I get my car fixed?"}

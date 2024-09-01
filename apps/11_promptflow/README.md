@@ -273,6 +273,15 @@ $ pf run create \
 $ pf run show-details --name $RUN_NAME
 ```
 
+### evaluators
+
+To guide you through working with evaluators, a helpful document is available at [Evaluate with the prompt flow SDK](https://learn.microsoft.com/azure/ai-studio/how-to/develop/flow-evaluate-sdk).
+
+```shell
+# Show help
+python apps/11_promptflow/evaluators/main.py --help
+```
+
 <!-- TODO: rag, deployments -->
 
 ## References

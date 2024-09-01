@@ -4,18 +4,19 @@ streamlit==1.37.1
 azure-cosmos==4.7.0
 plotly==5.23.0
 pandas==2.2.2
-langchain==0.2.12
-langchain-openai==0.1.20
-langchain-community==0.2.11
+langchain==0.2.14
+langchain-openai==0.1.22
+langchain-community==0.2.12
 azure-search-documents==11.5.1
 azure-identity==1.17.1
 azure-ai-documentintelligence==1.0.0b3
 azure-storage-blob==12.22.0
 requests==2.32.3
 promptflow==1.15.0
+promptflow-evals==0.3.2
 
 # To run 99_streamlit_examples/pages/10_Object_Detection.py
-# ultralytics==8.2.77
+# ultralytics==8.2.82
 
 # To run 99_streamlit_examples/pages/11_Pose_Estimation.py
 # mediapipe==0.10.14
