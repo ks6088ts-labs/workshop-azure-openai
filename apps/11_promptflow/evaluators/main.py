@@ -9,6 +9,7 @@ from promptflow.client import load_flow
 from promptflow.core import AzureOpenAIModelConfiguration
 from promptflow.evals.evaluate import evaluate
 from promptflow.evals.evaluators import RelevanceEvaluator
+from promptflow.tracing import start_trace, trace
 
 BASE_DIR = Path(__file__).absolute().parent
 
@@ -33,6 +34,12 @@ def init_args() -> argparse.Namespace:
         help="Evaluator type",
     )
     parser.add_argument(
+        "-r",
+        "--trace",
+        action="store_true",
+        help="Enable tracing",
+    )
+    parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
@@ -41,6 +48,7 @@ def init_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+@trace
 def run_relevance_evaluator(model_config):
     relevance_eval = RelevanceEvaluator(model_config)
 
@@ -63,6 +71,7 @@ class AnswerLengthEvaluator:
         return {"answer_length": len(answer)}
 
 
+@trace
 def run_answer_length_evaluator():
     evaluator = AnswerLengthEvaluator()
     answer_length = evaluator(answer="What is the speed of light?")
@@ -76,6 +85,7 @@ def get_apology_evaluator(model_config):
     )
 
 
+@trace
 def run_apology_evaluator(model_config):
     apology_eval = get_apology_evaluator(model_config)
 
@@ -87,6 +97,7 @@ def run_apology_evaluator(model_config):
     print(apology_score)
 
 
+@trace
 def run_test_dataset(model_config):
     result = evaluate(
         data=f"{BASE_DIR}/data.jsonl",  # provide your data here
@@ -111,6 +122,9 @@ if __name__ == "__main__":
     # Set verbose mode
     if args.verbose:
         logging.basicConfig(level=logging.DEBUG)
+
+    if args.trace:
+        start_trace()
 
     load_dotenv()
 
