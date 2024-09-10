@@ -32,29 +32,38 @@ $ python apps/3_call_azure_cosmos_db/main.py Hello
 ### Example
 
 ```shell
-$ python apps/3_call_azure_cosmos_db/main.py Hello
-Created item:
+$ python apps/3_call_azure_cosmos_db/main.py --command create
+Create item
 {'_attachments': 'attachments/',
- '_etag': '"8100471f-0000-2300-0000-66b32f2b0000"',
- '_rid': 'Ny9FAOMmTIMKAAAAAAAAAA==',
- '_self': 'dbs/Ny9FAA==/colls/Ny9FAOMmTIM=/docs/Ny9FAOMmTIMKAAAAAAAAAA==/',
- '_ts': 1723019051,
+ '_etag': '"0000ef9c-0000-2300-0000-66dfd5140000"',
+ '_rid': 'ipcwAJFKMxICAAAAAAAAAA==',
+ '_self': 'dbs/ipcwAA==/colls/ipcwAJFKMxI=/docs/ipcwAJFKMxICAAAAAAAAAA==/',
+ '_ts': 1725945108,
  'content': 'Hello, world!',
- 'id': 'Hello',
+ 'id': 'test',
  'role': 'assistant'}
+
+$ python apps/3_call_azure_cosmos_db/main.py --command read
 Read item:
 {'_attachments': 'attachments/',
- '_etag': '"8100471f-0000-2300-0000-66b32f2b0000"',
- '_rid': 'Ny9FAOMmTIMKAAAAAAAAAA==',
- '_self': 'dbs/Ny9FAA==/colls/Ny9FAOMmTIM=/docs/Ny9FAOMmTIMKAAAAAAAAAA==/',
- '_ts': 1723019051,
+ '_etag': '"0000ef9c-0000-2300-0000-66dfd5140000"',
+ '_rid': 'ipcwAJFKMxICAAAAAAAAAA==',
+ '_self': 'dbs/ipcwAA==/colls/ipcwAJFKMxI=/docs/ipcwAJFKMxICAAAAAAAAAA==/',
+ '_ts': 1725945108,
  'content': 'Hello, world!',
- 'id': 'Hello',
+ 'id': 'test',
  'role': 'assistant'}
+
+$ python apps/3_call_azure_cosmos_db/main.py --command delete
+Delete item:
+
+$ python apps/3_call_azure_cosmos_db/main.py --command read
+Read item:
+Failed to read item: (NotFound) Entity with the specified id does not exist in the system. More info: https://aka.ms/cosmosdb-tsg-not-found,
 ```
 
 ## References
 
-- [Get started with Azure Cosmos DB for NoSQL using Python](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/how-to-python-get-started?tabs=env-virtual%2Cazure-cli%2Clinux)
-- [Examples for Azure Cosmos DB for NoSQL SDK for Python](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/samples-python)
+- [Get started with Azure Cosmos DB for NoSQL using Python](https://learn.microsoft.com/azure/cosmos-db/nosql/how-to-python-get-started?tabs=env-virtual%2Cazure-cli%2Clinux)
+- [Examples for Azure Cosmos DB for NoSQL SDK for Python](https://learn.microsoft.com/azure/cosmos-db/nosql/samples-python)
 - [Azure Cosmos DB SQL API client library for Python Samples](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/cosmos/azure-cosmos/samples)
