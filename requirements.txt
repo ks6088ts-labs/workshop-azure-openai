@@ -14,6 +14,7 @@ azure-storage-blob==12.22.0
 requests==2.32.3
 promptflow==1.15.0
 promptflow-evals==0.3.2
+langgraph==0.2.23
 
 # To run 99_streamlit_examples/pages/10_Object_Detection.py
 # ultralytics==8.2.89
