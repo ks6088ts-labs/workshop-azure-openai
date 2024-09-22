@@ -43,3 +43,6 @@ $ python apps/12_langgraph_agent/reflection_agent/main.py
 - [LangGraph](https://langchain-ai.github.io/langgraph/)
 - [Udemy > LangGraph- Develop LLM powered agents with LangGraph](https://www.udemy.com/course/langgraph)
 - [Prompt flow > Tracing](https://microsoft.github.io/promptflow/how-to-guides/tracing/index.html)
+- [Reflection Agents](https://blog.langchain.dev/reflection-agents/)
+- [LangChain > Reflexion](https://langchain-ai.github.io/langgraph/tutorials/reflexion/reflexion/)
+- [LangChain > Bing Search](https://python.langchain.com/docs/integrations/tools/bing_search/)
