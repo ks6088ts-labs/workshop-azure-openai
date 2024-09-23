@@ -166,3 +166,4 @@ generated/
 *.pt
 *.jpg
 *.jpeg
+.chroma
