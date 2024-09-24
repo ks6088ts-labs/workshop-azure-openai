@@ -28,6 +28,10 @@ requests = "^2.32.3"
 opencv-python-headless = "^4.10.0.84"
 promptflow = "^1.15.0"
 promptflow-evals = "^0.3.2"
+langgraph = "^0.2.23"
+langchain-chroma = "^0.1.4"
+beautifulsoup4 = "^4.12.3"
+langgraph-checkpoint-sqlite = "^1.0.4"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.8.0"
