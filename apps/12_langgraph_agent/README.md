@@ -31,17 +31,31 @@ $ source .venv/bin/activate
 
 # Install dependencies
 $ pip install -r requirements.txt
-
-# Run the script
-$ python apps/12_langgraph_agent/reflection_agent/main.py
 ```
 
-### Example
+### Examples
+
+#### [reflection_agent](./reflection_agent/main.py)
+
+#### [react_agent](./react_agent/main.py)
+
+#### [advanced_rag_flows](./advanced_rag_flows/main.py)
+
+```shell
+# create vector store
+python apps/12_langgraph_agent/advanced_rag_flows/ingestion.py
+
+# run main.py
+python apps/12_langgraph_agent/advanced_rag_flows/main.py
+```
+
+![Advanced RAG Flows](../../docs/images/12_langgraph_agent_graph.png)
 
 ## References
 
 - [LangGraph](https://langchain-ai.github.io/langgraph/)
 - [Udemy > LangGraph- Develop LLM powered agents with LangGraph](https://www.udemy.com/course/langgraph)
+- [emarco177/langgaph-course](https://github.com/emarco177/langgaph-course)
 - [Prompt flow > Tracing](https://microsoft.github.io/promptflow/how-to-guides/tracing/index.html)
 - [Reflection Agents](https://blog.langchain.dev/reflection-agents/)
 - [LangChain > Reflexion](https://langchain-ai.github.io/langgraph/tutorials/reflexion/reflexion/)

@@ -24,15 +24,16 @@ def triple(num: float) -> float:
     return 3 * float(num)
 
 
-tools = [
-    BingSearchResults(
-        api_wrapper=BingSearchAPIWrapper(
-            bing_search_url=getenv("BING_SEARCH_URL"),
-            bing_subscription_key=getenv("BING_SUBSCRIPTION_KEY"),
-            k=1,
-        ),
-        num_results=1,
+web_search_tool = BingSearchResults(
+    api_wrapper=BingSearchAPIWrapper(
+        bing_search_url=getenv("BING_SEARCH_URL"),
+        bing_subscription_key=getenv("BING_SUBSCRIPTION_KEY"),
+        k=3,
     ),
+    num_results=3,
+)
+tools = [
+    web_search_tool,
     triple,
 ]
 
@@ -47,10 +48,5 @@ llm = AzureChatOpenAI(
 react_agent_runnable = create_react_agent(llm, tools, react_prompt)
 
 if __name__ == "__main__":
-    # https://python.langchain.com/docs/integrations/tools/bing_search/
-    result = BingSearchAPIWrapper(
-        k=1,
-        bing_search_url=getenv("BING_SEARCH_URL"),
-        bing_subscription_key=getenv("BING_SUBSCRIPTION_KEY"),
-    ).run("python")
+    result = web_search_tool.invoke({"query": "python"})
     print(result)
