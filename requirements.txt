@@ -18,6 +18,10 @@ langgraph==0.2.23
 langchain-chroma==0.1.4
 beautifulsoup4==4.12.3
 langgraph-checkpoint-sqlite==1.0.4
+playwright==1.47.0
+lxml==5.3.0
+nest-asyncio==1.6.0
+typer==0.12.5
 
 # To run 99_streamlit_examples/pages/10_Object_Detection.py
 # ultralytics==8.2.89
