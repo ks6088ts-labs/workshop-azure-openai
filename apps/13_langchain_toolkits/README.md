@@ -33,7 +33,18 @@ $ pip install -r requirements.txt
 
 ### Examples
 
-#### [PlayWright Browser Toolkit](https://python.langchain.com/docs/integrations/tools/playwright/)
+#### Playwright
+
+##### [Playwright for Python](https://playwright.dev/python/docs/intro)
+
+- [Test generator](https://playwright.dev/docs/codegen)
+
+```shell
+# Generate Python code from PlayWright
+$ npx playwright codegen --target=python
+```
+
+##### [PlayWright Browser Toolkit](https://python.langchain.com/docs/integrations/tools/playwright/)
 
 ```shell
 $ poetry run playwright install
