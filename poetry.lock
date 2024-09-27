@@ -2951,31 +2951,27 @@ files = [
 
 [[package]]
 name = "mediapipe"
-version = "0.10.14"
+version = "0.10.15"
 description = "MediaPipe is the simplest way for researchers and developers to build world-class ML solutions and applications for mobile, edge, cloud and the web."
 optional = false
 python-versions = "*"
 files = [
-    {file = "mediapipe-0.10.14-cp310-cp310-macosx_11_0_universal2.whl", hash = "sha256:1166935be26df23f6c6f6369dd7a79f0337ce882364acb986a377c4951bf7c34"},
-    {file = "mediapipe-0.10.14-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:113e264c38616ff23ff261b70cbcad2a2ae34b8335d055787b10bc09b2175adf"},
-    {file = "mediapipe-0.10.14-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:255e46a9f29b9739b10997d2c48657bdb0823a5d7052c0246522bcfd73873477"},
-    {file = "mediapipe-0.10.14-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:aecd2fdf603f741a43beb61d8686ce1c3a72c88e3880053e62d33c712c3df6e6"},
-    {file = "mediapipe-0.10.14-cp310-cp310-win_amd64.whl", hash = "sha256:10c670ea5c556ddae4ca941e511970278ce5632f9e24234368c6e91132c04e31"},
-    {file = "mediapipe-0.10.14-cp311-cp311-macosx_11_0_universal2.whl", hash = "sha256:4737fce6107bd21e420a6b2aad2c721fbc4cc318f1258b68f0665f10225bde1d"},
-    {file = "mediapipe-0.10.14-cp311-cp311-macosx_11_0_x86_64.whl", hash = "sha256:e5f8fdf512da074c225219f4e09723f612cdd3449c4793693fd360dc817c9261"},
-    {file = "mediapipe-0.10.14-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1061d499d341e7f11dd7f18d5bee747e862db8ef47665ff777323282225d4315"},
-    {file = "mediapipe-0.10.14-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a807328339e7356fda0bb14df12fedbf1d33bdf81649c5f8666b0026b1cc30b4"},
-    {file = "mediapipe-0.10.14-cp311-cp311-win_amd64.whl", hash = "sha256:1b7687d3b63590bcc601ad195b923b80a1b2d6be5cdf43711edc661cecd3dd47"},
-    {file = "mediapipe-0.10.14-cp312-cp312-macosx_11_0_universal2.whl", hash = "sha256:aa2298c1886716cde6bd7ce96aba1505d67d52edaba856f6c2e1ab905de52b0d"},
-    {file = "mediapipe-0.10.14-cp312-cp312-macosx_11_0_x86_64.whl", hash = "sha256:5c97e32cbb9e9d72b78a33f011257b3cdb55b60fef70a8a864c5d2a4b6652425"},
-    {file = "mediapipe-0.10.14-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3e30ed2f39f925924de58adeec6a8e61ba6beb6959325dc0d8a1aa487a74377b"},
-    {file = "mediapipe-0.10.14-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9b1e72d754cd9e1b4b88d80ec9ead2f1cbe8424b7f883d3bda53341b982a9f8b"},
-    {file = "mediapipe-0.10.14-cp312-cp312-win_amd64.whl", hash = "sha256:ebb8350e860c8e00b7c84d71e15090fc3ac4cc9d4249892f85fb35011590e372"},
-    {file = "mediapipe-0.10.14-cp39-cp39-macosx_11_0_universal2.whl", hash = "sha256:8e6cad0c9606930dcb1b09bc5f92b4b935e00813ac0b2e525dd2dbce191125c0"},
-    {file = "mediapipe-0.10.14-cp39-cp39-macosx_11_0_x86_64.whl", hash = "sha256:db59b272235689769dec1ed7c745d419f5d8a249f41e2b0c6e1b4dbe8ea073e2"},
-    {file = "mediapipe-0.10.14-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:419a2591be13cd92b74d4ca19bfcc146b114f4d5feb41dd1cbe838dcbc63cd75"},
-    {file = "mediapipe-0.10.14-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e4c7a8ef124870ac181242dec7052ea781fde28b484bdf2033b8c1a295c67b1f"},
-    {file = "mediapipe-0.10.14-cp39-cp39-win_amd64.whl", hash = "sha256:8da20a8d16c8b4d9b71ea1ee8ded50200fb17bf93ef1cea9a343ff71b0d71525"},
+    {file = "mediapipe-0.10.15-cp310-cp310-macosx_11_0_universal2.whl", hash = "sha256:bad50dccb42fc4757d36cbd66ddd6221a78b01074956fd8e35f38b22a0924557"},
+    {file = "mediapipe-0.10.15-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:52ded396a854d57d86a724c5fa613e94b11b2a2ed6e717f97227171a9ce04f73"},
+    {file = "mediapipe-0.10.15-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f36e4139b1dab145a4ab57bb58064dbaabf05d69213b80f0dc48bcbea9ddcd6c"},
+    {file = "mediapipe-0.10.15-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:57e9396b408cc9ffc919ab2a830c6bb0dd12f217482154a8d64ca2eda50f7562"},
+    {file = "mediapipe-0.10.15-cp311-cp311-macosx_11_0_universal2.whl", hash = "sha256:2adb0898e3a3c7daaebee1d760c99695c667ef53417cdaef750e842b9240131a"},
+    {file = "mediapipe-0.10.15-cp311-cp311-macosx_11_0_x86_64.whl", hash = "sha256:30b7c9c81ac1841cf70bd7559c878d6c238a9371499195abe67984eada2c924c"},
+    {file = "mediapipe-0.10.15-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9f20086c79c4605cc552f95252dee19891990acbeb348fcba03acda0bfebfd0f"},
+    {file = "mediapipe-0.10.15-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f35cd73c0f3a19c7b8c58cee771d396abbb16991761cbb73459c9ed73d51652a"},
+    {file = "mediapipe-0.10.15-cp312-cp312-macosx_11_0_universal2.whl", hash = "sha256:67a04fc8462f9c19738f564e2b0c298d8714d955c8bc2c6f70a7d046dc264fe2"},
+    {file = "mediapipe-0.10.15-cp312-cp312-macosx_11_0_x86_64.whl", hash = "sha256:d79624e895c51414fe677a97a042544b83d3e99613350505a1424d9d4ce7f907"},
+    {file = "mediapipe-0.10.15-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2e227be74169b6445d318e6751dca958f26a55554603fca75f5100d055368709"},
+    {file = "mediapipe-0.10.15-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c7fee5088df68f2f3ab44f688e059ef85859669f8307207cbe19337a7c35b8b9"},
+    {file = "mediapipe-0.10.15-cp39-cp39-macosx_11_0_universal2.whl", hash = "sha256:5db8cd9958fdd963d96e23261b3ea80eb42294792963b4f6da92d1f7f6c0b22b"},
+    {file = "mediapipe-0.10.15-cp39-cp39-macosx_11_0_x86_64.whl", hash = "sha256:8f653fa30cb3302ef7c425fe514254e8cdb8bd29dfe5ee37c6ca05e3fb79e3d6"},
+    {file = "mediapipe-0.10.15-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d0ee9dd32508ffb5c1b4b3560a85753cdc2bb4c42f56c050c383af17fe884967"},
+    {file = "mediapipe-0.10.15-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:73a763f04d2e9a3e3c2c2a4260799c848492782d348c4c2c3af64f6e7d4e6966"},
 ]
 
 [package.dependencies]
@@ -2985,7 +2981,7 @@ flatbuffers = ">=2.0"
 jax = "*"
 jaxlib = "*"
 matplotlib = "*"
-numpy = "*"
+numpy = "<2"
 opencv-contrib-python = "*"
 protobuf = ">=4.25.3,<5"
 sounddevice = ">=0.4.4"
@@ -6921,4 +6917,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "e34fb6b10e1ecb44e59799ea008abe643d479999ae4bb85a7b3e7a9f30c75e90"
+content-hash = "a23fd055636d97abbc9361d3bb26a6660e257a6d36424a97fa7aee4bc77e6e8d"
