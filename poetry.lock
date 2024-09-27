@@ -6277,13 +6277,13 @@ files = [
 
 [[package]]
 name = "ultralytics"
-version = "8.2.91"
-description = "Ultralytics YOLOv8 for SOTA object detection, multi-object tracking, instance segmentation, pose estimation and image classification."
+version = "8.2.102"
+description = "Ultralytics YOLO for SOTA object detection, multi-object tracking, instance segmentation, pose estimation and image classification."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "ultralytics-8.2.91-py3-none-any.whl", hash = "sha256:38cdb888daa0e0fe0a591eb275b96df331cfeea83705cd3771d5d8c140892779"},
-    {file = "ultralytics-8.2.91.tar.gz", hash = "sha256:db931dee0be535b1348ab038a9d7e2d21dbce724ea9e3360a1742aeee1ec089d"},
+    {file = "ultralytics-8.2.102-py3-none-any.whl", hash = "sha256:ff18c5bf20a2ac3944893ce7bc6d6df7fd981dc93c28ce9e54df07248c224057"},
+    {file = "ultralytics-8.2.102.tar.gz", hash = "sha256:ea731ce3f145a9bacbca5408b660093278944eccee452f6d3f31b45d51efcdde"},
 ]
 
 [package.dependencies]
@@ -6310,7 +6310,7 @@ ultralytics-thop = ">=2.0.0"
 dev = ["coverage[toml]", "ipython", "mkdocs (>=1.6.0)", "mkdocs-jupyter", "mkdocs-macros-plugin (>=1.0.5)", "mkdocs-material (>=9.5.9)", "mkdocs-redirects", "mkdocs-ultralytics-plugin (>=0.1.8)", "mkdocstrings[python]", "pytest", "pytest-cov"]
 explorer = ["duckdb (<=0.9.2)", "lancedb", "streamlit"]
 export = ["coremltools (>=7.0)", "flatbuffers (>=23.5.26,<100)", "h5py (!=3.11.0)", "keras", "numpy (==1.23.5)", "onnx (>=1.12.0)", "openvino (>=2024.0.0)", "tensorflow (>=2.0.0)", "tensorflowjs (>=3.9.0)", "tensorstore (>=0.1.63)"]
-extra = ["albumentations (>=1.4.6)", "hub-sdk (>=0.0.8)", "ipython", "pycocotools (>=2.0.7)"]
+extra = ["albumentations (>=1.4.6)", "hub-sdk (>=0.0.12)", "ipython", "pycocotools (>=2.0.7)"]
 logging = ["comet", "dvclive (>=2.12.0)", "tensorboard (>=2.13.0)"]
 
 [[package]]
@@ -6921,4 +6921,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "638d602346516e6eb26beece5d61ecca3b90d413ccc90cdd18eefb37e15073aa"
+content-hash = "a5605d9f4badc862e556a8dd0c6aa811aac045c1e2d6cbd4f84e0ce0941a8743"
