@@ -167,3 +167,5 @@ generated/
 *.jpg
 *.jpeg
 .chroma
+.stop
+.transcribed.txt
