@@ -1,4 +1,4 @@
-# Call Azure AI Search from Python
+# 6. Call Azure AI Search from Python
 
 This application explains how to call Azure AI Search from Python.
 
@@ -50,8 +50,7 @@ So we introduce `RecursiveCharacterTextSplitter` which provides a simple and eas
 1. Set credentials in `.env`
 1. Run scripts in the [apps/6_call_azure_ai_search](./) directory
 
-> [!CAUTION]
-> `AZURE_AI_SEARCH_INDEX_NAME` in `.env` should be unique and should not be changed once set.
+> [!CAUTION] > `AZURE_AI_SEARCH_INDEX_NAME` in `.env` should be unique and should not be changed once set.
 > If you change the index name, you will need to recreate the index and re-upload the documents.
 
 Set up the environment and install dependencies:

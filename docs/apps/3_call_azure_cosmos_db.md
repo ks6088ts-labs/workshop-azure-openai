@@ -1,4 +1,4 @@
-# Call Azure Cosmos DB from Python
+# 3. Call Azure Cosmos DB from Python
 
 This app demonstrates how to call Azure Cosmos DB from Python.
 

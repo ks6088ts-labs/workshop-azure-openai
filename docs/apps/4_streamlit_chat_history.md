@@ -1,4 +1,4 @@
-# Add feature to store chat history using Azure Cosmos DB
+# 4. Add feature to store chat history using Azure Cosmos DB
 
 This app demonstrates how to add a feature to save chat history using Azure Cosmos DB to an Azure OpenAI Chat app using Streamlit implemented in [2_streamlit_chat](../2_streamlit_chat/).
 
@@ -36,11 +36,11 @@ Access `http://localhost:8501` and set the required fields in the sidebar to sta
 
 When you send a message, the chat history will be saved in Azure Cosmos DB.
 
-![Chat page](../../docs/images/4_streamlit_chat_history.chat_page.png)
+![Chat page](../images/4_streamlit_chat_history.chat_page.png)
 
 Conversation history can be viewed from the Cosmos DB Data Explorer as shown below.
 
-![Cosmos DB Data Explorer](../../docs/images/4_streamlit_chat_history.data_explorer.png)
+![Cosmos DB Data Explorer](../images/4_streamlit_chat_history.data_explorer.png)
 
 The chat history is saved as shown below.
 

@@ -1,4 +1,4 @@
-# Call Batch Transcription API with Streamlit
+# 10. Call Batch Transcription API with Streamlit
 
 This is a Streamlit app that calls Azure AI Speech Batch Transcription API.
 
@@ -36,7 +36,7 @@ $ python -m streamlit run apps/10_streamlit_batch_transcription/main.py
 
 ### Example
 
-![Streamlit](../../docs/images/10_streamlit_batch_transcription.main.png)
+![Streamlit](../images/10_streamlit_batch_transcription.main.png)
 
 ## References
 

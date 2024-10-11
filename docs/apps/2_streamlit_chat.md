@@ -1,4 +1,4 @@
-# Create an Azure OpenAI Chat app using Streamlit
+# 2. Create an Azure OpenAI Chat app using Streamlit
 
 This app demonstrates how to create a chat application using Azure OpenAI Service and Streamlit.
 
@@ -108,11 +108,11 @@ $ python -m streamlit run apps/2_streamlit_chat/main.py
 
 When you access `http://localhost:8501`, you will see the following screen.
 
-![Streamlit Chat](../../docs/images/2_streamlit_chat.initial_page.png)
+![Streamlit Chat](../images/2_streamlit_chat.initial_page.png)
 
 To start a conversation, fill in the required fields in the sidebar and you will see the following screen.
 
-![Streamlit Chat](../../docs/images/2_streamlit_chat.chat_page.png)
+![Streamlit Chat](../images/2_streamlit_chat.chat_page.png)
 
 ## Note
 

@@ -1,4 +1,4 @@
-# Call Azure Document Intelligence API with Streamlit
+# 9. Call Azure Document Intelligence API with Streamlit
 
 This Streamlit app demonstrates how to call Azure Document Intelligence API with Streamlit.
 
@@ -30,7 +30,7 @@ $ python -m streamlit run apps/9_streamlit_azure_document_intelligence/main.py
 
 ### Example
 
-![Streamlit Chat](../../docs/images/9_streamlit_azure_document_intelligence.main.png)
+![Streamlit Chat](../images/9_streamlit_azure_document_intelligence.main.png)
 
 ## References
 

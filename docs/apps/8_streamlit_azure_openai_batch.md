@@ -1,4 +1,4 @@
-# Call Azure OpenAI Batch API with Streamlit
+# 8. Call Azure OpenAI Batch API with Streamlit
 
 This app demonstrates how to call Azure OpenAI Batch API with Streamlit.
 
@@ -30,7 +30,7 @@ $ python -m streamlit run apps/8_streamlit_azure_openai_batch/main.py
 
 ### Example
 
-![Streamlit Chat](../../docs/images/8_streamlit_azure_openai_batch.main.png)
+![Streamlit Chat](../images/8_streamlit_azure_openai_batch.main.png)
 
 ## References
 

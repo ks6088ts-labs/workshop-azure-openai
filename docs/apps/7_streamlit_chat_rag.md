@@ -1,4 +1,4 @@
-# Add RAG feature to Streamlit chat app
+# 7. Add RAG feature to Streamlit chat app
 
 This app demonstrates how to add the Retrieval-Augmented Generation (RAG) feature to a Streamlit chat app.
 
@@ -64,7 +64,7 @@ Access `http://localhost:8501` and set the required fields in the sidebar to sta
 
 When you send a question about Contoso Corporation, the chatbot will respond with an answer from Azure AI Search.
 
-![RAG Chat](../../docs/images/7_streamlit_chat_rag.main.png)
+![RAG Chat](../images/7_streamlit_chat_rag.main.png)
 
 To see how the RAG feature works, watch the video below.
 
