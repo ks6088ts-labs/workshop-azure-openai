@@ -80,3 +80,18 @@ docker-scan: ## scan Docker image
 
 .PHONY: ci-test-docker
 ci-test-docker: docker-lint docker-build docker-run ## run CI test for Docker
+
+# ---
+# Docs
+# ---
+
+.PHONY: docs
+docs: ## build documentation
+	poetry run mkdocs build
+
+.PHONY: docs-serve
+docs-serve: ## serve documentation
+	poetry run mkdocs serve
+
+.PHONY: ci-test-docs
+ci-test-docs: docs ## run CI test for documentation
