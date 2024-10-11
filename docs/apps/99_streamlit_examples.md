@@ -1,4 +1,4 @@
-# Code samples for Streamlit
+# 99. Code samples for Streamlit
 
 This app includes code samples for Streamlit. You can run the app and select the sample you want to run from the sidebar.
 
@@ -35,51 +35,51 @@ Access to http://localhost:8501 and select the sample you want to run from the s
 
 #### 1. File Q&A
 
-![File Q&A](../../docs/images/99_streamlit_examples.fileqa.png)
+![File Q&A](../images/99_streamlit_examples.fileqa.png)
 
 #### 2. Image Q&A
 
-![Image Q&A](../../docs/images/99_streamlit_examples.imageqa.png)
+![Image Q&A](../images/99_streamlit_examples.imageqa.png)
 
 #### 3. Camera Q&A
 
-![Camera Q&A](../../docs/images/99_streamlit_examples.cameraqa.png)
+![Camera Q&A](../images/99_streamlit_examples.cameraqa.png)
 
 #### 4. Translate text
 
-![Translate text](../../docs/images/99_streamlit_examples.translate.png)
+![Translate text](../images/99_streamlit_examples.translate.png)
 
 #### 5. Explain data
 
-![Explain data](../../docs/images/99_streamlit_examples.explaindata.png)
+![Explain data](../images/99_streamlit_examples.explaindata.png)
 
 #### 6. Speech to Text
 
-![Speech to Text](../../docs/images/99_streamlit_examples.stt.png)
+![Speech to Text](../images/99_streamlit_examples.stt.png)
 
 #### 7. Text to Speech
 
-![Text to Speech](../../docs/images/99_streamlit_examples.tts.png)
+![Text to Speech](../images/99_streamlit_examples.tts.png)
 
 #### 8. Create image
 
-![Create image](../../docs/images/99_streamlit_examples.createimage.png)
+![Create image](../images/99_streamlit_examples.createimage.png)
 
 #### 9. Visualize location
 
-![Visualize location](../../docs/images/99_streamlit_examples.map.png)
+![Visualize location](../images/99_streamlit_examples.map.png)
 
 #### 10. Object detection
 
-![Object detection](../../docs/images/99_streamlit_examples.objectdetection.png)
+![Object detection](../images/99_streamlit_examples.objectdetection.png)
 
 #### 11. Pose estimation
 
-![Pose estimation](../../docs/images/99_streamlit_examples.poseestimation.png)
+![Pose estimation](../images/99_streamlit_examples.poseestimation.png)
 
 #### 12. Video processing
 
-![Video processing](../../docs/images/99_streamlit_examples.videoprocessing.png)
+![Video processing](../images/99_streamlit_examples.videoprocessing.png)
 
 ref. [data-videos/traffic.mp4](https://github.com/OlafenwaMoses/ImageAI/blob/master/data-videos/traffic.mp4)
 

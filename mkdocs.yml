@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+site_name: Workshop for Azure OpenAI Service
+site_url: ""
+nav:
+  - Home: index.md
+  - Applications:
+    - 1. Call Azure OpenAI Service API from Python: apps/1_call_azure_openai_chat.md
+    - 2. Create an Azure OpenAI Chat app using Streamlit: apps/2_streamlit_chat.md
+    - 3. Call Azure Cosmos DB from Python: apps/3_call_azure_cosmos_db.md
+    - 4. Add feature to store chat history using Azure Cosmos DB: apps/4_streamlit_chat_history.md
+    - 5. Search Chat History: apps/5_streamlit_query_chat_history.md
+    - 6. Call Azure AI Search from Python: apps/6_call_azure_ai_search.md
+    - 7. Add RAG feature to Streamlit chat app: apps/7_streamlit_chat_rag.md
+    - 8. Call Azure OpenAI Batch API with Streamlit: apps/8_streamlit_azure_openai_batch.md
+    - 9. Call Azure Document Intelligence API with Streamlit: apps/9_streamlit_azure_document_intelligence.md
+    - 10. Call Batch Transcription API with Streamlit: apps/10_streamlit_batch_transcription.md
+    - 11. Getting Started with Prompt flow: apps/11_promptflow.md
+    - 12. Create agents with LangGraph: apps/12_langgraph_agent.md
+    - 13. LangChain Toolkits sample applications: apps/13_langchain_toolkits.md
+    - 14. Realtime transcription with Azure AI Speech Service: apps/14_streamlit_azure_ai_speech.md
+    - 15. Streamlit Chat with SLM: apps/15_streamlit_chat_slm.md
+    - 16. Whisper transcription: apps/16_whisper_transcription.md
+    - 99. Code samples for Streamlit: apps/99_streamlit_examples.md
+theme:
+  name: material
+  # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#automatic-light-dark-mode
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference

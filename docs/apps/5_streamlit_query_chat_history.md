@@ -1,4 +1,4 @@
-# Search Chat History
+# 5. Search Chat History
 
 This application is used to search the chat history accumulated in [4_streamlit_chat_history](../4_streamlit_chat_history/).
 
@@ -34,4 +34,4 @@ Access `http://localhost:8501` and set the required fields in the sidebar to sea
 
 When you click the "Search" button, the chat history will be displayed.
 
-![Main page](../../docs/images/5_streamlit_query_chat_history.main.png)
+![Main page](../images/5_streamlit_query_chat_history.main.png)

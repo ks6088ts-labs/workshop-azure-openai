@@ -2,6 +2,7 @@
 [![docker](https://github.com/ks6088ts-labs/workshop-azure-openai/actions/workflows/docker.yaml/badge.svg?branch=main)](https://github.com/ks6088ts-labs/workshop-azure-openai/actions/workflows/docker.yaml?query=branch%3Amain)
 [![docker-release](https://github.com/ks6088ts-labs/workshop-azure-openai/actions/workflows/docker-release.yaml/badge.svg)](https://github.com/ks6088ts-labs/workshop-azure-openai/actions/workflows/docker-release.yaml)
 [![ghcr](https://github.com/ks6088ts-labs/workshop-azure-openai/actions/workflows/ghcr.yaml/badge.svg)](https://github.com/ks6088ts-labs/workshop-azure-openai/actions/workflows/ghcr.yaml)
+[![docs](https://github.com/ks6088ts-labs/workshop-azure-openai/actions/workflows/github-pages.yaml/badge.svg)](https://github.com/ks6088ts-labs/workshop-azure-openai/actions/workflows/github-pages.yaml)
 
 <!-- https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-azure-button -->
 

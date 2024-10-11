@@ -1,4 +1,4 @@
-# Create agents with LangGraph
+# 12. Create agents with LangGraph
 
 This app demonstrates how to implement agents with LangGraph.
 
@@ -49,7 +49,7 @@ python apps/12_langgraph_agent/advanced_rag_flows/ingestion.py
 python apps/12_langgraph_agent/advanced_rag_flows/main.py
 ```
 
-![Advanced RAG Flows](../../docs/images/12_langgraph_agent_graph.png)
+![Advanced RAG Flows](../images/12_langgraph_agent_graph.png)
 
 ## References
 

@@ -1,4 +1,4 @@
-# Call Azure OpenAI Service API from Python
+# 1. Call Azure OpenAI Service API from Python
 
 This app demonstrates how to call the Azure OpenAI Service API from Python.
 
