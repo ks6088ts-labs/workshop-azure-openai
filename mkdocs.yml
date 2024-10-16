@@ -1,6 +1,8 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 site_name: Workshop for Azure OpenAI Service
 site_url: ""
+repo_url: https://github.com/ks6088ts-labs/workshop-azure-openai
+repo_name: ks6088ts-labs/workshop-azure-openai
 nav:
   - Home: index.md
   - Applications:
@@ -44,3 +46,17 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+  icon:
+    repo: fontawesome/brands/github
+  language: en
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/ks6088ts/
+    - icon: fontawesome/brands/github
+      link: https://github.com/ks6088ts
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/ks6088ts
+  analytics:
+    provider: google
+    property: G-0ZTKFXVQ5K
