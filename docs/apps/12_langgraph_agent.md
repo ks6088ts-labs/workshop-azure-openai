@@ -35,11 +35,11 @@ $ pip install -r requirements.txt
 
 ### Examples
 
-#### [reflection_agent](./reflection_agent/main.py)
+#### [reflection_agent](https://github.com/ks6088ts-labs/workshop-azure-openai/tree/main/apps/12_langgraph_agent/reflection_agent)
 
-#### [react_agent](./react_agent/main.py)
+#### [react_agent](https://github.com/ks6088ts-labs/workshop-azure-openai/tree/main/apps/12_langgraph_agent/react_agent)
 
-#### [advanced_rag_flows](./advanced_rag_flows/main.py)
+#### [advanced_rag_flows](https://github.com/ks6088ts-labs/workshop-azure-openai/tree/main/apps/12_langgraph_agent/advanced_rag_flows)
 
 ```shell
 # create vector store
