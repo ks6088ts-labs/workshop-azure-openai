@@ -17,6 +17,14 @@ Here are the preferred tools for development.
 - [Poetry](https://python-poetry.org/docs/#installation)
 - [GNU Make](https://www.gnu.org/software/make/)
 
+## Setup
+
+### Infrastructure
+
+Click the button below to deploy the infrastructure to Azure.
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fks6088ts-labs%2Fbaseline-environment-on-azure-bicep%2Frefs%2Fheads%2Fmain%2Finfra%2Fscenarios%2Fworkshop-azure-openai%2Fazuredeploy.json)
+
 ## Projects
 
 | Project                                                                                 | Description                                             | Image                                                                                                 |
