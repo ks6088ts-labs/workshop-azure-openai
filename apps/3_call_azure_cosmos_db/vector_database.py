@@ -53,6 +53,7 @@ def get_azure_cosmos_db_no_sql_vector_search():
         cosmos_database_properties={"id": getenv("AZURE_COSMOS_DB_DATABASE_NAME")},
     )
 
+
 @app.command()
 def insert_data(
     pdf_url: str = "https://arxiv.org/pdf/2303.08774.pdf",
