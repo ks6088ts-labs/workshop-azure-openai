@@ -14,7 +14,46 @@ logger = logging.getLogger(__name__)
 app = typer.Typer()
 
 
-# https://python.langchain.com/docs/integrations/vectorstores/azure_cosmos_db_no_sql/
+def get_vector_embedding_policy():
+    return {
+        "vectorEmbeddings": [
+            {
+                "path": "/embedding",
+                "dataType": "float32",
+                "distanceFunction": "cosine",
+                "dimensions": 3072,  # for text-embedding-3-large
+            }
+        ]
+    }
+
+
+def get_indexing_policy():
+    return {
+        "indexingMode": "consistent",
+        "includedPaths": [{"path": "/*"}],
+        "excludedPaths": [{"path": '/"_etag"/?'}],
+        "vectorIndexes": [{"path": "/embedding", "type": "quantizedFlat"}],
+    }
+
+
+def get_azure_cosmos_db_no_sql_vector_search():
+    return AzureCosmosDBNoSqlVectorSearch(
+        embedding=AzureOpenAIEmbeddings(
+            api_key=getenv("AZURE_OPENAI_API_KEY"),
+            api_version=getenv("AZURE_OPENAI_API_VERSION"),
+            azure_endpoint=getenv("AZURE_OPENAI_ENDPOINT"),
+            model=getenv("AZURE_OPENAI_EMBEDDING_MODEL"),
+        ),
+        cosmos_client=CosmosClient.from_connection_string(getenv("AZURE_COSMOS_DB_CONNECTION_STRING")),
+        database_name=getenv("AZURE_COSMOS_DB_DATABASE_NAME"),
+        container_name=getenv("AZURE_COSMOS_DB_CONTAINER_NAME"),
+        vector_embedding_policy=get_vector_embedding_policy(),
+        indexing_policy=get_indexing_policy(),
+        cosmos_container_properties={"partition_key": PartitionKey(path="/id")},
+        cosmos_database_properties={"id": getenv("AZURE_COSMOS_DB_DATABASE_NAME")},
+    )
+
+
 @app.command()
 def insert_data(
     pdf_url: str = "https://arxiv.org/pdf/2303.08774.pdf",
@@ -36,38 +75,8 @@ def insert_data(
     ).split_documents(data)
 
     try:
-        # Insert the data into Azure Cosmos DB
-        database_name = getenv("AZURE_COSMOS_DB_DATABASE_NAME")
-        AzureCosmosDBNoSqlVectorSearch.from_documents(
-            documents=docs,
-            embedding=AzureOpenAIEmbeddings(
-                api_key=getenv("AZURE_OPENAI_API_KEY"),
-                api_version=getenv("AZURE_OPENAI_API_VERSION"),
-                azure_endpoint=getenv("AZURE_OPENAI_ENDPOINT"),
-                model=getenv("AZURE_OPENAI_EMBEDDING_MODEL"),
-            ),
-            cosmos_client=CosmosClient.from_connection_string(getenv("AZURE_COSMOS_DB_CONNECTION_STRING")),
-            database_name=database_name,
-            container_name=getenv("AZURE_COSMOS_DB_CONTAINER_NAME"),
-            vector_embedding_policy={
-                "vectorEmbeddings": [
-                    {
-                        "path": "/embedding",
-                        "dataType": "float32",
-                        "distanceFunction": "cosine",
-                        "dimensions": 3072,  # for text-embedding-3-large
-                    }
-                ]
-            },
-            indexing_policy={
-                "indexingMode": "consistent",
-                "includedPaths": [{"path": "/*"}],
-                "excludedPaths": [{"path": '/"_etag"/?'}],
-                "vectorIndexes": [{"path": "/embedding", "type": "quantizedFlat"}],
-            },
-            cosmos_container_properties={"partition_key": PartitionKey(path="/id")},
-            cosmos_database_properties={"id": database_name},  # need to add this
-        )
+        vector_search = get_azure_cosmos_db_no_sql_vector_search()
+        vector_search.add_documents(docs)
     except Exception as e:
         logger.error(f"error: {e}")
 
@@ -79,40 +88,10 @@ def query_data(
 ):
     if verbose:
         logging.basicConfig(level=logging.DEBUG)
-
-    database_name = getenv("AZURE_COSMOS_DB_DATABASE_NAME")
-    vector_search = AzureCosmosDBNoSqlVectorSearch(
-        embedding=AzureOpenAIEmbeddings(
-            api_key=getenv("AZURE_OPENAI_API_KEY"),
-            api_version=getenv("AZURE_OPENAI_API_VERSION"),
-            azure_endpoint=getenv("AZURE_OPENAI_ENDPOINT"),
-            model=getenv("AZURE_OPENAI_EMBEDDING_MODEL"),
-        ),
-        cosmos_client=CosmosClient.from_connection_string(getenv("AZURE_COSMOS_DB_CONNECTION_STRING")),
-        database_name=database_name,
-        container_name=getenv("AZURE_COSMOS_DB_CONTAINER_NAME"),
-        vector_embedding_policy={
-            "vectorEmbeddings": [
-                {
-                    "path": "/embedding",
-                    "dataType": "float32",
-                    "distanceFunction": "cosine",
-                    "dimensions": 3072,  # for text-embedding-3-large
-                }
-            ]
-        },
-        indexing_policy={
-            "indexingMode": "consistent",
-            "includedPaths": [{"path": "/*"}],
-            "excludedPaths": [{"path": '/"_etag"/?'}],
-            "vectorIndexes": [{"path": "/embedding", "type": "quantizedFlat"}],
-        },
-        cosmos_container_properties={"partition_key": PartitionKey(path="/id")},
-        cosmos_database_properties={"id": database_name},
-    )
-
     try:
+        vector_search = get_azure_cosmos_db_no_sql_vector_search()
         results = vector_search.similarity_search(query=query)
+        logger.info(f"got {len(results)} results")
         for idx, result in enumerate(results):
             print(f"Result {idx + 1}: {result}")
     except Exception as e:
