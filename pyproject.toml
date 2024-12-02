@@ -40,6 +40,7 @@ typer = "^0.12.5"
 azure-cognitiveservices-speech = "^1.40.0"
 openai-whisper = "^20240930"
 pymupdf = "^1.24.14"
+pydantic = "^2.10.2"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.0.0"
