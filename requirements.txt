@@ -35,7 +35,7 @@ numpy==1.26.4
 openai==1.55.0
 orjson==3.10.12
 packaging==24.2
-propcache==0.2.0
+propcache==0.2.1
 pydantic==2.10.1
 pydantic-settings==2.6.1
 pydantic_core==2.27.1
