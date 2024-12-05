@@ -32,18 +32,6 @@ def print_structured_output_openai(
     system: str,
     user: str,
 ):
-    """
-    How to use:
-        Support for structured outputs was first added in API version 2024-08-01-preview.
-        It is available in the latest preview APIs as well as the latest GA API: 2024-10-21.
-
-    Install dependencies:
-        $ pip install openai python-dotenv pydantic
-
-    References:
-        - https://learn.microsoft.com/ja-jp/azure/ai-services/openai/how-to/structured-outputs?tabs=python
-    """
-
     client = AzureOpenAI(
         azure_endpoint=getenv("AZURE_OPENAI_ENDPOINT"),
         api_key=getenv("AZURE_OPENAI_API_KEY"),
@@ -67,17 +55,6 @@ def print_structured_output_langchain(
     system: str,
     user: str,
 ):
-    """
-    How to use:
-        Support for structured outputs was first added in API version 2024-08-01-preview.
-        It is available in the latest preview APIs as well as the latest GA API: 2024-10-21.
-
-    Install dependencies:
-        $ pip install openai python-dotenv pydantic langchain-openai
-
-    References:
-        - https://python.langchain.com/docs/how_to/structured_output/
-    """
     llm = AzureChatOpenAI(
         temperature=0,
         api_key=getenv("AZURE_OPENAI_API_KEY"),

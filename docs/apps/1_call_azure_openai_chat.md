@@ -63,7 +63,7 @@ For more information, see the following references.
 1. Get Azure OpenAI Service API key
 1. Copy [.env.template](../../.env.template) to `.env` in the same directory
 1. Set credentials in `.env`
-1. Run [main.py](./main.py)
+1. Run scripts
 
 ```shell
 # Create a virtual environment
@@ -79,7 +79,7 @@ $ pip install -r requirements.txt
 $ python apps/1_call_azure_openai_chat/main.py
 ```
 
-### Example
+### [main.py](../../apps/1_call_azure_openai_chat/main.py)
 
 To call the Azure OpenAI Service API, run the following command.
 
@@ -168,7 +168,7 @@ $ python apps/1_call_azure_openai_chat/main.py
 }
 ```
 
-## References
+#### References
 
 - Python basics
   - [Python Cheatsheet > Basics](https://www.pythoncheatsheet.org/cheatsheet/basics)
@@ -176,3 +176,51 @@ $ python apps/1_call_azure_openai_chat/main.py
 - Azure OpenAI Basics
   - [Azure OpenAI Service documentation](https://learn.microsoft.com/azure/ai-services/openai/)
   - [Quickstart: Get started generating text using Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython-new&pivots=programming-language-python)
+
+### [convert_code.py](../../apps/1_call_azure_openai_chat/convert_code.py)
+
+Support for structured outputs was first added in API version 2024-08-01-preview.
+It is available in the latest preview APIs as well as the latest GA API: 2024-10-21.
+See details in [Structured outputs](https://learn.microsoft.com/azure/ai-services/openai/how-to/structured-outputs?tabs=python).
+
+To set up the environment, run the following commands.
+
+```shell
+# Create a virtual environment
+python -m venv .venv
+
+# Activate the virtual environment
+source .venv/bin/activate
+
+# Install dependencies
+pip install openai python-dotenv pydantic langchain-openai
+```
+
+Run the following command to convert code via OpenAI SDK or LangChain.
+
+```shell
+
+# help
+python apps/1_call_azure_openai_chat/convert_code.py --help
+
+# convert code via OpenAI SDK in verbose mode
+python apps/1_call_azure_openai_chat/convert_code.py \
+  --system "Extract the event information." \
+  --user "Alice and Bob are going to a science fair on Friday." \
+  --type "openai" \
+  --verbose
+# Result: name='Science Fair' date='Friday' participants=['Alice', 'Bob']
+
+# convert code via LangChain in verbose mode
+python apps/1_call_azure_openai_chat/convert_code.py \
+  --system "Extract the event information." \
+  --user "Alice and Bob are going to a science fair on Friday." \
+  --type "langchain" \
+  --verbose
+# Result: name='Science Fair' date='Friday' participants=['Alice', 'Bob']
+```
+
+#### References
+
+- [Structured outputs](https://learn.microsoft.com/azure/ai-services/openai/how-to/structured-outputs?tabs=python)
+- [How to return structured data from a model](https://python.langchain.com/docs/how_to/structured_output/)
