@@ -328,6 +328,42 @@ isodate = ">=0.6.1"
 typing-extensions = ">=4.6.0"
 
 [[package]]
+name = "azure-ai-inference"
+version = "1.0.0b6"
+description = "Microsoft Azure AI Inference Client Library for Python"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "azure_ai_inference-1.0.0b6-py3-none-any.whl", hash = "sha256:5699ad78d70ec2d227a5eff2c1bafc845018f6624edc5b03589dfff861c54958"},
+    {file = "azure_ai_inference-1.0.0b6.tar.gz", hash = "sha256:b8ac941de1e69151bad464191e18856d4e74f962ae03235da137a9a326143676"},
+]
+
+[package.dependencies]
+azure-core = ">=1.30.0"
+isodate = ">=0.6.1"
+typing-extensions = ">=4.6.0"
+
+[package.extras]
+opentelemetry = ["azure-core-tracing-opentelemetry"]
+prompts = ["pyyaml"]
+
+[[package]]
+name = "azure-ai-projects"
+version = "1.0.0b2"
+description = "Microsoft Azure AI Projects Client Library for Python"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "azure_ai_projects-1.0.0b2-py3-none-any.whl", hash = "sha256:5bdbc437817ff26582fb804e82cb23afd1b100d71a8cbd22e696d81916536fac"},
+    {file = "azure_ai_projects-1.0.0b2.tar.gz", hash = "sha256:6f3585efecf91cda4d6bdbedc019e975c2c5c2e0852691f1a4396d3183a46529"},
+]
+
+[package.dependencies]
+azure-core = ">=1.30.0"
+isodate = ">=0.6.1"
+typing-extensions = ">=4.12.2"
+
+[[package]]
 name = "azure-cognitiveservices-speech"
 version = "1.40.0"
 description = "Microsoft Cognitive Services Speech SDK for Python"
@@ -7493,4 +7529,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "32bb35d2d3c987f1c3717ba10217ceace23f727fe1e93ecf6a2c957d6e148dcf"
+content-hash = "51979a8904f189a410fea8afdf680511cabf523216a22b0c6d7d9acd81bff816"

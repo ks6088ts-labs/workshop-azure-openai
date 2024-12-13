@@ -41,6 +41,8 @@ azure-cognitiveservices-speech = "^1.40.0"
 openai-whisper = "^20240930"
 pymupdf = "^1.24.14"
 pydantic = "^2.10.2"
+azure-ai-projects = "^1.0.0b2"
+azure-ai-inference = "^1.0.0b6"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.0.0"
