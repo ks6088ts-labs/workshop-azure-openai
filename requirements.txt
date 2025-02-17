@@ -14,7 +14,7 @@ distro==1.9.0
 frozenlist==1.5.0
 h11==0.14.0
 httpcore==1.0.7
-httpx==0.27.2
+httpx==0.28.1
 httpx-sse==0.4.0
 idna==3.10
 jiter==0.8.2
