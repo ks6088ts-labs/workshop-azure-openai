@@ -39,6 +39,7 @@ dependencies = [
     "pydantic>=2.10.2",
     "azure-ai-projects>=1.0.0b2",
     "azure-ai-inference>=1.0.0b6",
+    "foundry-local-sdk>=0.3.1",
 ]
 
 [tool.uv]
