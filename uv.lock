@@ -1192,6 +1192,19 @@ wheels = [
 ]
 
 [[package]]
+name = "foundry-local-sdk"
+version = "0.3.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx" },
+    { name = "pydantic" },
+    { name = "tqdm" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9f/5a/7a53fcdb3c5cbf13a09119921910cc578969246d095cd65abbd85d93ea7b/foundry_local_sdk-0.3.1-py3-none-any.whl", hash = "sha256:52846d76c953ee4cd3fff9613781912a434a90b022248dc7bf4b61544970cda9", size = 12085 },
+]
+
+[[package]]
 name = "frozenlist"
 version = "1.6.0"
 source = { registry = "https://pypi.org/simple" }
@@ -5284,7 +5297,7 @@ name = "triton"
 version = "3.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "setuptools" },
+    { name = "setuptools", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/76/04/d54d3a6d077c646624dc9461b0059e23fd5d30e0dbe67471e3654aec81f9/triton-3.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:fad99beafc860501d7fcc1fb7045d9496cbe2c882b1674640304949165a916e7", size = 156441993 },
@@ -5670,6 +5683,7 @@ dependencies = [
     { name = "azure-search-documents" },
     { name = "azure-storage-blob" },
     { name = "beautifulsoup4" },
+    { name = "foundry-local-sdk" },
     { name = "langchain" },
     { name = "langchain-chroma" },
     { name = "langchain-community" },
@@ -5719,6 +5733,7 @@ requires-dist = [
     { name = "azure-search-documents", specifier = ">=11.5.1" },
     { name = "azure-storage-blob", specifier = ">=12.23.1" },
     { name = "beautifulsoup4", specifier = ">=4.12.3" },
+    { name = "foundry-local-sdk", specifier = ">=0.3.1" },
     { name = "langchain", specifier = ">=0.3.2" },
     { name = "langchain-chroma", specifier = ">=0.1.4" },
     { name = "langchain-community", specifier = ">=0.3.1" },
