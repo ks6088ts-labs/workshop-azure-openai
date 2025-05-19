@@ -14,33 +14,32 @@ info: ## show information
 
 .PHONY: install-deps-dev
 install-deps-dev: ## install dependencies for development
-	poetry install
-	poetry run pre-commit install
+	uv sync --all-extras
+	uv run pre-commit install
 
 .PHONY: install-deps
 install-deps: ## install dependencies for production
-	poetry install --without dev
+	uv sync --no-dev
 
 .PHONY: format-check
 format-check: ## format check
-	poetry run black . --check --verbose
+	uv run ruff format --check --verbose
 
 .PHONY: format
 format: ## format code
-	poetry run isort .
-	poetry run black . --verbose
+	uv run ruff format --verbose
 
 .PHONY: fix
 fix: format ## apply auto-fixes
-	poetry run ruff check --fix
+	uv run ruff check --fix
 
 .PHONY: lint
 lint: ## lint
-	poetry run ruff check .
+	uv run ruff check .
 
 .PHONY: test
 test: ## run tests
-	poetry run pytest --capture=no
+	uv run pytest --capture=no -vv
 
 .PHONY: ci-test
 ci-test: install-deps-dev format-check lint test ## run CI tests
@@ -81,17 +80,21 @@ docker-scan: ## scan Docker image
 .PHONY: ci-test-docker
 ci-test-docker: docker-lint docker-build docker-run ## run CI test for Docker
 
+.PHONY: update
+update: ## update packages
+	uv lock --upgrade
+
 # ---
 # Docs
 # ---
 
 .PHONY: docs
 docs: ## build documentation
-	poetry run mkdocs build
+	uv run mkdocs build
 
 .PHONY: docs-serve
 docs-serve: ## serve documentation
-	poetry run mkdocs serve
+	uv run mkdocs serve
 
 .PHONY: ci-test-docs
 ci-test-docs: docs ## run CI test for documentation

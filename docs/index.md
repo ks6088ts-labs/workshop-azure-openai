@@ -14,7 +14,7 @@ To run all the projects in this repository, you need the followings.
 
 Here are the preferred tools for development.
 
-- [Poetry](https://python-poetry.org/docs/#installation)
+- [uv](https://docs.astral.sh/uv/getting-started/installation/)
 - [GNU Make](https://www.gnu.org/software/make/)
 
 ## Setup

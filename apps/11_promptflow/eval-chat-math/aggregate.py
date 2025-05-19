@@ -3,7 +3,6 @@ from promptflow.core import log_metric, tool
 
 @tool
 def accuracy_aggregate(processed_results: list[int]):
-
     num_exception = 0
     num_correct = 0
 

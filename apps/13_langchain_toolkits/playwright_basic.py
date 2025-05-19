@@ -82,7 +82,7 @@ def get_yahoo_realtime_trends(
         page.goto(url="https://search.yahoo.co.jp/realtime")
         trends = []
         for i in range(20):
-            keyword = page.get_by_role("link", name=f"{i+1}", exact=True).text_content()
+            keyword = page.get_by_role("link", name=f"{i + 1}", exact=True).text_content()
             trends.append(
                 {
                     "rank": i + 1,
