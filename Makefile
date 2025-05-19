@@ -80,6 +80,10 @@ docker-scan: ## scan Docker image
 .PHONY: ci-test-docker
 ci-test-docker: docker-lint docker-build docker-run ## run CI test for Docker
 
+.PHONY: update
+update: ## update packages
+	uv lock --upgrade
+
 # ---
 # Docs
 # ---
