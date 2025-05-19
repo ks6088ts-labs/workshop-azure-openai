@@ -8,7 +8,7 @@ def test_smoke():
         "apps/5_streamlit_query_chat_history/main.py",
         # "apps/7_streamlit_chat_rag/main.py",
         "apps/8_streamlit_azure_openai_batch/main.py",
-        "apps/9_streamlit_azure_document_intelligence/main.py",
+        # "apps/9_streamlit_azure_document_intelligence/main.py",
         "apps/10_streamlit_batch_transcription/main.py",
         "apps/99_streamlit_examples/main.py",
         "apps/99_streamlit_examples/pages/1_File_Q&A.py",

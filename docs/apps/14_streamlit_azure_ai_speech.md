@@ -12,10 +12,10 @@ This app demonstrates how to use Azure AI Speech Service for realtime transcript
 
 ```shell
 # Speech to Text script
-poetry run python apps/14_streamlit_azure_ai_speech/speech_to_text.py --help
+uv run python apps/14_streamlit_azure_ai_speech/speech_to_text.py --help
 
 # WIP: Streamlit app
-poetry run python -m streamlit run apps/14_streamlit_azure_ai_speech/main.py
+uv run python -m streamlit run apps/14_streamlit_azure_ai_speech/main.py
 ```
 
 # References

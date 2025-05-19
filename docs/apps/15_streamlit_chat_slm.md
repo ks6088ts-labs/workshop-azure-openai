@@ -10,13 +10,13 @@ $ ollama serve
 $ ollama pull phi3
 
 # Run a simple chat with Ollama
-$ poetry run python apps/15_streamlit_chat_slm/chat.py
+$ uv run python apps/15_streamlit_chat_slm/chat.py
 
 # Run summarization with SLM
-$ poetry run python apps/15_streamlit_chat_slm/summarize.py
+$ uv run python apps/15_streamlit_chat_slm/summarize.py
 
 # Run streamlit app
-$ poetry run python -m streamlit run apps/15_streamlit_chat_slm/main.py
+$ uv run python -m streamlit run apps/15_streamlit_chat_slm/main.py
 
 # List models
 $ ollama list
@@ -34,7 +34,7 @@ phi4:latest    ac896e5b8b34    9.1 GB    55 minutes ago
 $ ollama pull phi3
 
 # Measure time to run the chat
-$ time poetry run python apps/15_streamlit_chat_slm/chat.py \
+$ time uv run python apps/15_streamlit_chat_slm/chat.py \
   --model phi3 \
   --prompt "hello"
 {
@@ -68,7 +68,7 @@ $ time poetry run python apps/15_streamlit_chat_slm/chat.py \
     "total_tokens": 32
   }
 }
-poetry run python apps/15_streamlit_chat_slm/chat.py --model phi3 --prompt   1.57s user 0.16s system 68% cpu 2.515 total
+uv run python apps/15_streamlit_chat_slm/chat.py --model phi3 --prompt   1.57s user 0.16s system 68% cpu 2.515 total
 ```
 
 ### Use Phi4 model
@@ -78,7 +78,7 @@ poetry run python apps/15_streamlit_chat_slm/chat.py --model phi3 --prompt   1.5
 $ ollama pull phi4
 
 # Measure time to run the chat
-$ time poetry run python apps/15_streamlit_chat_slm/chat.py \
+$ time uv run python apps/15_streamlit_chat_slm/chat.py \
   --model phi4 \
   --prompt "hello"
 {
@@ -112,7 +112,7 @@ $ time poetry run python apps/15_streamlit_chat_slm/chat.py \
     "total_tokens": 51
   }
 }
-poetry run python apps/15_streamlit_chat_slm/chat.py --model phi4 --prompt   1.48s user 0.12s system 12% cpu 12.455 total
+uv run python apps/15_streamlit_chat_slm/chat.py --model phi4 --prompt   1.48s user 0.12s system 12% cpu 12.455 total
 ```
 
 Note:

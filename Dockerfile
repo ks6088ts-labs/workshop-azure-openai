@@ -2,11 +2,11 @@ FROM python:3.11.8-slim-bookworm AS requirements-stage
 
 WORKDIR /tmp
 
-RUN pip install --no-cache-dir poetry==1.8.2
+RUN pip install --no-cache-dir uv==0.5.12
 
-COPY ./pyproject.toml ./poetry.lock* /tmp/
+COPY ./pyproject.toml ./uv.lock /tmp/
 
-RUN poetry export --without=dev -f requirements.txt --output requirements.txt --without-hashes
+RUN uv export --format requirements-txt --no-dev --no-hashes --output-file requirements.txt
 
 FROM python:3.11.8-slim-bookworm
 

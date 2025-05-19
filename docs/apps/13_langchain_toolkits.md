@@ -47,9 +47,9 @@ $ npx playwright codegen --target=python
 ##### [PlayWright Browser Toolkit](https://python.langchain.com/docs/integrations/tools/playwright/)
 
 ```shell
-$ poetry run playwright install
+$ uv run playwright install
 
-$ poetry run python apps/13_langchain_toolkits/playwright_tool.py
+$ uv run python apps/13_langchain_toolkits/playwright_tool.py
 ```
 
 Sample output:
