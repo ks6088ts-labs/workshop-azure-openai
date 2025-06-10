@@ -12,7 +12,7 @@ click==8.1.8
 dataclasses-json==0.6.7
 distro==1.9.0
 frozenlist==1.5.0
-h11==0.14.0
+h11==0.16.0
 httpcore==1.0.7
 httpx==0.28.1
 httpx-sse==0.4.0
@@ -43,7 +43,7 @@ Pygments==2.18.0
 python-dotenv==1.0.1
 PyYAML==6.0.2
 regex==2024.11.6
-requests==2.32.3
+requests==2.32.4
 requests-toolbelt==1.0.0
 rich==13.9.4
 shellingham==1.5.4
