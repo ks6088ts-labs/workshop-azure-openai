@@ -13,7 +13,7 @@ jobs:
   docker:
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0 # to retrieve git tags
       # How to set system path variable in github action workflow: https://stackoverflow.com/a/68214331
